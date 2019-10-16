@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     private static final Integer SPLASH_SCREEN_DELAY_TIME = 2000; // in milliseconds
     RelativeLayout relativeLayout1, relativeLayout2;
