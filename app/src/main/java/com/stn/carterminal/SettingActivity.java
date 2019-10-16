@@ -1,5 +1,6 @@
 package com.stn.carterminal;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.stn.carterminal.Constant.Constant;
 import com.stn.carterminal.Helper.SharedPreferencesHelper;
+
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -55,11 +60,24 @@ public class SettingActivity extends AppCompatActivity {
 
                 SharedPreferencesHelper.storeData(sharedPreferences, KEY_SHARED_PREFERENCES_HOST, inputHost);
                 Toast.makeText(getApplicationContext(), Constant.SUCCESS_SAVE_DATA_MESSAGE, Toast.LENGTH_SHORT).show();
+
+                Intent signIn = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(signIn);
             }
         });
     }
 
     private boolean validateHost(String inputHost) {
-        return inputHost.equals(Constant.LOCALHOST_VALUE);
+        if (inputHost.equals(Constant.LOCALHOST_VALUE)) {
+            return true;
+        }
+        boolean isIPv4;
+        try {
+            final InetAddress inet = InetAddress.getByName(inputHost);
+            isIPv4 = inet.getHostAddress().equals(inputHost) && inet instanceof Inet4Address;
+        } catch (final UnknownHostException e) {
+            isIPv4 = false;
+        }
+        return isIPv4;
     }
 }

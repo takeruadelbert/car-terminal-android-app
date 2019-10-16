@@ -22,6 +22,9 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+dependencies {
+    apply plugin: 'java'
+    compile fileTree(dir: 'libs', include: '*.jar') // jar files under the libs folder.
+    compile 'com.google.code.gson:gson:2.8.5' // google GSON
+    compile 'com.google.guava:guava:28.1-jre' // guava 14.0.1
 }
