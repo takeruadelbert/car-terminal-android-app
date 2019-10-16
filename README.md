@@ -1,1 +1,1 @@
-# car-terminal-android-app
+# Car Terminal Android Application
