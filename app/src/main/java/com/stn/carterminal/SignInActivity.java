@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignInActivity extends AppCompatActivity {
 
     private static final Integer SPLASH_SCREEN_DELAY_TIME = 2000; // in milliseconds
+    private static final String INVALID_USERNAME_MESSAGE = "Invalid Field 'Username'.";
+    private static final String INVALID_PASSWORD_MESSAGE = "Invalid Field 'Password'.";
+
     RelativeLayout relativeLayout1, relativeLayout2;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -29,6 +34,7 @@ public class SignInActivity extends AppCompatActivity {
 
         setupSplashScreen();
         setSettingOnClickListener();
+        setSignInOnClickListener();
     }
 
     private void setupSplashScreen() {
@@ -47,5 +53,32 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(settingIntent);
             }
         });
+    }
+
+    private void setSignInOnClickListener() {
+        Button signInButton = findViewById(R.id.btnSignIn);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String username = ((EditText) findViewById(R.id.txtUsername)).getText().toString();
+                String password = ((EditText) findViewById(R.id.txtPassword)).getText().toString();
+                if (validateFields(username, password)) {
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private boolean validateFields(String username, String password) {
+        if (username.isEmpty()) {
+            Toast.makeText(getApplicationContext(), INVALID_USERNAME_MESSAGE, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.isEmpty()) {
+            Toast.makeText(getApplicationContext(), INVALID_PASSWORD_MESSAGE, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

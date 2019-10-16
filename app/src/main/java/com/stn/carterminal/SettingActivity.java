@@ -13,10 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.stn.carterminal.Constant.Constant;
 import com.stn.carterminal.Helper.SharedPreferencesHelper;
-
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import com.stn.carterminal.Helper.TakeruHelper;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -53,7 +50,7 @@ public class SettingActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (!validateHost(inputHost)) {
+                if (!TakeruHelper.validateHost(inputHost)) {
                     Toast.makeText(getApplicationContext(), MESSAGE_INVALID_HOST, Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -65,19 +62,5 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(signIn);
             }
         });
-    }
-
-    private boolean validateHost(String inputHost) {
-        if (inputHost.equals(Constant.LOCALHOST_VALUE)) {
-            return true;
-        }
-        boolean isIPv4;
-        try {
-            final InetAddress inet = InetAddress.getByName(inputHost);
-            isIPv4 = inet.getHostAddress().equals(inputHost) && inet instanceof Inet4Address;
-        } catch (final UnknownHostException e) {
-            isIPv4 = false;
-        }
-        return isIPv4;
     }
 }
