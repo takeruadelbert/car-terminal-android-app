@@ -1,4 +1,4 @@
-package com.stn.carterminal;
+package com.stn.carterminal.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,9 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.stn.carterminal.Constant.Constant;
-import com.stn.carterminal.Helper.SharedPreferencesHelper;
-import com.stn.carterminal.Helper.TakeruHelper;
+import com.stn.carterminal.R;
+import com.stn.carterminal.constant.Constant;
+import com.stn.carterminal.helper.SharedPreferencesHelper;
+import com.stn.carterminal.helper.TakeruHelper;
 
 public class SettingActivity extends AppCompatActivity {
 

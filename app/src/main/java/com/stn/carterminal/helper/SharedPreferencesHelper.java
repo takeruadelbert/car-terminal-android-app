@@ -1,8 +1,8 @@
-package com.stn.carterminal.Helper;
+package com.stn.carterminal.helper;
 
 import android.content.SharedPreferences;
 
-import com.stn.carterminal.Constant.Constant;
+import com.stn.carterminal.constant.Constant;
 
 public class SharedPreferencesHelper {
     public static void storeData(SharedPreferences sharedPreferences, String key, String value) {

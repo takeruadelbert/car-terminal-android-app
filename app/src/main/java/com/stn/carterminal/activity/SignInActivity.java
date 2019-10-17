@@ -1,4 +1,4 @@
-package com.stn.carterminal;
+package com.stn.carterminal.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.stn.carterminal.R;
 
 public class SignInActivity extends AppCompatActivity {
 

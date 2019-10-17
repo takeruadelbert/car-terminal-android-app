@@ -1,6 +1,6 @@
-package com.stn.carterminal.Helper;
+package com.stn.carterminal.helper;
 
-import com.stn.carterminal.Constant.Constant;
+import com.stn.carterminal.constant.Constant;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;

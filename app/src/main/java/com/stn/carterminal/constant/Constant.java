@@ -1,4 +1,4 @@
-package com.stn.carterminal.Constant;
+package com.stn.carterminal.constant;
 
 public class Constant {
     public static final String SHARED_PREFERENCES_NAME = "car_terminal";
