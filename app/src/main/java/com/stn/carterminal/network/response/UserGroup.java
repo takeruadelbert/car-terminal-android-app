@@ -2,10 +2,12 @@ package com.stn.carterminal.network.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class UserGroup {
+public class UserGroup implements Serializable {
     @SerializedName("id")
     private Long userGroupId;
     @SerializedName("name")

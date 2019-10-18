@@ -15,4 +15,15 @@
     <string name="setting">Setting</string>
     <string name="ip_address_label">Host/IP Address</string>
     <string name="save_btn_label">Save</string>
+
+    <!-- Home Properties -->
+    <string name="home">Home</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="fullName">Full Name</string>
+    <string name="do_service">Urus Pelayanan</string>
+    <string name="check_vehicle">Cek Kendaraan</string>
+    <string name="change_manifest">Pindah Manifest</string>
+    <string name="change_tag_vehicle">Ganti Tag</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

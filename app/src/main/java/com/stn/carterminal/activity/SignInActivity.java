@@ -138,6 +138,13 @@ public class SignInActivity extends AppCompatActivity {
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
                     Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+
+                    User user = response.body();
+
+                    Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    homeIntent.putExtra("user", user);
+                    startActivity(homeIntent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to retrieve data session.", Toast.LENGTH_SHORT).show();
                 }

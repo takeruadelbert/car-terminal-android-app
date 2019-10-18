@@ -1,9 +1,7 @@
 package com.stn.carterminal.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +58,7 @@ public class SettingActivity extends AppCompatActivity {
 
                 Intent signIn = new Intent(getApplicationContext(), SignInActivity.class);
                 startActivity(signIn);
+                finish();
             }
         });
     }
