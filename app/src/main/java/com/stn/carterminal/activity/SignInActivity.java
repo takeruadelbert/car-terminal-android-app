@@ -1,8 +1,10 @@
 package com.stn.carterminal.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +13,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.stn.carterminal.common.GlobalVariable;
 import com.stn.carterminal.R;
+import com.stn.carterminal.constant.sharedPreference.SharedPreferenceDataKey;
+import com.stn.carterminal.helper.SharedPreferencesHelper;
 import com.stn.carterminal.network.ServiceGenerator;
-import com.stn.carterminal.network.endpoint.Endpoint;
 import com.stn.carterminal.network.request.Login;
 import com.stn.carterminal.network.response.User;
 import com.stn.carterminal.network.service.UserService;
@@ -40,7 +42,7 @@ public class SignInActivity extends AppCompatActivity {
         }
     };
     private UserService userService;
-    private GlobalVariable globalVariable;
+    public static SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +50,17 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userService = ServiceGenerator.createBaseService(this, UserService.class);
-        globalVariable = (GlobalVariable) getApplicationContext();
-        String username = globalVariable.getUsername();
-        String password = globalVariable.getPassword();
-        if(username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
-            ((EditText) findViewById(R.id.txtUsername)).setText(username);
-            ((EditText) findViewById(R.id.txtPassword)).setText(password);
-        }
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         setupSplashScreen();
+        String username = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME);
+        String password = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD);
+        if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
+            ((EditText) findViewById(R.id.txtUsername)).setText(username);
+            ((EditText) findViewById(R.id.txtPassword)).setText(password);
+
+            autoLogin();
+        }
         setSettingOnClickListener();
         setSignInOnClickListener();
     }
@@ -112,7 +116,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
-                    Endpoint.tokenBearer = response.headers().get("Authorization");
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_TOKEN_BEARER, response.headers().get("Authorization"));
                     requestAPIGetDataUser(username, password);
                 } else {
                     Toast.makeText(getApplicationContext(), "Login Failed.", Toast.LENGTH_SHORT).show();
@@ -133,8 +137,8 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
-                    globalVariable.setUsername(username);
-                    globalVariable.setPassword(password);
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
                     Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to retrieve data session.", Toast.LENGTH_SHORT).show();
@@ -149,7 +153,20 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isLoginSessionExpired() {
-        return false;
+    private void autoLogin() {
+        Call<User> userCall = userService.apiGetDataSession();
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 }

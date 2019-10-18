@@ -1,9 +1,11 @@
 package com.stn.carterminal.network;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.stn.carterminal.BuildConfig;
+import com.stn.carterminal.activity.SignInActivity;
+import com.stn.carterminal.constant.sharedPreference.SharedPreferenceDataKey;
+import com.stn.carterminal.helper.SharedPreferencesHelper;
 import com.stn.carterminal.network.endpoint.Endpoint;
 
 import java.io.IOException;
@@ -48,7 +50,7 @@ public class ServiceGenerator {
                 Request request = chain.request();
                 Request newReq = request.newBuilder()
                         .header("Accept", "application/json")
-                        .header("Authorization", Endpoint.tokenBearer)
+                        .header("Authorization", SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_TOKEN_BEARER))
                         .build();
                 return chain.proceed(newReq);
             }
