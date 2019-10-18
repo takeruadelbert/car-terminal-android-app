@@ -11,7 +11,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.stn.carterminal.common.GlobalVariable;
 import com.stn.carterminal.R;
+import com.stn.carterminal.network.ServiceGenerator;
+import com.stn.carterminal.network.endpoint.Endpoint;
+import com.stn.carterminal.network.request.Login;
+import com.stn.carterminal.network.response.User;
+import com.stn.carterminal.network.service.UserService;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -28,11 +39,22 @@ public class SignInActivity extends AppCompatActivity {
             relativeLayout2.setVisibility(View.VISIBLE);
         }
     };
+    private UserService userService;
+    private GlobalVariable globalVariable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userService = ServiceGenerator.createBaseService(this, UserService.class);
+        globalVariable = (GlobalVariable) getApplicationContext();
+        String username = globalVariable.getUsername();
+        String password = globalVariable.getPassword();
+        if(username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
+            ((EditText) findViewById(R.id.txtUsername)).setText(username);
+            ((EditText) findViewById(R.id.txtPassword)).setText(password);
+        }
 
         setupSplashScreen();
         setSettingOnClickListener();
@@ -66,7 +88,7 @@ public class SignInActivity extends AppCompatActivity {
                 String username = ((EditText) findViewById(R.id.txtUsername)).getText().toString();
                 String password = ((EditText) findViewById(R.id.txtPassword)).getText().toString();
                 if (validateFields(username, password)) {
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    requestAPILogin(username, password);
                 }
             }
         });
@@ -82,5 +104,52 @@ public class SignInActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void requestAPILogin(String username, String password) {
+        Call<ResponseBody> call = userService.apiSignIn(new Login(username, password));
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Endpoint.tokenBearer = response.headers().get("Authorization");
+                    requestAPIGetDataUser(username, password);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Login Failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("call = " + call);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void requestAPIGetDataUser(String username, String password) {
+        Call<User> userCall = userService.apiGetDataSession();
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+                    globalVariable.setUsername(username);
+                    globalVariable.setPassword(password);
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to retrieve data session.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                System.out.println("user call = " + call);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private boolean isLoginSessionExpired() {
+        return false;
     }
 }

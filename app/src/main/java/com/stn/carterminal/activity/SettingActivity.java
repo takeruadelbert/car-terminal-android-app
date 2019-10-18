@@ -1,9 +1,7 @@
 package com.stn.carterminal.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,31 +9,33 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.stn.carterminal.common.GlobalVariable;
 import com.stn.carterminal.R;
 import com.stn.carterminal.constant.Constant;
-import com.stn.carterminal.helper.SharedPreferencesHelper;
 import com.stn.carterminal.helper.TakeruHelper;
 
 public class SettingActivity extends AppCompatActivity {
 
     private static final String MESSAGE_HOST_NOT_BLANK = "Field 'Host' must not be empty.";
     private static final String MESSAGE_INVALID_HOST = "Invalid Host/IP Address.";
-    private static final String KEY_SHARED_PREFERENCES_HOST = "host";
 
+    private GlobalVariable globalVariable;
     private String host;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        globalVariable = (GlobalVariable) getApplicationContext();
         setHost();
         setOnClickSubmitButton();
     }
 
     private void setHost() {
-        this.host = SharedPreferencesHelper.getData(sharedPreferences, KEY_SHARED_PREFERENCES_HOST);
+        if (globalVariable.getHost() != null && !globalVariable.getHost().isEmpty()) {
+            this.host = globalVariable.getHost();
+        }
         ((EditText) findViewById(R.id.host)).setText(this.host);
     }
 
@@ -56,7 +56,7 @@ public class SettingActivity extends AppCompatActivity {
                     return;
                 }
 
-                SharedPreferencesHelper.storeData(sharedPreferences, KEY_SHARED_PREFERENCES_HOST, inputHost);
+                globalVariable.setHost(inputHost);
                 Toast.makeText(getApplicationContext(), Constant.SUCCESS_SAVE_DATA_MESSAGE, Toast.LENGTH_SHORT).show();
 
                 Intent signIn = new Intent(getApplicationContext(), SignInActivity.class);
