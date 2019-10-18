@@ -6,7 +6,6 @@ import com.stn.carterminal.BuildConfig;
 import com.stn.carterminal.activity.SignInActivity;
 import com.stn.carterminal.constant.sharedPreference.SharedPreferenceDataKey;
 import com.stn.carterminal.helper.SharedPreferencesHelper;
-import com.stn.carterminal.network.endpoint.Endpoint;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -57,9 +56,10 @@ public class ServiceGenerator {
         });
 
         OkHttpClient client = builder.build();
-
+        String test = SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST);
+        String temp = "";
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Endpoint.HOST)
+                .baseUrl("http://" + SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST))
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

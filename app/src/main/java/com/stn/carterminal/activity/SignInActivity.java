@@ -49,8 +49,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userService = ServiceGenerator.createBaseService(this, UserService.class);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        userService = ServiceGenerator.createBaseService(this, UserService.class);
 
         setupSplashScreen();
         String username = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME);
@@ -58,8 +58,6 @@ public class SignInActivity extends AppCompatActivity {
         if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
             ((EditText) findViewById(R.id.txtUsername)).setText(username);
             ((EditText) findViewById(R.id.txtPassword)).setText(password);
-
-            autoLogin();
         }
         setSettingOnClickListener();
         setSignInOnClickListener();
@@ -149,23 +147,6 @@ public class SignInActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("user call = " + call);
                 t.printStackTrace();
-            }
-        });
-    }
-
-    private void autoLogin() {
-        Call<User> userCall = userService.apiGetDataSession();
-        userCall.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() == 200) {
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-
             }
         });
     }
