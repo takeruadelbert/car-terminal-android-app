@@ -26,4 +26,11 @@
     <string name="change_tag_vehicle">Ganti Tag</string>
     <string name="logout">Logout</string>
     <string name="title_activity_main2">Main2Activity</string>
+    
+    <!-- Search Manifest -->
+    <string name="searchManifest">Cari Manifest</string>
+    <string name="providedServiceNumberLabel">Nomor Layanan</string>
+    <string name="btnConfirm">Konfirmasi</string>
+    <string name="providedServiceNumber">Nomor Layanan</string>
+    <string name="vesselName">Nama Kapal</string>
 </resources>

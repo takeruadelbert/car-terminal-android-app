@@ -21,13 +21,26 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarSearchManifest);
         toolbar.setTitle("Home");
 
         user = (User) getIntent().getSerializableExtra("user");
         ((TextView) findViewById(R.id.fullName)).setText(user.getBiodata().getFullName());
 
+        setOnClickListenerDoServiceButton();
         setOnClickListenerLogoutButton();
+    }
+
+    private void setOnClickListenerDoServiceButton() {
+        Button doServiceButton = findViewById(R.id.btnDoService);
+        doServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent doServiceIntent = new Intent(getApplicationContext(), SearchManifestActivity.class);
+                startActivity(doServiceIntent);
+                finish();
+            }
+        });
     }
 
     private void setOnClickListenerLogoutButton() {
