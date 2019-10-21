@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.stn.carterminal.R;
+import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.constant.sharedPreference.SharedPreferenceDataKey;
 import com.stn.carterminal.helper.SharedPreferencesHelper;
 import com.stn.carterminal.network.ServiceGenerator;
@@ -117,7 +118,7 @@ public class SignInActivity extends AppCompatActivity {
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_TOKEN_BEARER, response.headers().get("Authorization"));
                     requestAPIGetDataUser(username, password);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Login Failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -137,7 +138,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
 
                     User user = response.body();
 
@@ -146,7 +147,7 @@ public class SignInActivity extends AppCompatActivity {
                     startActivity(homeIntent);
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Failed to retrieve data session.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED_TO_RETRIEVE_DATA_SESSION, Toast.LENGTH_SHORT).show();
                 }
             }
 

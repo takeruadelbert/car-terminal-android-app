@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,9 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
 import com.stn.carterminal.adapter.SearchManifestAdapter;
+import com.stn.carterminal.constant.Constant;
+import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.response.ProvidedService;
+import com.stn.carterminal.network.service.ProvidedServiceService;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchManifestActivity extends AppCompatActivity {
 
@@ -23,6 +31,7 @@ public class SearchManifestActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ArrayList<ProvidedService> manifests;
     private SearchManifestAdapter searchManifestAdapter;
+    private ProvidedServiceService providedServiceService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,8 @@ public class SearchManifestActivity extends AppCompatActivity {
         recyclerView.setAdapter(searchManifestAdapter);
 
         setSearchFunctionalityRecyclerView();
+
+        providedServiceService = ServiceGenerator.createBaseService(this, ProvidedServiceService.class);
     }
 
     private void setSearchFunctionalityRecyclerView() {
@@ -55,15 +66,9 @@ public class SearchManifestActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().isEmpty()) {
-                    manifests.add(new ProvidedService(1L, "PS-123", "Kapal-1", "Takeru", "T.K."));
-                    manifests.add(new ProvidedService(2L, "PS-123", "Kapal-2", "Takeru", "T.K."));
-                    manifests.add(new ProvidedService(3L, "PS-123", "Kapal-3", "Takeru", "T.K."));
-                    manifests.add(new ProvidedService(4L, "PS-123", "Kapal-4", "Takeru", "T.K."));
-                    manifests.add(new ProvidedService(5L, "PS-123", "Kapal-5", "Takeru", "T.K."));
-                    manifests.add(new ProvidedService(6L, "PS-123", "Kapal-6", "Takeru", "T.K."));
-                    manifests.add(new ProvidedService(7L, "PS-123", "Kapal-7", "Takeru", "T.K."));
-                    manifests.add(new ProvidedService(8L, "PS-123", "Kapal-8", "Takeru", "T.K."));
+                String input = s.toString();
+                if (!input.isEmpty()) {
+                    manifests = requestAPISearchProvidedService(input);
                 } else {
                     manifests = new ArrayList<>();
                 }
@@ -87,5 +92,25 @@ public class SearchManifestActivity extends AppCompatActivity {
         }
 
         searchManifestAdapter.filterList(filteredManifests);
+    }
+
+    private ArrayList<ProvidedService> requestAPISearchProvidedService(String providedServiceNumber) {
+        Call<ArrayList<ProvidedService>> providedServiceCall = providedServiceService.apiGetProvidedService(providedServiceNumber);
+        providedServiceCall.enqueue(new Callback<ArrayList<ProvidedService>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ProvidedService>> call, Response<ArrayList<ProvidedService>> response) {
+                if (response.code() == 200) {
+                    manifests = response.body();
+                } else {
+                    Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ProvidedService>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return manifests;
     }
 }
