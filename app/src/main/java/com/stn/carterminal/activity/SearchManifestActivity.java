@@ -1,8 +1,11 @@
 package com.stn.carterminal.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,6 +36,8 @@ public class SearchManifestActivity extends AppCompatActivity {
     private SearchManifestAdapter searchManifestAdapter;
     private ProvidedServiceService providedServiceService;
 
+    private static final String TOOLBAR_TITLE = "Search Manifest";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +49,7 @@ public class SearchManifestActivity extends AppCompatActivity {
         search = findViewById(R.id.searchServiceNumber);
 
         toolbar = findViewById(R.id.toolbarSearchManifest);
-        toolbar.setTitle("Search Manifest");
+        toolbar.setTitle(TOOLBAR_TITLE);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,6 +60,7 @@ public class SearchManifestActivity extends AppCompatActivity {
         setSearchFunctionalityRecyclerView();
 
         providedServiceService = ServiceGenerator.createBaseService(this, ProvidedServiceService.class);
+        setOnClickListenerConfirmationButton();
     }
 
     private void setSearchFunctionalityRecyclerView() {
@@ -84,7 +90,6 @@ public class SearchManifestActivity extends AppCompatActivity {
 
     private void filter(String text) {
         ArrayList<ProvidedService> filteredManifests = new ArrayList<>();
-
         for (ProvidedService providedService : manifests) {
             if (providedService.getProvidedServiceNumber().toLowerCase().contains(text.toLowerCase())) {
                 filteredManifests.add(providedService);
@@ -112,5 +117,23 @@ public class SearchManifestActivity extends AppCompatActivity {
             }
         });
         return manifests;
+    }
+
+    private void setOnClickListenerConfirmationButton() {
+        Button confirm = findViewById(R.id.btnConfirmSearchManifest);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProvidedService providedService = searchManifestAdapter.getProvidedService();
+                if (providedService != null) {
+                    Intent detailManifestIntent = new Intent(getApplicationContext(), DetailManifestActivity.class);
+                    detailManifestIntent.putExtra("providedService", providedService);
+                    startActivity(detailManifestIntent);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

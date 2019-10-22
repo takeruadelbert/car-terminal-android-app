@@ -1,6 +1,7 @@
 package com.stn.carterminal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
 import com.stn.carterminal.ViewHolder.SearchManifestViewHolder;
+import com.stn.carterminal.activity.DetailManifestActivity;
+import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.listener.ItemClickListener;
 import com.stn.carterminal.network.response.ProvidedService;
 
 import java.util.ArrayList;
 
+import lombok.Data;
+
+@Data
 public class SearchManifestAdapter extends RecyclerView.Adapter<SearchManifestViewHolder> {
     private Context context;
     private ArrayList<ProvidedService> manifests;
     private ItemClickListener itemClickListener;
     private EditText search;
+    private ProvidedService providedService;
 
     public SearchManifestAdapter(Context context, ArrayList<ProvidedService> manifests, EditText search) {
         this.context = context;
@@ -37,13 +44,20 @@ public class SearchManifestAdapter extends RecyclerView.Adapter<SearchManifestVi
 
     @Override
     public void onBindViewHolder(@NonNull SearchManifestViewHolder holder, int position) {
+        String providedServiceNumberLabel = context.getString(R.string.providedServiceNumber);
         String providedServiceNumber = manifests.get(position).getProvidedServiceNumber();
-        holder.txtProvidedServiceNumber.setText(providedServiceNumber);
-        holder.txtVesselName.setText(manifests.get(position).getVesselName());
+        String fullProvidedServiceNumber = providedServiceNumberLabel + Constant.WHITESPACE + providedServiceNumber;
+        holder.txtProvidedServiceNumber.setText(fullProvidedServiceNumber);
+
+        String vesselName = context.getString(R.string.vesselName) + Constant.WHITESPACE + manifests.get(position).getVesselName();
+        holder.txtVesselName.setText(vesselName);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                providedService = manifests.get(position);
+
                 search.setText(providedServiceNumber);
                 manifests = new ArrayList<>();
                 notifyDataSetChanged();
