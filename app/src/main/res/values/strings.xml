@@ -40,4 +40,11 @@
     <string name="vesselOwnerDetailManifestLabel">Pemilik Kapal</string>
     <string name="companyNameDetailManifestLabel">Nama Perusahaan</string>
     <string name="buttonBackToSearchManifest">Kembali</string>
+
+    <!-- Search Vehicle -->
+    <string name="inputNIKLabel">Input NIK</string>
+    <string name="btnConfirmVehicle">Konfirmasi</string>
+    <string name="btnBackToDetailManifest">Kembali</string>
+    <string name="vehicleNIK">NIK : </string>
+    <string name="vehicleDescription">Deskripsi : </string>
 </resources>

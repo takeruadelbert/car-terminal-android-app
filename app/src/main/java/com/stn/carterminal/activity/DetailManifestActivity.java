@@ -34,6 +34,7 @@ public class DetailManifestActivity extends AppCompatActivity {
 
         setData(providedService);
         setOnClickListenerBackToSearchManifestButton();
+        setOnClickListenerGoToSearchVehicleButton();
     }
 
     private void setData(ProvidedService providedService) {
@@ -57,6 +58,18 @@ public class DetailManifestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent searchManifest = new Intent(getApplicationContext(), SearchManifestActivity.class);
                 startActivity(searchManifest);
+                finish();
+            }
+        });
+    }
+
+    private void setOnClickListenerGoToSearchVehicleButton() {
+        Button goToSearchVehicle = findViewById(R.id.btnConfirmDetailManifest);
+        goToSearchVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
+                startActivity(searchVehicle);
                 finish();
             }
         });
