@@ -101,8 +101,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
         AppCompatCheckBox checkBoxNIK = findViewById(R.id.checkboxVehicleNIK);
         AppCompatCheckBox checkBoxDescription = findViewById(R.id.checkboxVehicleDescription);
         AppCompatCheckBox checkBoxClass = findViewById(R.id.checkboxVehicleDetailClass);
-
-        return checkBoxNIK.isChecked() == checkBoxDescription.isChecked() == checkBoxClass.isChecked();
+        return checkBoxNIK.isChecked() && checkBoxDescription.isChecked() && checkBoxClass.isChecked();
     }
 
     private void apiChangeDataVehiclePosition(Long vehicleId) {

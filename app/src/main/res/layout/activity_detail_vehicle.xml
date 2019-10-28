@@ -17,9 +17,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="40dp">
+        android:layout_marginRight="20dp">
 
         <RelativeLayout
             android:id="@+id/relay1"
@@ -47,67 +47,72 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:padding="5dp"
                             android:text="@string/vehicleNIKLabel"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/txtVehicleDetailNIK"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:padding="5dp"
                             android:text="@string/vehicleClassValue"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white" />
 
-                        <androidx.appcompat.widget.AppCompatCheckBox
-                            android:id="@+id/checkboxVehicleNIK"/>
+                        <androidx.appcompat.widget.AppCompatCheckBox android:id="@+id/checkboxVehicleNIK" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:padding="5dp"
                             android:text="@string/vehicleDescriptionLabel"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/txtVehicleDetailDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:padding="5dp"
                             android:text="@string/vehicleDescriptionValue"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white" />
 
-                        <androidx.appcompat.widget.AppCompatCheckBox
-                            android:id="@+id/checkboxVehicleDescription"/>
+                        <androidx.appcompat.widget.AppCompatCheckBox android:id="@+id/checkboxVehicleDescription" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:padding="5dp"
                             android:text="@string/vehicleClassLabel"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/txtVehicleDetailClass"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:padding="5dp"
                             android:text="@string/vehicleClassValue"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white" />
 
-                        <androidx.appcompat.widget.AppCompatCheckBox
-                            android:id="@+id/checkboxVehicleDetailClass"/>
+                        <androidx.appcompat.widget.AppCompatCheckBox android:id="@+id/checkboxVehicleDetailClass" />
                     </TableRow>
 
                 </TableLayout>
@@ -121,8 +126,8 @@
                         android:id="@+id/btnBackToSearchVehicle"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/btn_bg"
                         android:fontFamily="sans-serif-medium"
@@ -137,14 +142,14 @@
                         android:id="@+id/btnConfirmDetailVehicle"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="30dp"
                         android:background="@drawable/btn_bg"
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
-                        android:layout_marginLeft="30dp"
                         android:text="@string/btnConfirm"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
