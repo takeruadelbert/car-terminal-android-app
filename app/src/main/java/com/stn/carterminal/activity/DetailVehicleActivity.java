@@ -6,12 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.Toolbar;
 
 import com.stn.carterminal.R;
+import com.stn.carterminal.constant.Constant;
+import com.stn.carterminal.network.ServiceGenerator;
+import com.stn.carterminal.network.request.ChangeVehiclePosition;
 import com.stn.carterminal.network.response.Vehicle;
+import com.stn.carterminal.network.service.VehicleService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailVehicleActivity extends AppCompatActivity {
 
@@ -20,6 +30,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private TextView txtVehicleDescription;
     private TextView txtVehicleClass;
     private Long providedServiceId;
+    private VehicleService vehicleService;
 
     private final static String TOOLBAR_TITLE = "Detail Kendaraan";
 
@@ -40,6 +51,8 @@ public class DetailVehicleActivity extends AppCompatActivity {
         setData();
         setOnClickListenerBackToSearchVehicleButton();
         setOnClickListenerConfirmDetailVehicleButton();
+
+        vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
     }
 
     private void setData() {
@@ -64,10 +77,13 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private void setOnClickListenerConfirmDetailVehicleButton() {
         Button confirmDetailVehicle = findViewById(R.id.btnConfirmDetailVehicle);
         confirmDetailVehicle.setOnClickListener((View v) -> {
-
+            if (validate()) {
+                apiChangeDataVehiclePosition(vehicle.getVehicleId());
+            } else {
+                Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_DETAIL_VEHICLE_CHECKBOX, Toast.LENGTH_SHORT).show();
+            }
         });
     }
-
 
     @Override
     public void onBackPressed() {
@@ -79,5 +95,34 @@ public class DetailVehicleActivity extends AppCompatActivity {
         searchVehicleIntent.putExtra("providedServiceId", providedServiceId);
         startActivity(searchVehicleIntent);
         finish();
+    }
+
+    private boolean validate() {
+        AppCompatCheckBox checkBoxNIK = findViewById(R.id.checkboxVehicleNIK);
+        AppCompatCheckBox checkBoxDescription = findViewById(R.id.checkboxVehicleDescription);
+        AppCompatCheckBox checkBoxClass = findViewById(R.id.checkboxVehicleDetailClass);
+
+        return checkBoxNIK.isChecked() == checkBoxDescription.isChecked() == checkBoxClass.isChecked();
+    }
+
+    private void apiChangeDataVehiclePosition(Long vehicleId) {
+        Call<Vehicle> vehicleCall = vehicleService.apiChangeVehiclePosition(vehicleId, new ChangeVehiclePosition(vehicleId));
+        vehicleCall.enqueue(new Callback<Vehicle>() {
+            @Override
+            public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
+                    backToSearchVehicle();
+                } else {
+                    Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Vehicle> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
