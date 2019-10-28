@@ -14,11 +14,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.stn.carterminal.R;
 import com.stn.carterminal.adapter.SearchManifestAdapter;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.response.ProvidedService;
+import com.stn.carterminal.network.response.User;
 import com.stn.carterminal.network.service.ProvidedServiceService;
 
 import java.util.ArrayList;
@@ -121,19 +123,33 @@ public class SearchManifestActivity extends AppCompatActivity {
 
     private void setOnClickListenerConfirmationButton() {
         Button confirm = findViewById(R.id.btnConfirmSearchManifest);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProvidedService providedService = searchManifestAdapter.getProvidedService();
-                if (providedService != null) {
-                    Intent detailManifestIntent = new Intent(getApplicationContext(), DetailManifestActivity.class);
-                    detailManifestIntent.putExtra("providedService", providedService);
-                    startActivity(detailManifestIntent);
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
-                }
+        confirm.setOnClickListener((View view) -> {
+            ProvidedService providedService = searchManifestAdapter.getProvidedService();
+            if (providedService != null) {
+                Intent detailManifestIntent = new Intent(getApplicationContext(), DetailManifestActivity.class);
+                detailManifestIntent.putExtra("providedService", providedService);
+                startActivity(detailManifestIntent);
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        backToHome();
+    }
+
+    private void backToHome() {
+        Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+
+        Gson gson = new Gson();
+        String dataUser = SignInActivity.sharedPreferences.getString("user", "");
+        User user = gson.fromJson(dataUser, User.class);
+
+        homeIntent.putExtra("user", user);
+        startActivity(homeIntent);
+        finish();
     }
 }

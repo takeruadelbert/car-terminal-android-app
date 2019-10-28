@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.stn.carterminal.R;
 import com.stn.carterminal.network.response.Vehicle;
@@ -20,10 +21,15 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private TextView txtVehicleClass;
     private Long providedServiceId;
 
+    private final static String TOOLBAR_TITLE = "Detail Kendaraan";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_vehicle);
+
+        Toolbar toolbar = findViewById(R.id.toolbarDetailVehicle);
+        toolbar.setTitle(TOOLBAR_TITLE);
 
         vehicle = (Vehicle) getIntent().getSerializableExtra("vehicle");
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
@@ -51,10 +57,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private void setOnClickListenerBackToSearchVehicleButton() {
         Button backToSearchVehicle = findViewById(R.id.btnBackToSearchVehicle);
         backToSearchVehicle.setOnClickListener((View v) -> {
-            Intent searchVehicleIntent = new Intent(getApplicationContext(), SearchVehicleActivity.class);
-            searchVehicleIntent.putExtra("providedServiceId", providedServiceId);
-            startActivity(searchVehicleIntent);
-            finish();
+            backToSearchVehicle();
         });
     }
 
@@ -63,5 +66,18 @@ public class DetailVehicleActivity extends AppCompatActivity {
         confirmDetailVehicle.setOnClickListener((View v) -> {
 
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        backToSearchVehicle();
+    }
+
+    private void backToSearchVehicle() {
+        Intent searchVehicleIntent = new Intent(getApplicationContext(), SearchVehicleActivity.class);
+        searchVehicleIntent.putExtra("providedServiceId", providedServiceId);
+        startActivity(searchVehicleIntent);
+        finish();
     }
 }

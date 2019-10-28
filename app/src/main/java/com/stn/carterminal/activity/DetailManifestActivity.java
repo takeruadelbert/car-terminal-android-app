@@ -59,26 +59,29 @@ public class DetailManifestActivity extends AppCompatActivity {
 
     private void setOnClickListenerBackToSearchManifestButton() {
         Button backToSearchManifest = findViewById(R.id.btnBackToSearchManifest);
-        backToSearchManifest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent searchManifest = new Intent(getApplicationContext(), SearchManifestActivity.class);
-                startActivity(searchManifest);
-                finish();
-            }
+        backToSearchManifest.setOnClickListener((View view) -> {
+            backToSearchManifest();
         });
     }
 
     private void setOnClickListenerGoToSearchVehicleButton() {
         Button goToSearchVehicle = findViewById(R.id.btnConfirmDetailManifest);
-        goToSearchVehicle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
-                searchVehicle.putExtra("providedServiceId", providedServiceId);
-                startActivity(searchVehicle);
-                finish();
-            }
+        goToSearchVehicle.setOnClickListener((View view) -> {
+            Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
+            searchVehicle.putExtra("providedServiceId", providedServiceId);
+            startActivity(searchVehicle);
+            finish();
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        backToSearchManifest();
+    }
+
+    private void backToSearchManifest() {
+        Intent searchManifest = new Intent(getApplicationContext(), SearchManifestActivity.class);
+        startActivity(searchManifest);
+        finish();
     }
 }

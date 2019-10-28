@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.stn.carterminal.R;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.constant.sharedPreference.SharedPreferenceDataKey;
@@ -138,9 +139,14 @@ public class SignInActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
+
                     Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
 
                     User user = response.body();
+
+                    Gson gson = new Gson();
+                    String dataUser = gson.toJson(user);
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_DATA_USER, dataUser);
 
                     Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     homeIntent.putExtra("user", user);

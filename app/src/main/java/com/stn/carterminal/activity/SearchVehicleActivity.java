@@ -48,7 +48,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
         vehicles = new ArrayList<>();
 
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
-        if(providedServiceId == 0L) {
+        if (providedServiceId == 0L) {
             throw new Resources.NotFoundException();
         }
 
@@ -147,13 +147,19 @@ public class SearchVehicleActivity extends AppCompatActivity {
 
     private void setOnClickListenerBackToDetailManifestButton() {
         Button back = findViewById(R.id.btnBackToDetailManifest);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent backToSearchManifest = new Intent(getApplicationContext(), SearchManifestActivity.class);
-                startActivity(backToSearchManifest);
-                finish();
-            }
+        back.setOnClickListener((View view) -> {
+            backToSearchManifest();
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        backToSearchManifest();
+    }
+
+    private void backToSearchManifest() {
+        Intent backToSearchManifest = new Intent(getApplicationContext(), SearchManifestActivity.class);
+        startActivity(backToSearchManifest);
+        finish();
     }
 }
