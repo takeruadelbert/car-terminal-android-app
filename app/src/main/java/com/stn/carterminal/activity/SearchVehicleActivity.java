@@ -1,6 +1,7 @@
 package com.stn.carterminal.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,6 +36,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     private ArrayList<Vehicle> vehicles;
     private SearchVehicleAdapter searchVehicleAdapter;
     private VehicleService vehicleService;
+    private Long providedServiceId;
 
     private static final String TOOLBAR_TITLE = "Search Kendaraan";
 
@@ -44,6 +46,11 @@ public class SearchVehicleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_vehicle_activity);
 
         vehicles = new ArrayList<>();
+
+        providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
+        if(providedServiceId == 0L) {
+            throw new Resources.NotFoundException();
+        }
 
         recyclerView = findViewById(R.id.recyclerViewVehicle);
         search = findViewById(R.id.inputNIK);
@@ -100,7 +107,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     }
 
     private ArrayList<Vehicle> requestAPISearchVehicle(String NIK) {
-        Call<ArrayList<Vehicle>> vehicleCall = vehicleService.apiGetVehicle(NIK);
+        Call<ArrayList<Vehicle>> vehicleCall = vehicleService.apiGetVehicle(providedServiceId, NIK);
         vehicleCall.enqueue(new Callback<ArrayList<Vehicle>>() {
             @Override
             public void onResponse(Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
@@ -126,10 +133,11 @@ public class SearchVehicleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Vehicle vehicle = searchVehicleAdapter.getVehicle();
                 if (vehicle != null) {
-//                    Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailManifestActivity.class);
-//                    detailVehicleIntent.putExtra("vehicle", vehicle);
-//                    startActivity(detailVehicleIntent);
-//                    finish();
+                    Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
+                    detailVehicleIntent.putExtra("vehicle", vehicle);
+                    detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
+                    startActivity(detailVehicleIntent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
                 }

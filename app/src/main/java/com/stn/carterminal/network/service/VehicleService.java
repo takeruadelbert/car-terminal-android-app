@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.OPTIONS;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface VehicleService {
 
     @OPTIONS(Endpoint.API_GET_VEHICLE)
-    Call<ArrayList<Vehicle>> apiGetVehicle(@Query("keyword") String keyword);
+    Call<ArrayList<Vehicle>> apiGetVehicle(@Path("providedServiceId") Long providedServiceId, @Query("keyword") String keyword);
 }

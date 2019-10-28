@@ -1,6 +1,7 @@
 package com.stn.carterminal.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ public class DetailManifestActivity extends AppCompatActivity {
     private TextView vesselName;
     private TextView vesselOwner;
     private TextView companyName;
+    private Long providedServiceId;
 
     private static final String TOOLBAR_TITLE = "Detail Manifest";
 
@@ -31,6 +33,10 @@ public class DetailManifestActivity extends AppCompatActivity {
         toolbar.setTitle(TOOLBAR_TITLE);
 
         providedService = (ProvidedService) getIntent().getSerializableExtra("providedService");
+        if (providedService == null) {
+            throw new Resources.NotFoundException();
+        }
+        providedServiceId = providedService.getProvidedServiceId();
 
         setData(providedService);
         setOnClickListenerBackToSearchManifestButton();
@@ -69,6 +75,7 @@ public class DetailManifestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
+                searchVehicle.putExtra("providedServiceId", providedServiceId);
                 startActivity(searchVehicle);
                 finish();
             }

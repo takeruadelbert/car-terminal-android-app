@@ -47,4 +47,12 @@
     <string name="btnBackToDetailManifest">Kembali</string>
     <string name="vehicleNIK">NIK : </string>
     <string name="vehicleDescription">Deskripsi : </string>
+
+    <!-- Detail Vehicle -->
+    <string name="vehicleNIKLabel">NIK</string>
+    <string name="vehicleDescriptionLabel">Deskripsi</string>
+    <string name="vehicleClassLabel">Golongan</string>
+    <string name="vehicleNIKValue">NIK Kendaraan</string>
+    <string name="vehicleDescriptionValue">Deskripsi Kendaraan</string>
+    <string name="vehicleClassValue">Golongan Kendaraan</string>
 </resources>
