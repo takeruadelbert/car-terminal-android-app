@@ -95,6 +95,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private void backToScanVehicle() {
         Intent scanVehicleIntent = new Intent(getApplicationContext(), ScanVehicleActivity.class);
         scanVehicleIntent.putExtra("providedServiceId", providedServiceId);
+        scanVehicleIntent.putExtra("menu", "detailManifest");
         startActivity(scanVehicleIntent);
         finish();
     }

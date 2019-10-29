@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">CarTerminal</string>
 
+    <!-- Dialog Spinner -->
+    <string name="buttonLabelSelect">Select</string>
+    <string name="buttonLabelDimiss">Dismiss</string>
+    <string-array name="methodList">
+        <item>Choose One ...</item>
+        <item>Scan UHF</item>
+        <item>Input NIK</item>
+    </string-array>
+
     <!-- General -->
     <string name="logo_description">Logo Car Terminal</string>
 
@@ -58,4 +67,10 @@
     <string name="vehicleNIKValue">NIK Kendaraan</string>
     <string name="vehicleDescriptionValue">Deskripsi Kendaraan</string>
     <string name="vehicleClassValue">Golongan Kendaraan</string>
+
+    <!-- Check Vehicle -->
+    <string name="vehicleEntryDateLabel">Tanggal Masuk</string>
+    <string name="vehicleEntryDateValue">31 Oktober 2019</string>
+    <string name="vehicleProductionDayLabel">Hari Penumpukan</string>
+    <string name="vehicleProductionDayValue">15</string>
 </resources>

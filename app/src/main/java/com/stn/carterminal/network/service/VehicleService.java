@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.OPTIONS;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -20,4 +21,7 @@ public interface VehicleService {
 
     @PUT(Endpoint.API_CHANGE_DATA_VEHICLE_POSITION)
     Call<Vehicle> apiChangeVehiclePosition(@Path("vehicleId") Long vehicleId, @Body ChangeVehiclePosition changeVehiclePosition);
+
+    @GET(Endpoint.API_GET_VEHICLE_BY_TAG)
+    Call<Vehicle> apiGetVehicleByTag(@Path("uhfTag") String uhfTag);
 }

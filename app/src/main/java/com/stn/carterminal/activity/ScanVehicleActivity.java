@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.magicrf.uhfreaderlib.reader.Tools;
 import com.magicrf.uhfreaderlib.reader.UhfReader;
 import com.stn.carterminal.R;
+import com.stn.carterminal.activity.CheckVehicle.CheckVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.magicrf.uhfreader.ScreenStateReceiver;
 import com.stn.carterminal.magicrf.uhfreader.UhfReaderDevice;
@@ -39,6 +40,7 @@ public class ScanVehicleActivity extends AppCompatActivity {
     private static final Integer DELAY_TIME_SCAN = 1000;
     private String EPC;
     private Long providedServiceId;
+    private String menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,8 @@ public class ScanVehicleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan_vehicle);
 
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
-        if (providedServiceId == 0L) {
+        menu = getIntent().getStringExtra("menu");
+        if (menu.equals("detailManifest") && providedServiceId == 0L) {
             Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
             throw new Resources.NotFoundException();
         }
@@ -143,14 +146,30 @@ public class ScanVehicleActivity extends AppCompatActivity {
                 EPC = epc;
 
                 if (!EPC.isEmpty()) {
-                    Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
-                    searchVehicle.putExtra("providedServiceId", providedServiceId);
-                    searchVehicle.putExtra("EPC", EPC);
-                    startActivity(searchVehicle);
-                    finish();
+                    changeActivity();
                 }
             }
         });
+    }
+
+    private void changeActivity() {
+        switch (menu) {
+            case "home":
+                Intent checkVehicle = new Intent(getApplicationContext(), CheckVehicleActivity.class);
+                checkVehicle.putExtra("EPC", EPC);
+                startActivity(checkVehicle);
+                finish();
+                break;
+            case "detailManifest":
+                Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
+                searchVehicle.putExtra("providedServiceId", providedServiceId);
+                searchVehicle.putExtra("EPC", EPC);
+                startActivity(searchVehicle);
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 
     class InventoryThread extends Thread {

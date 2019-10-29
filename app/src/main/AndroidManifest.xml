@@ -14,9 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.CheckVehicle.CheckVehicleActivity"></activity>
         <activity
             android:name=".activity.ScanVehicleActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity android:name=".activity.DetailVehicleActivity" />
         <activity android:name=".activity.SearchVehicleActivity" />
         <activity android:name=".activity.DetailManifestActivity" />

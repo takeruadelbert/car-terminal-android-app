@@ -56,8 +56,6 @@ public class ServiceGenerator {
         });
 
         OkHttpClient client = builder.build();
-        String test = SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST);
-        String temp = "";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://" + SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST))
                 .client(client)

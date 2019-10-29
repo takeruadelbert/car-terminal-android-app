@@ -69,6 +69,7 @@ public class DetailManifestActivity extends AppCompatActivity {
         goToSearchVehicle.setOnClickListener((View view) -> {
             Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
             scanVehicle.putExtra("providedServiceId", providedServiceId);
+            scanVehicle.putExtra("menu", "detailManifest");
             startActivity(scanVehicle);
             finish();
         });

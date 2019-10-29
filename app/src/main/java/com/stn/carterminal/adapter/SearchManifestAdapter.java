@@ -1,7 +1,6 @@
 package com.stn.carterminal.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
 import com.stn.carterminal.ViewHolder.SearchManifestViewHolder;
-import com.stn.carterminal.activity.DetailManifestActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.listener.ItemClickListener;
 import com.stn.carterminal.network.response.ProvidedService;
 
 import java.util.ArrayList;
 
-import lombok.Data;
-
-@Data
 public class SearchManifestAdapter extends RecyclerView.Adapter<SearchManifestViewHolder> {
     private Context context;
     private ArrayList<ProvidedService> manifests;
@@ -73,5 +68,9 @@ public class SearchManifestAdapter extends RecyclerView.Adapter<SearchManifestVi
     public void filterList(ArrayList<ProvidedService> filteredManifests) {
         this.manifests = filteredManifests;
         notifyDataSetChanged();
+    }
+
+    public ProvidedService getProvidedService() {
+        return this.providedService;
     }
 }

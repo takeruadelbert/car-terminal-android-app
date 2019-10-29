@@ -17,9 +17,6 @@ import com.stn.carterminal.network.response.Vehicle;
 
 import java.util.ArrayList;
 
-import lombok.Data;
-
-@Data
 public class SearchVehicleAdapter extends RecyclerView.Adapter<SearchVehicleViewHolder> {
     private Context context;
     private ArrayList<Vehicle> vehicles;
@@ -70,5 +67,9 @@ public class SearchVehicleAdapter extends RecyclerView.Adapter<SearchVehicleView
     public void filterList(ArrayList<Vehicle> filteredVehicles) {
         this.vehicles = filteredVehicles;
         notifyDataSetChanged();
+    }
+
+    public Vehicle getVehicle() {
+        return this.vehicle;
     }
 }
