@@ -8,6 +8,10 @@ public class Constant {
 
     public static final String ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE = "Invalid Provided Service.";
     public static final String ERROR_MESSAGE_DETAIL_VEHICLE_CHECKBOX = "Whole Checkboxes must be checked.";
+    public static final String ERROR_MESSAGE_EPC_NOT_FOUND = "EPC Not Found.";
+
+    public static final String ERROR_MESSAGE_UHF_READER_SERIAL_PORT = "Serial Port Init Fail.";
+    public static final String ERROR_MESSAGE_UHF_READER_POWER = "UHF Reader Power On Failed.";
 
     public static final String API_SUCCESS = "Success";
     public static final String API_LOGIN_FAILED = "Login Failed.";

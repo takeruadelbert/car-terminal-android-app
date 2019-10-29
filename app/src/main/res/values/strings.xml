@@ -41,6 +41,9 @@
     <string name="companyNameDetailManifestLabel">Nama Perusahaan</string>
     <string name="buttonBackToSearchManifest">Kembali</string>
 
+    <!-- Scan Vehicle -->
+    <string name="labelScanVehicle">Scanning RFID Tag ...</string>
+
     <!-- Search Vehicle -->
     <string name="inputNIKLabel">Input NIK</string>
     <string name="btnConfirmVehicle">Konfirmasi</string>

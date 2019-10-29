@@ -30,6 +30,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private TextView txtVehicleDescription;
     private TextView txtVehicleClass;
     private Long providedServiceId;
+    private String EPC;
     private VehicleService vehicleService;
 
     private final static String TOOLBAR_TITLE = "Detail Kendaraan";
@@ -44,7 +45,8 @@ public class DetailVehicleActivity extends AppCompatActivity {
 
         vehicle = (Vehicle) getIntent().getSerializableExtra("vehicle");
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
-        if (vehicle == null) {
+        EPC = getIntent().getStringExtra("EPC");
+        if (vehicle == null || EPC == null || EPC.isEmpty()) {
             throw new Resources.NotFoundException();
         }
 
@@ -70,7 +72,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private void setOnClickListenerBackToSearchVehicleButton() {
         Button backToSearchVehicle = findViewById(R.id.btnBackToSearchVehicle);
         backToSearchVehicle.setOnClickListener((View v) -> {
-            backToSearchVehicle();
+            backToScanVehicle();
         });
     }
 
@@ -87,13 +89,13 @@ public class DetailVehicleActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        backToSearchVehicle();
+        backToScanVehicle();
     }
 
-    private void backToSearchVehicle() {
-        Intent searchVehicleIntent = new Intent(getApplicationContext(), SearchVehicleActivity.class);
-        searchVehicleIntent.putExtra("providedServiceId", providedServiceId);
-        startActivity(searchVehicleIntent);
+    private void backToScanVehicle() {
+        Intent scanVehicleIntent = new Intent(getApplicationContext(), ScanVehicleActivity.class);
+        scanVehicleIntent.putExtra("providedServiceId", providedServiceId);
+        startActivity(scanVehicleIntent);
         finish();
     }
 
@@ -105,13 +107,13 @@ public class DetailVehicleActivity extends AppCompatActivity {
     }
 
     private void apiChangeDataVehiclePosition(Long vehicleId) {
-        Call<Vehicle> vehicleCall = vehicleService.apiChangeVehiclePosition(vehicleId, new ChangeVehiclePosition(vehicleId));
+        Call<Vehicle> vehicleCall = vehicleService.apiChangeVehiclePosition(vehicleId, new ChangeVehiclePosition(vehicleId, EPC));
         vehicleCall.enqueue(new Callback<Vehicle>() {
             @Override
             public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
                 if (response.code() == 200) {
                     Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
-                    backToSearchVehicle();
+                    backToScanVehicle();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                 }

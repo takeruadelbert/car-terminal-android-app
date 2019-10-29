@@ -37,6 +37,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     private SearchVehicleAdapter searchVehicleAdapter;
     private VehicleService vehicleService;
     private Long providedServiceId;
+    private String EPC;
 
     private static final String TOOLBAR_TITLE = "Search Kendaraan";
 
@@ -48,7 +49,9 @@ public class SearchVehicleActivity extends AppCompatActivity {
         vehicles = new ArrayList<>();
 
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
-        if (providedServiceId == 0L) {
+        EPC = getIntent().getStringExtra("EPC");
+        if (providedServiceId == 0L || EPC == null || EPC.isEmpty()) {
+            Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_EPC_NOT_FOUND, Toast.LENGTH_SHORT).show();
             throw new Resources.NotFoundException();
         }
 
@@ -136,6 +139,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
                     Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
                     detailVehicleIntent.putExtra("vehicle", vehicle);
                     detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
+                    detailVehicleIntent.putExtra("EPC", EPC);
                     startActivity(detailVehicleIntent);
                     finish();
                 } else {

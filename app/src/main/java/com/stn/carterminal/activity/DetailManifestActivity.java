@@ -67,9 +67,9 @@ public class DetailManifestActivity extends AppCompatActivity {
     private void setOnClickListenerGoToSearchVehicleButton() {
         Button goToSearchVehicle = findViewById(R.id.btnConfirmDetailManifest);
         goToSearchVehicle.setOnClickListener((View view) -> {
-            Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
-            searchVehicle.putExtra("providedServiceId", providedServiceId);
-            startActivity(searchVehicle);
+            Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
+            scanVehicle.putExtra("providedServiceId", providedServiceId);
+            startActivity(scanVehicle);
             finish();
         });
     }
