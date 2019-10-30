@@ -39,13 +39,16 @@ public class SearchVehicleAdapter extends RecyclerView.Adapter<SearchVehicleView
 
     @Override
     public void onBindViewHolder(@NonNull SearchVehicleViewHolder holder, int position) {
-        String vehicleNIKLabel = context.getString(R.string.inputNIKLabel);
+        String vehicleNIKLabel = context.getString(R.string.vehicleNIK);
         String vehicleNIK = vehicles.get(position).getNIK();
         String fullVehicleNIK = vehicleNIKLabel + Constant.WHITESPACE + vehicleNIK;
         holder.txtVehicleNIK.setText(fullVehicleNIK);
 
         String vehicleDescription = context.getString(R.string.vehicleDescription) + Constant.WHITESPACE + vehicles.get(position).getDescription();
         holder.txtVehicleDescription.setText(vehicleDescription);
+
+        String providedServiceNumber = context.getString(R.string.providedServiceNumber) + Constant.WHITESPACE + vehicles.get(position).getProvidedServiceNumber();
+        holder.txtVehicleProvidedServiceNumber.setText(providedServiceNumber);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

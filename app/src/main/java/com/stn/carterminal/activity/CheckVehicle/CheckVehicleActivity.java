@@ -42,16 +42,19 @@ public class CheckVehicleActivity extends AppCompatActivity {
         toolbar.setTitle(TOOLBAR_TITLE);
 
         if (getIntent().getExtras().containsKey("vehicle")) {
+            vehicle = (Vehicle) getIntent().getSerializableExtra("vehicle");
             if (vehicle == null) {
                 throw new Resources.NotFoundException();
             }
-            vehicle = (Vehicle) getIntent().getSerializableExtra("vehicle");
+            setData();
         }
 
-        String EPC = getIntent().getStringExtra("EPC");
-        vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
-        if (EPC != null && !EPC.isEmpty()) {
-            requestAPIByTag(EPC);
+        if (getIntent().getExtras().containsKey("EPC")) {
+            String EPC = getIntent().getStringExtra("EPC");
+            vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
+            if (EPC != null && !EPC.isEmpty()) {
+                requestAPIByTag(EPC);
+            }
         }
 
         setOnClickListenerBackToHomeButton();
@@ -72,7 +75,8 @@ public class CheckVehicleActivity extends AppCompatActivity {
         vehicleEntryDate.setText(date);
 
         TextView vehicleProductionDay = findViewById(R.id.txtVehicleDetailProductionDay);
-        vehicleProductionDay.setText(vehicle.getNumDaysBuildUp().toString());
+        String numDaysBuildUp = vehicle.getNumDaysBuildUp() != null ? vehicle.getNumDaysBuildUp().toString() : "-";
+        vehicleProductionDay.setText(numDaysBuildUp);
     }
 
     private void setOnClickListenerBackToHomeButton() {

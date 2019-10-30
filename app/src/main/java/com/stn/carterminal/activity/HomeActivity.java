@@ -78,14 +78,15 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 if (!spinner.getSelectedItem().toString().equalsIgnoreCase("Choose One ...")) {
                     if (spinner.getSelectedItem().toString().equals("Scan UHF")) {
-                        Toast.makeText(getApplicationContext(), "Scan UHF", Toast.LENGTH_SHORT).show();
-
                         Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
                         scanVehicle.putExtra("menu", "home");
                         startActivity(scanVehicle);
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Input NIK", Toast.LENGTH_SHORT).show();
+                        Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
+                        searchVehicle.putExtra("menu", "home");
+                        startActivity(searchVehicle);
+                        finish();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Please choose one.", Toast.LENGTH_SHORT).show();

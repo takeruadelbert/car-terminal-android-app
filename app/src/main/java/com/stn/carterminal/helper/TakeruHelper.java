@@ -24,14 +24,17 @@ public class TakeruHelper {
     }
 
     public static String convertStringDateToPlainDate(String stringDate) {
-        try {
-            SimpleDateFormat input = new SimpleDateFormat(INPUT_DATE_PATTERN, locale);
-            SimpleDateFormat output = new SimpleDateFormat(OUTPUT_DATE_PATTERN, locale);
-            Date date = new Date(input.parse(stringDate).getTime());
-            return output.format(date);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-            return "";
+        if (stringDate != null && !stringDate.isEmpty()) {
+            try {
+                SimpleDateFormat input = new SimpleDateFormat(INPUT_DATE_PATTERN, locale);
+                SimpleDateFormat output = new SimpleDateFormat(OUTPUT_DATE_PATTERN, locale);
+                Date date = new Date(input.parse(stringDate).getTime());
+                return output.format(date);
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+                return "-";
+            }
         }
+        return "-";
     }
 }

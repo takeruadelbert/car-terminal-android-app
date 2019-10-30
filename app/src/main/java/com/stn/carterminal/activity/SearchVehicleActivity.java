@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
+import com.stn.carterminal.activity.CheckVehicle.CheckVehicleActivity;
 import com.stn.carterminal.adapter.SearchVehicleAdapter;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
@@ -38,6 +39,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     private VehicleService vehicleService;
     private Long providedServiceId;
     private String EPC;
+    private String menu;
 
     private static final String TOOLBAR_TITLE = "Search Kendaraan";
 
@@ -48,11 +50,14 @@ public class SearchVehicleActivity extends AppCompatActivity {
 
         vehicles = new ArrayList<>();
 
-        providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
-        EPC = getIntent().getStringExtra("EPC");
-        if (providedServiceId == 0L || EPC == null || EPC.isEmpty()) {
-            Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_EPC_NOT_FOUND, Toast.LENGTH_SHORT).show();
-            throw new Resources.NotFoundException();
+        menu = getIntent().getStringExtra("menu");
+        if (menu.equals("scanVehicle")) {
+            providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
+            EPC = getIntent().getStringExtra("EPC");
+            if (providedServiceId == 0L || EPC == null || EPC.isEmpty()) {
+                Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_EPC_NOT_FOUND, Toast.LENGTH_SHORT).show();
+                throw new Resources.NotFoundException();
+            }
         }
 
         recyclerView = findViewById(R.id.recyclerViewVehicle);
@@ -85,7 +90,16 @@ public class SearchVehicleActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = s.toString();
                 if (!input.isEmpty()) {
-                    vehicles = requestAPISearchVehicle(input);
+                    switch (menu) {
+                        case "scanVehicle":
+                            vehicles = requestAPISearchVehicleByProvidedServiceIdAndNIK(input);
+                            break;
+                        case "home":
+                            vehicles = requestAPISearchVehicleByNIK(input);
+                            break;
+                        default:
+                            break;
+                    }
                 } else {
                     vehicles = new ArrayList<>();
                 }
@@ -109,7 +123,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
         searchVehicleAdapter.filterList(filteredVehicles);
     }
 
-    private ArrayList<Vehicle> requestAPISearchVehicle(String NIK) {
+    private ArrayList<Vehicle> requestAPISearchVehicleByProvidedServiceIdAndNIK(String NIK) {
         Call<ArrayList<Vehicle>> vehicleCall = vehicleService.apiGetVehicle(providedServiceId, NIK);
         vehicleCall.enqueue(new Callback<ArrayList<Vehicle>>() {
             @Override
@@ -124,6 +138,28 @@ public class SearchVehicleActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<Vehicle>> call, Throwable t) {
                 t.printStackTrace();
+                Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+            }
+        });
+        return vehicles;
+    }
+
+    private ArrayList<Vehicle> requestAPISearchVehicleByNIK(String NIK) {
+        Call<ArrayList<Vehicle>> vehicleCall = vehicleService.apiGetVehicleByNIK(NIK);
+        vehicleCall.enqueue(new Callback<ArrayList<Vehicle>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
+                if (response.code() == 200) {
+                    vehicles = response.body();
+                } else {
+                    Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Vehicle>> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
             }
         });
         return vehicles;
@@ -131,22 +167,35 @@ public class SearchVehicleActivity extends AppCompatActivity {
 
     private void SetOnClickListenerConfirmationButton() {
         Button confirm = findViewById(R.id.btnConfirmSearchVehicle);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Vehicle vehicle = searchVehicleAdapter.getVehicle();
-                if (vehicle != null) {
-                    Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
-                    detailVehicleIntent.putExtra("vehicle", vehicle);
-                    detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
-                    detailVehicleIntent.putExtra("EPC", EPC);
-                    startActivity(detailVehicleIntent);
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
-                }
+        confirm.setOnClickListener((View view) -> {
+            Vehicle vehicle = searchVehicleAdapter.getVehicle();
+            if (vehicle != null) {
+                changeActivity(vehicle);
+            } else {
+                Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void changeActivity(Vehicle vehicle) {
+        switch (menu) {
+            case "scanVehicle":
+                Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
+                detailVehicleIntent.putExtra("vehicle", vehicle);
+                detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
+                detailVehicleIntent.putExtra("EPC", EPC);
+                startActivity(detailVehicleIntent);
+                finish();
+                break;
+            case "home":
+                Intent checkVehicleIntent = new Intent(getApplicationContext(), CheckVehicleActivity.class);
+                checkVehicleIntent.putExtra("vehicle", vehicle);
+                startActivity(checkVehicleIntent);
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 
     private void setOnClickListenerBackToDetailManifestButton() {

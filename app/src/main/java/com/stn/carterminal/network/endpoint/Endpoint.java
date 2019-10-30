@@ -6,5 +6,6 @@ public class Endpoint {
     public static final String API_GET_PROVIDED_SERVICE = "/provided_services/search";
     public static final String API_GET_VEHICLE = "/vehicles/mobile/search/{providedServiceId}";
     public static final String API_GET_VEHICLE_BY_TAG = "/vehicles/mobile/get/{uhfTag}";
+    public static final String API_GET_VEHICLE_BY_NIK = "/vehicles/simplesearch";
     public static final String API_CHANGE_DATA_VEHICLE_POSITION = "/vehicles/mobile/change_vehicle_position/{vehicleId}";
 }

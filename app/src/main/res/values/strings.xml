@@ -59,6 +59,7 @@
     <string name="btnBackToDetailManifest">Kembali</string>
     <string name="vehicleNIK">NIK : </string>
     <string name="vehicleDescription">Deskripsi : </string>
+    <string name="vehicleProvidedServiceNumber">Nomor Layanan : </string>
 
     <!-- Detail Vehicle -->
     <string name="vehicleNIKLabel">NIK</string>

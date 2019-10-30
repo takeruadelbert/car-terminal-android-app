@@ -24,4 +24,7 @@ public interface VehicleService {
 
     @GET(Endpoint.API_GET_VEHICLE_BY_TAG)
     Call<Vehicle> apiGetVehicleByTag(@Path("uhfTag") String uhfTag);
+
+    @OPTIONS(Endpoint.API_GET_VEHICLE_BY_NIK)
+    Call<ArrayList<Vehicle>> apiGetVehicleByNIK(@Query("keyword") String keyword);
 }

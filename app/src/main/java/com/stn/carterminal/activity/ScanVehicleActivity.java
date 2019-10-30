@@ -163,6 +163,7 @@ public class ScanVehicleActivity extends AppCompatActivity {
             case "detailManifest":
                 Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
                 searchVehicle.putExtra("providedServiceId", providedServiceId);
+                searchVehicle.putExtra("menu", "scanVehicle");
                 searchVehicle.putExtra("EPC", EPC);
                 startActivity(searchVehicle);
                 finish();

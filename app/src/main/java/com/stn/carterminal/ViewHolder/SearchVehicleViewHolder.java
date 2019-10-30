@@ -11,6 +11,7 @@ import com.stn.carterminal.listener.ItemClickListener;
 public class SearchVehicleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView txtVehicleNIK;
     public TextView txtVehicleDescription;
+    public TextView txtVehicleProvidedServiceNumber;
     private ItemClickListener itemClickListener;
 
     public SearchVehicleViewHolder(View view) {
@@ -18,6 +19,7 @@ public class SearchVehicleViewHolder extends RecyclerView.ViewHolder implements 
 
         txtVehicleNIK = view.findViewById(R.id.txtVehicleNIK);
         txtVehicleDescription = view.findViewById(R.id.txtVehicleDescription);
+        txtVehicleProvidedServiceNumber = view.findViewById(R.id.txtVehicleProvidedServiceNumber);
 
         view.setOnClickListener(this);
     }

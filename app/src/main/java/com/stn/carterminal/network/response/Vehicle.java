@@ -27,4 +27,7 @@ public class Vehicle implements Serializable {
 
     @SerializedName("numDaysBuildUp")
     private Long numDaysBuildUp;
+
+    @SerializedName("providedServiceNumber")
+    private String providedServiceNumber;
 }
