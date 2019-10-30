@@ -12,11 +12,13 @@ import android.widget.Toast;
 import android.zyapi.CommonApi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.magicrf.uhfreaderlib.reader.Tools;
 import com.magicrf.uhfreaderlib.reader.UhfReader;
 import com.stn.carterminal.R;
-import com.stn.carterminal.activity.CheckVehicle.CheckVehicleActivity;
+import com.stn.carterminal.activity.changemanifest.ChangeManifestActivity;
+import com.stn.carterminal.activity.checkvehicle.CheckVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.magicrf.uhfreader.ScreenStateReceiver;
 import com.stn.carterminal.magicrf.uhfreader.UhfReaderDevice;
@@ -41,14 +43,21 @@ public class ScanVehicleActivity extends AppCompatActivity {
     private String EPC;
     private Long providedServiceId;
     private String menu;
+    private String target;
+
+    private static final String TOOLBAR_TITLE = "Scan Kendaraan";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_vehicle);
 
+        Toolbar toolbar = findViewById(R.id.toolbarScanVehicle);
+        toolbar.setTitle(TOOLBAR_TITLE);
+
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
         menu = getIntent().getStringExtra("menu");
+        target = getIntent().getStringExtra("target");
         if (menu.equals("detailManifest") && providedServiceId == 0L) {
             Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
             throw new Resources.NotFoundException();
@@ -155,10 +164,17 @@ public class ScanVehicleActivity extends AppCompatActivity {
     private void changeActivity() {
         switch (menu) {
             case "home":
-                Intent checkVehicle = new Intent(getApplicationContext(), CheckVehicleActivity.class);
-                checkVehicle.putExtra("EPC", EPC);
-                startActivity(checkVehicle);
-                finish();
+                if (target.equals("checkVehicle")) {
+                    Intent checkVehicle = new Intent(getApplicationContext(), CheckVehicleActivity.class);
+                    checkVehicle.putExtra("EPC", EPC);
+                    startActivity(checkVehicle);
+                    finish();
+                } else if (target.equals("changeManifest")) {
+                    Intent changeManifest = new Intent(getApplicationContext(), ChangeManifestActivity.class);
+                    changeManifest.putExtra("EPC", EPC);
+                    startActivity(changeManifest);
+                    finish();
+                }
                 break;
             case "detailManifest":
                 Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);

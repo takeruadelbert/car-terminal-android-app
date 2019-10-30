@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         setOnClickListenerDoServiceButton();
         setOnClickListenerLogoutButton();
         setOnClickListenerCheckVehicleButton();
+        setOnClickListenerChangeManifestButton();
     }
 
     private void setOnClickListenerDoServiceButton() {
@@ -59,11 +60,18 @@ public class HomeActivity extends AppCompatActivity {
     private void setOnClickListenerCheckVehicleButton() {
         Button checkVehicle = findViewById(R.id.btnCheckVehicle);
         checkVehicle.setOnClickListener((View view) -> {
-            setupDialog();
+            setupDialog("checkVehicle");
         });
     }
 
-    private void setupDialog() {
+    private void setOnClickListenerChangeManifestButton() {
+        Button changeManifest = findViewById(R.id.btnChangeManifest);
+        changeManifest.setOnClickListener((View view) -> {
+            setupDialog("changeManifest");
+        });
+    }
+
+    private void setupDialog(String target) {
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, R.style.MyDialogTheme);
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
         builder.setTitle(Constant.DIALOG_SPINNER_TITLE);
@@ -76,21 +84,7 @@ public class HomeActivity extends AppCompatActivity {
         builder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (!spinner.getSelectedItem().toString().equalsIgnoreCase("Choose One ...")) {
-                    if (spinner.getSelectedItem().toString().equals("Scan UHF")) {
-                        Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
-                        scanVehicle.putExtra("menu", "home");
-                        startActivity(scanVehicle);
-                        finish();
-                    } else {
-                        Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
-                        searchVehicle.putExtra("menu", "home");
-                        startActivity(searchVehicle);
-                        finish();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Please choose one.", Toast.LENGTH_SHORT).show();
-                }
+                changeActivity(spinner, target);
             }
         });
 
@@ -103,5 +97,25 @@ public class HomeActivity extends AppCompatActivity {
         builder.setView(mView);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private void changeActivity(Spinner spinner, String target) {
+        if (!spinner.getSelectedItem().toString().equalsIgnoreCase("Choose One ...")) {
+            if (spinner.getSelectedItem().toString().equals("Scan UHF")) {
+                Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
+                scanVehicle.putExtra("menu", "home");
+                scanVehicle.putExtra("target", target);
+                startActivity(scanVehicle);
+                finish();
+            } else {
+                Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
+                searchVehicle.putExtra("menu", "home");
+                searchVehicle.putExtra("target", target);
+                startActivity(searchVehicle);
+                finish();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Please choose one.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

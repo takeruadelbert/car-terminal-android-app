@@ -1,4 +1,4 @@
-package com.stn.carterminal.ViewHolder;
+package com.stn.carterminal.viewholder;
 
 import android.view.View;
 import android.widget.TextView;

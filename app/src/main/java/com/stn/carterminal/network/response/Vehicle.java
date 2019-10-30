@@ -30,4 +30,7 @@ public class Vehicle implements Serializable {
 
     @SerializedName("providedServiceNumber")
     private String providedServiceNumber;
+
+    @SerializedName("providedServiceId")
+    private Long providedServiceId;
 }

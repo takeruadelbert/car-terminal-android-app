@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
-import com.stn.carterminal.ViewHolder.SearchVehicleViewHolder;
+import com.stn.carterminal.viewholder.SearchVehicleViewHolder;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.listener.ItemClickListener;
 import com.stn.carterminal.network.response.Vehicle;

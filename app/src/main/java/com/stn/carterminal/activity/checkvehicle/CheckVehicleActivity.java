@@ -1,4 +1,4 @@
-package com.stn.carterminal.activity.CheckVehicle;
+package com.stn.carterminal.activity.checkvehicle;
 
 import android.content.Intent;
 import android.content.res.Resources;

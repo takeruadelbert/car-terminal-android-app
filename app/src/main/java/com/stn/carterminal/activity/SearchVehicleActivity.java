@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
-import com.stn.carterminal.activity.CheckVehicle.CheckVehicleActivity;
+import com.stn.carterminal.activity.changemanifest.ChangeManifestActivity;
+import com.stn.carterminal.activity.checkvehicle.CheckVehicleActivity;
 import com.stn.carterminal.adapter.SearchVehicleAdapter;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
@@ -40,6 +41,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     private Long providedServiceId;
     private String EPC;
     private String menu;
+    private String target;
 
     private static final String TOOLBAR_TITLE = "Search Kendaraan";
 
@@ -51,6 +53,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
         vehicles = new ArrayList<>();
 
         menu = getIntent().getStringExtra("menu");
+        target = getIntent().getStringExtra("target");
         if (menu.equals("scanVehicle")) {
             providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
             EPC = getIntent().getStringExtra("EPC");
@@ -188,10 +191,18 @@ public class SearchVehicleActivity extends AppCompatActivity {
                 finish();
                 break;
             case "home":
-                Intent checkVehicleIntent = new Intent(getApplicationContext(), CheckVehicleActivity.class);
-                checkVehicleIntent.putExtra("vehicle", vehicle);
-                startActivity(checkVehicleIntent);
-                finish();
+                if (target.equals("checkVehicle")) {
+                    Intent checkVehicleIntent = new Intent(getApplicationContext(), CheckVehicleActivity.class);
+                    checkVehicleIntent.putExtra("vehicle", vehicle);
+                    startActivity(checkVehicleIntent);
+                    finish();
+                } else if (target.equals("changeManifest")) {
+                    Intent changeManifestIntent = new Intent(getApplicationContext(), ChangeManifestActivity.class);
+                    changeManifestIntent.putExtra("originProvidedServiceId", vehicle.getProvidedServiceId());
+                    changeManifestIntent.putExtra("vehicleId", vehicle.getVehicleId());
+                    startActivity(changeManifestIntent);
+                    finish();
+                }
                 break;
             default:
                 break;
