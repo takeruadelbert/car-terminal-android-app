@@ -16,6 +16,7 @@ import com.stn.carterminal.R;
 import com.stn.carterminal.activity.HomeActivity;
 import com.stn.carterminal.activity.SignInActivity;
 import com.stn.carterminal.constant.Constant;
+import com.stn.carterminal.helper.TakeruHelper;
 import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.response.User;
 import com.stn.carterminal.network.response.Vehicle;
@@ -53,7 +54,6 @@ public class CheckVehicleActivity extends AppCompatActivity {
             requestAPIByTag(EPC);
         }
 
-        setData();
         setOnClickListenerBackToHomeButton();
     }
 
@@ -68,7 +68,8 @@ public class CheckVehicleActivity extends AppCompatActivity {
         vehicleClass.setText(vehicle.getVehicleClass());
 
         TextView vehicleEntryDate = findViewById(R.id.txtVehicleDetailEntryDate);
-        vehicleEntryDate.setText(vehicle.getEntryDate());
+        String date = TakeruHelper.convertStringDateToPlainDate(vehicle.getEntryDate());
+        vehicleEntryDate.setText(date);
 
         TextView vehicleProductionDay = findViewById(R.id.txtVehicleDetailProductionDay);
         vehicleProductionDay.setText(vehicle.getNumDaysBuildUp().toString());
@@ -104,6 +105,7 @@ public class CheckVehicleActivity extends AppCompatActivity {
             public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
                 if (response.code() == 200) {
                     vehicle = response.body();
+                    setData();
                 } else if (response.code() == 404) {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_VEHICLE_NOT_FOUND, Toast.LENGTH_SHORT).show();
                 } else {
