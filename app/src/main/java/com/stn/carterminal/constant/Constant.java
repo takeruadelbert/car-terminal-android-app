@@ -18,9 +18,11 @@ public class Constant {
 
     public static final String API_SUCCESS = "Success";
     public static final String API_SUCCESS_CHANGE_DATA_MANIFEST = "Data Manifest has been updated.";
+    public static final String API_SUCCESS_CHANGE_UHF_TAG = "UHF Tag has been updated.";
     public static final String API_LOGIN_FAILED = "Login Failed.";
     public static final String API_LOGIN_FAILED_TO_RETRIEVE_DATA_SESSION = "Failed to retrieve data session.";
     public static final String API_ERROR_INVALID_RESPONSE = "Invalid Response from server.";
     public static final String API_ERROR_VEHICLE_NOT_FOUND = "Invalid Vehicle ID.";
     public static final String API_ERROR_CHANGE_DATA_MANIFEST = "Error : Fail to change manifest.";
+    public static final String API_ERROR_UHF_TAG_SAME = "UHF Tag is currently same.";
 }

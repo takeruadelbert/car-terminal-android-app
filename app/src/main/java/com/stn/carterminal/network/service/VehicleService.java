@@ -1,6 +1,7 @@
 package com.stn.carterminal.network.service;
 
 import com.stn.carterminal.network.endpoint.Endpoint;
+import com.stn.carterminal.network.request.ChangeUhfTag;
 import com.stn.carterminal.network.request.ChangeVehiclePosition;
 import com.stn.carterminal.network.response.Vehicle;
 
@@ -27,4 +28,7 @@ public interface VehicleService {
 
     @OPTIONS(Endpoint.API_GET_VEHICLE_BY_NIK)
     Call<ArrayList<Vehicle>> apiGetVehicleByNIK(@Query("keyword") String keyword);
+
+    @PUT(Endpoint.API_CHANGE_UHF_TAG)
+    Call<Vehicle> apiChangeUHFTag(@Path("vehicleId") Long vehicleId, @Body ChangeUhfTag changeUhfTag);
 }

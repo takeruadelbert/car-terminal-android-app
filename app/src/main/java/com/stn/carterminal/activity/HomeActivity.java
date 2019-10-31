@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         setOnClickListenerLogoutButton();
         setOnClickListenerCheckVehicleButton();
         setOnClickListenerChangeManifestButton();
+        setOnClickListenerChangeUHFTagButton();
     }
 
     private void setOnClickListenerDoServiceButton() {
@@ -71,6 +72,13 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private void setOnClickListenerChangeUHFTagButton() {
+        Button changeTag = findViewById(R.id.btnChangeTag);
+        changeTag.setOnClickListener((View view) -> {
+            changeActivityToScanVehicle("changeUhfTag");
+        });
+    }
+
     private void setupDialog(String target) {
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, R.style.MyDialogTheme);
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
@@ -102,11 +110,7 @@ public class HomeActivity extends AppCompatActivity {
     private void changeActivity(Spinner spinner, String target) {
         if (!spinner.getSelectedItem().toString().equalsIgnoreCase("Choose One ...")) {
             if (spinner.getSelectedItem().toString().equals("Scan UHF")) {
-                Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
-                scanVehicle.putExtra("menu", "home");
-                scanVehicle.putExtra("target", target);
-                startActivity(scanVehicle);
-                finish();
+                changeActivityToScanVehicle(target);
             } else {
                 Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
                 searchVehicle.putExtra("menu", "home");
@@ -117,5 +121,13 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Please choose one.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void changeActivityToScanVehicle(String target) {
+        Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
+        scanVehicle.putExtra("menu", "home");
+        scanVehicle.putExtra("target", target);
+        startActivity(scanVehicle);
+        finish();
     }
 }

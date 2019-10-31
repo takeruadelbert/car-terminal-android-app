@@ -75,4 +75,6 @@
     <string name="vehicleProductionDayLabel">Hari Penumpukan</string>
     <string name="vehicleProductionDayValue">15</string>
 
+    <!--Change UHF Tag -->
+    <string name="changeUHFTagInputNIK">Input NIK yang Ingin Diganti :</string>
 </resources>

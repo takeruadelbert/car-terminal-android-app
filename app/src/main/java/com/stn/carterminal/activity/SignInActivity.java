@@ -125,8 +125,8 @@ public class SignInActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("call = " + call);
                 t.printStackTrace();
+                Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -159,8 +159,8 @@ public class SignInActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("user call = " + call);
                 t.printStackTrace();
+                Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
             }
         });
     }

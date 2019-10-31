@@ -18,6 +18,7 @@ import com.magicrf.uhfreaderlib.reader.Tools;
 import com.magicrf.uhfreaderlib.reader.UhfReader;
 import com.stn.carterminal.R;
 import com.stn.carterminal.activity.changemanifest.ChangeManifestActivity;
+import com.stn.carterminal.activity.changeuhftag.ChangeUHFTagActivity;
 import com.stn.carterminal.activity.checkvehicle.CheckVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.magicrf.uhfreader.ScreenStateReceiver;
@@ -173,6 +174,11 @@ public class ScanVehicleActivity extends AppCompatActivity {
                     Intent changeManifest = new Intent(getApplicationContext(), ChangeManifestActivity.class);
                     changeManifest.putExtra("EPC", EPC);
                     startActivity(changeManifest);
+                    finish();
+                } else if (target.equals("changeUhfTag")) {
+                    Intent changeUhfTag = new Intent(getApplicationContext(), ChangeUHFTagActivity.class);
+                    changeUhfTag.putExtra("EPC", EPC);
+                    startActivity(changeUhfTag);
                     finish();
                 }
                 break;
