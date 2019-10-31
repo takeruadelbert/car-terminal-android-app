@@ -14,6 +14,7 @@ import android.zyapi.CommonApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.gson.Gson;
 import com.magicrf.uhfreaderlib.reader.Tools;
 import com.magicrf.uhfreaderlib.reader.UhfReader;
 import com.stn.carterminal.R;
@@ -23,6 +24,7 @@ import com.stn.carterminal.activity.checkvehicle.CheckVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.magicrf.uhfreader.ScreenStateReceiver;
 import com.stn.carterminal.magicrf.uhfreader.UhfReaderDevice;
+import com.stn.carterminal.network.response.User;
 
 import java.util.List;
 
@@ -193,6 +195,23 @@ public class ScanVehicleActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        backToHome();
+    }
+
+    private void backToHome() {
+        Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+
+        Gson gson = new Gson();
+        String dataUser = SignInActivity.sharedPreferences.getString("user", "");
+        User user = gson.fromJson(dataUser, User.class);
+
+        homeIntent.putExtra("user", user);
+        startActivity(homeIntent);
+        finish();
     }
 
     class InventoryThread extends Thread {
