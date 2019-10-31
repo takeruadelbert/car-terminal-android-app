@@ -75,6 +75,12 @@
     <string name="vehicleProductionDayLabel">Hari Penumpukan</string>
     <string name="vehicleProductionDayValue">15</string>
 
-    <!--Change UHF Tag -->
+    <!-- Change UHF Tag -->
     <string name="changeUHFTagInputNIK">Input NIK yang Ingin Diganti :</string>
+
+    <!-- Add New Vehicle Menu -->
+    <string name="addNewVehicle">Tambah Kendaraan</string>
+    <string name="addNewVehicleInputNIKLabel">Input NIK Kendaraan Baru :</string>
+    <string name="addNewVehicleDescriptionLabel">Detail Kendaraan :</string>
+    <string name="addNewVehicleClass">Golongan Kendaraan :</string>
 </resources>

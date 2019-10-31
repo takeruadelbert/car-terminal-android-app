@@ -12,6 +12,11 @@ public class Constant {
     public static final String ERROR_MESSAGE_INVALID_VEHICLE = "Invalid Vehicle ID.";
     public static final String ERROR_MESSAGE_DETAIL_VEHICLE_CHECKBOX = "Whole Checkboxes must be checked.";
     public static final String ERROR_MESSAGE_EPC_NOT_FOUND = "EPC Not Found.";
+    public static final String ERROR_MESSAGE_INVALID_VEHICLE_CLASS = "Invalid Data Vehicle Class.";
+
+    public static final String WARNING_MESSAGE_VEHICLE_ID_NUMBER = "Vehicle ID Number must be filled.";
+    public static final String WARNING_MESSAGE_VEHICLE_DESCRIPTION = "Vehicle Description must be filled.";
+    public static final String WARNING_MESSAGE_VEHICLE_CLASS = "Vehicle Class must be filled.";
 
     public static final String ERROR_MESSAGE_UHF_READER_SERIAL_PORT = "Serial Port Init Fail.";
     public static final String ERROR_MESSAGE_UHF_READER_POWER = "UHF Reader Power On Failed.";
@@ -19,6 +24,7 @@ public class Constant {
     public static final String API_SUCCESS = "Success";
     public static final String API_SUCCESS_CHANGE_DATA_MANIFEST = "Data Manifest has been updated.";
     public static final String API_SUCCESS_CHANGE_UHF_TAG = "UHF Tag has been updated.";
+    public static final String API_SUCCESS_ADD_NEW_VEHICLE = "Add New Vehicle Success.";
     public static final String API_LOGIN_FAILED = "Login Failed.";
     public static final String API_LOGIN_FAILED_TO_RETRIEVE_DATA_SESSION = "Failed to retrieve data session.";
     public static final String API_ERROR_INVALID_RESPONSE = "Invalid Response from server.";

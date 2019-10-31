@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
+import com.stn.carterminal.activity.addnewvehicle.AddNewVehicleActivity;
 import com.stn.carterminal.activity.changemanifest.ChangeManifestActivity;
 import com.stn.carterminal.activity.checkvehicle.CheckVehicleActivity;
 import com.stn.carterminal.adapter.SearchVehicleAdapter;
@@ -54,7 +56,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
 
         menu = getIntent().getStringExtra("menu");
         target = getIntent().getStringExtra("target");
-        if (menu.equals("scanVehicle")) {
+        if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
             providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
             EPC = getIntent().getStringExtra("EPC");
             if (providedServiceId == 0L || EPC == null || EPC.isEmpty()) {
@@ -66,8 +68,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewVehicle);
         search = findViewById(R.id.inputNIK);
 
-        toolbar = findViewById(R.id.toolbarSearchVehicle);
-        toolbar.setTitle(TOOLBAR_TITLE);
+        setupToolbar();
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -82,6 +83,29 @@ public class SearchVehicleActivity extends AppCompatActivity {
         setOnClickListenerBackToDetailManifestButton();
     }
 
+    private void setupToolbar() {
+        toolbar = findViewById(R.id.toolbarSearchVehicle);
+        toolbar.setTitle(TOOLBAR_TITLE);
+        toolbar.inflateMenu(R.menu.additional);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.addNewVehicle:
+                        Intent newVehicle = new Intent(getApplicationContext(), AddNewVehicleActivity.class);
+                        newVehicle.putExtra("EPC", EPC);
+                        newVehicle.putExtra("providedServiceId", providedServiceId);
+                        startActivity(newVehicle);
+                        finish();
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
     private void setSearchFunctionalityRecyclerView() {
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,15 +117,10 @@ public class SearchVehicleActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = s.toString();
                 if (!input.isEmpty()) {
-                    switch (menu) {
-                        case "scanVehicle":
-                            vehicles = requestAPISearchVehicleByProvidedServiceIdAndNIK(input);
-                            break;
-                        case "home":
-                            vehicles = requestAPISearchVehicleByNIK(input);
-                            break;
-                        default:
-                            break;
+                    if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
+                        vehicles = requestAPISearchVehicleByProvidedServiceIdAndNIK(input);
+                    } else {
+                        vehicles = requestAPISearchVehicleByNIK(input);
                     }
                 } else {
                     vehicles = new ArrayList<>();
@@ -181,32 +200,31 @@ public class SearchVehicleActivity extends AppCompatActivity {
     }
 
     private void changeActivity(Vehicle vehicle) {
-        switch (menu) {
-            case "scanVehicle":
-                Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
-                detailVehicleIntent.putExtra("vehicle", vehicle);
-                detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
-                detailVehicleIntent.putExtra("EPC", EPC);
-                startActivity(detailVehicleIntent);
+        if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
+            changeActivityToDetailVehicle(vehicle);
+        } else {
+            if (target.equals("checkVehicle")) {
+                Intent checkVehicleIntent = new Intent(getApplicationContext(), CheckVehicleActivity.class);
+                checkVehicleIntent.putExtra("vehicle", vehicle);
+                startActivity(checkVehicleIntent);
                 finish();
-                break;
-            case "home":
-                if (target.equals("checkVehicle")) {
-                    Intent checkVehicleIntent = new Intent(getApplicationContext(), CheckVehicleActivity.class);
-                    checkVehicleIntent.putExtra("vehicle", vehicle);
-                    startActivity(checkVehicleIntent);
-                    finish();
-                } else if (target.equals("changeManifest")) {
-                    Intent changeManifestIntent = new Intent(getApplicationContext(), ChangeManifestActivity.class);
-                    changeManifestIntent.putExtra("originProvidedServiceId", vehicle.getProvidedServiceId());
-                    changeManifestIntent.putExtra("vehicleId", vehicle.getVehicleId());
-                    startActivity(changeManifestIntent);
-                    finish();
-                }
-                break;
-            default:
-                break;
+            } else if (target.equals("changeManifest")) {
+                Intent changeManifestIntent = new Intent(getApplicationContext(), ChangeManifestActivity.class);
+                changeManifestIntent.putExtra("originProvidedServiceId", vehicle.getProvidedServiceId());
+                changeManifestIntent.putExtra("vehicleId", vehicle.getVehicleId());
+                startActivity(changeManifestIntent);
+                finish();
+            }
         }
+    }
+
+    private void changeActivityToDetailVehicle(Vehicle vehicle) {
+        Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
+        detailVehicleIntent.putExtra("vehicle", vehicle);
+        detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
+        detailVehicleIntent.putExtra("EPC", EPC);
+        startActivity(detailVehicleIntent);
+        finish();
     }
 
     private void setOnClickListenerBackToDetailManifestButton() {
