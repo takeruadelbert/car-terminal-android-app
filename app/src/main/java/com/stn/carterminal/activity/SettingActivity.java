@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,8 +20,10 @@ public class SettingActivity extends AppCompatActivity {
 
     private static final String MESSAGE_HOST_NOT_BLANK = "Field 'Host' must not be empty.";
     private static final String MESSAGE_INVALID_HOST = "Invalid Host/IP Address.";
+    private static final String MESSAGE_PROGRESS_DIALOG = "Saving ...";
 
     private String host;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class SettingActivity extends AppCompatActivity {
 
         setHost();
         setOnClickSubmitButton();
+
+        progressDialog = new ProgressDialog(SettingActivity.this);
     }
 
     private void setHost() {
@@ -38,28 +43,29 @@ public class SettingActivity extends AppCompatActivity {
 
     private void setOnClickSubmitButton() {
         Button save = findViewById(R.id.saveBtnSetting);
-        save.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String inputHost = ((EditText) findViewById(R.id.host)).getText().toString();
-                if (inputHost.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), MESSAGE_HOST_NOT_BLANK, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (!TakeruHelper.validateHost(inputHost)) {
-                    Toast.makeText(getApplicationContext(), MESSAGE_INVALID_HOST, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST, inputHost);
-                Toast.makeText(getApplicationContext(), Constant.SUCCESS_SAVE_DATA_MESSAGE, Toast.LENGTH_SHORT).show();
-
-                Intent signIn = new Intent(getApplicationContext(), SignInActivity.class);
-                startActivity(signIn);
-                finish();
+        save.setOnClickListener((View view) -> {
+            progressDialog.setMessage(MESSAGE_PROGRESS_DIALOG);
+            progressDialog.show();
+            String inputHost = ((EditText) findViewById(R.id.host)).getText().toString();
+            if (inputHost.isEmpty()) {
+                Toast.makeText(getApplicationContext(), MESSAGE_HOST_NOT_BLANK, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                return;
             }
+
+            if (!TakeruHelper.validateHost(inputHost)) {
+                Toast.makeText(getApplicationContext(), MESSAGE_INVALID_HOST, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                return;
+            }
+
+            SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST, inputHost);
+            Toast.makeText(getApplicationContext(), Constant.SUCCESS_SAVE_DATA_MESSAGE, Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+
+            Intent signIn = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(signIn);
+            finish();
         });
     }
 }

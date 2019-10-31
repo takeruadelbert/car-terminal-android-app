@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity.addnewvehicle;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import retrofit2.Response;
 public class AddNewVehicleActivity extends AppCompatActivity {
 
     private static final String TOOLBAR_TITLE = "Input Kendaraan Tambahan";
+    private static final String PROGRESS_BAR_MESSAGE = "Saving ...";
 
     private ArrayList<VehicleClass> vehicleClasses = new ArrayList<>();
     private ArrayList<String> vehicleClassSpinner = new ArrayList<>();
@@ -41,6 +43,8 @@ public class AddNewVehicleActivity extends AppCompatActivity {
     private String EPC;
     private Long providedServiceId;
     private Long vehicleClassId;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +59,12 @@ public class AddNewVehicleActivity extends AppCompatActivity {
 
         vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
 
+        progressDialog = new ProgressDialog(AddNewVehicleActivity.this);
+        progressDialog.setMessage(PROGRESS_BAR_MESSAGE);
+
         Toolbar toolbar = findViewById(R.id.toolbarAddNewVehicle);
         toolbar.setTitle(TOOLBAR_TITLE);
 
-//        setupVehicleClasses();
         apiRequestGetVehicleClass();
         setOnClickListenerBackToSearchVehicleButton();
         setOnClickListenerConfirmButton();
@@ -93,6 +99,7 @@ public class AddNewVehicleActivity extends AppCompatActivity {
             vehicleClassId = getVehicleClassIdByName(vehicleClass);
 
             if (validate(NIK, description, vehicleClassId)) {
+                progressDialog.show();
                 requestAPIAddNewVehicle(NIK, description, vehicleClassId);
             }
         });
@@ -127,9 +134,11 @@ public class AddNewVehicleActivity extends AppCompatActivity {
             public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
                 if (response.code() == 200) {
                     Toast.makeText(getApplicationContext(), Constant.API_SUCCESS_ADD_NEW_VEHICLE, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                     backToSearchVehicle();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -137,6 +146,7 @@ public class AddNewVehicleActivity extends AppCompatActivity {
             public void onFailure(Call<Vehicle> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }

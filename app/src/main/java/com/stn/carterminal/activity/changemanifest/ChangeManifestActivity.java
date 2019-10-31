@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity.changemanifest;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import retrofit2.Response;
 public class ChangeManifestActivity extends AppCompatActivity {
 
     private static final String TOOLBAR_TITLE = "Pindah Manifest";
+    private static final String PROGRESS_DIALOG_MESSAGE = "Updating ...";
 
     private ProvidedService providedService;
     private ArrayList<ProvidedService> manifests;
@@ -49,6 +51,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
     private Long originProvidedServiceId;
     private Long targetProvidedServiceId;
     private VehicleService vehicleService;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,9 @@ public class ChangeManifestActivity extends AppCompatActivity {
         toolbar.setTitle(TOOLBAR_TITLE);
 
         manifests = new ArrayList<>();
+
+        progressDialog = new ProgressDialog(ChangeManifestActivity.this);
+        progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerChangeManifest);
         search = findViewById(R.id.changeManifestSearchServiceNumber);
@@ -113,6 +119,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
             if (providedService != null) {
                 targetProvidedServiceId = providedService.getProvidedServiceId();
                 if (targetProvidedServiceId != null && vehicleId != null) {
+                    progressDialog.show();
                     changeManifest(vehicleId, targetProvidedServiceId);
                 } else {
                     if (targetProvidedServiceId == null) {
@@ -258,9 +265,11 @@ public class ChangeManifestActivity extends AppCompatActivity {
             public void onResponse(Call<ProvidedService> call, Response<ProvidedService> response) {
                 if (response.code() == 200) {
                     Toast.makeText(getApplicationContext(), Constant.API_SUCCESS_CHANGE_DATA_MANIFEST, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                     backToHome();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_CHANGE_DATA_MANIFEST, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -268,6 +277,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
             public void onFailure(Call<ProvidedService> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }
