@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface ProvidedServiceService {
 
-    @OPTIONS(Endpoint.API_GET_PROVIDED_SERVICE)
+    @GET(Endpoint.API_GET_PROVIDED_SERVICE)
     Call<ArrayList<ProvidedService>> apiGetProvidedService(@Query("keyword") String keyword);
 
     @GET(Endpoint.API_GET_PROVIDED_SERVICE_BY_ID)

@@ -20,7 +20,7 @@ import retrofit2.http.Query;
 
 public interface VehicleService {
 
-    @OPTIONS(Endpoint.API_GET_VEHICLE)
+    @GET(Endpoint.API_GET_VEHICLE)
     Call<ArrayList<Vehicle>> apiGetVehicle(@Path("providedServiceId") Long providedServiceId, @Query("keyword") String keyword);
 
     @PUT(Endpoint.API_CHANGE_DATA_VEHICLE_POSITION)
