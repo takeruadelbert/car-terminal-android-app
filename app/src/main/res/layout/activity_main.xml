@@ -4,41 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/grad_bg"
+    android:background="@drawable/login_background"
     tools:context=".activity.SignInActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp">
-
-        <ImageView
-            android:id="@+id/imgView_logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/logo_description"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_car_terminal" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
 
         <RelativeLayout
             android:id="@+id/relay1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgView_logo"
-            android:visibility="gone">
+            android:visibility="visible"
+            android:background="@drawable/login_innerbox">
+
+            <ImageView
+                android:id="@+id/imgView_logo"
+                android:layout_width="250dp"
+                android:layout_height="120dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/logo_description"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="55dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logopelindo4" />
 
             <TextView
                 android:id="@+id/tv_login"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="150dp"
                 android:fontFamily="sans-serif-medium"
+                android:gravity="center"
                 android:text="@string/sign_in"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                tools:text="CAR TERMINAL" />
 
             <LinearLayout
                 android:id="@+id/linearLayer1"
@@ -61,20 +67,26 @@
                         android:text="@string/username_label"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:textSize="15sp"
+                        />
 
                     <EditText
                         android:id="@+id/txtUsername"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
                         android:fontFamily="sans-serif-light"
                         android:inputType="text"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:background="@drawable/login_textfield_username"
+                        />
 
                 </LinearLayout>
 
@@ -91,20 +103,28 @@
                         android:text="@string/password_label"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/txtPassword"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
                         android:fontFamily="sans-serif-light"
+                        android:foregroundGravity="center_horizontal"
+                        android:gravity="center_vertical"
                         android:inputType="textPassword"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:background="@drawable/login_textfield_password"
+                        />
 
                 </LinearLayout>
 
@@ -113,18 +133,19 @@
             <Button
                 android:id="@+id/btnSignIn"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="70dp"
                 android:layout_below="@+id/linearLayer1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="55dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/login_konfirmasi"
                 android:fontFamily="sans-serif-medium"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 android:text="@string/sign_in_btn_label"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="KONFIRMASI" />
 
         </RelativeLayout>
 
@@ -132,24 +153,16 @@
 
     <RelativeLayout
         android:id="@+id/relay2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone">
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"></RelativeLayout>
 
-        <Button
-            android:id="@+id/setting_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@color/transparent"
-            android:fontFamily="sans-serif"
-            android:text="@string/setting_label"
-            android:textAllCaps="true"
-            android:textColor="@color/white" />
-
-    </RelativeLayout>
+    <Button
+    android:id="@+id/setting_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button" />
 
 </RelativeLayout>
