@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -21,8 +22,10 @@ public class DetailManifestActivity extends AppCompatActivity {
     private TextView vesselOwner;
     private TextView companyName;
     private Long providedServiceId;
+    private ProgressDialog progressDialog;
 
     private static final String TOOLBAR_TITLE = "Detail Manifest";
+    private static final String PROGRESS_DIALOG_MESSAGE = "Confirming ...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class DetailManifestActivity extends AppCompatActivity {
         setData(providedService);
         setOnClickListenerBackToSearchManifestButton();
         setOnClickListenerGoToSearchVehicleButton();
+
+        progressDialog = new ProgressDialog(DetailManifestActivity.this);
     }
 
     private void setData(ProvidedService providedService) {
@@ -67,9 +72,13 @@ public class DetailManifestActivity extends AppCompatActivity {
     private void setOnClickListenerGoToSearchVehicleButton() {
         Button goToSearchVehicle = findViewById(R.id.btnConfirmDetailManifest);
         goToSearchVehicle.setOnClickListener((View view) -> {
+            progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
+            progressDialog.show();
+
             Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
             scanVehicle.putExtra("providedServiceId", providedServiceId);
             scanVehicle.putExtra("menu", "detailManifest");
+            progressDialog.dismiss();
             startActivity(scanVehicle);
             finish();
         });

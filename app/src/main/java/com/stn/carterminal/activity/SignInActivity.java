@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class SignInActivity extends AppCompatActivity {
     private static final Integer SPLASH_SCREEN_DELAY_TIME = 2000; // in milliseconds
     private static final String INVALID_USERNAME_MESSAGE = "Invalid Field 'Username'.";
     private static final String INVALID_PASSWORD_MESSAGE = "Invalid Field 'Password'.";
+    private static final String PROGRESS_DIALOG_MESSAGE = "Signing In ...";
 
     RelativeLayout relativeLayout1, relativeLayout2;
     Handler handler = new Handler();
@@ -45,6 +47,7 @@ public class SignInActivity extends AppCompatActivity {
     };
     private UserService userService;
     public static SharedPreferences sharedPreferences;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +61,14 @@ public class SignInActivity extends AppCompatActivity {
         String username = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME);
         String password = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD);
         if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
+            requestAPIGetDataUser(username, password);
             ((EditText) findViewById(R.id.txtUsername)).setText(username);
             ((EditText) findViewById(R.id.txtPassword)).setText(password);
         }
         setSettingOnClickListener();
         setSignInOnClickListener();
+
+        progressDialog = new ProgressDialog(SignInActivity.this);
     }
 
     private void setupSplashScreen() {
@@ -73,27 +79,21 @@ public class SignInActivity extends AppCompatActivity {
 
     private void setSettingOnClickListener() {
         Button settingButton = findViewById(R.id.setting_button);
-        settingButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent settingIntent = new Intent(getApplicationContext(), SettingActivity.class);
-                startActivity(settingIntent);
-            }
+        settingButton.setOnClickListener((View view) -> {
+            Intent settingIntent = new Intent(getApplicationContext(), SettingActivity.class);
+            startActivity(settingIntent);
         });
     }
 
     private void setSignInOnClickListener() {
         Button signInButton = findViewById(R.id.btnSignIn);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String username = ((EditText) findViewById(R.id.txtUsername)).getText().toString();
-                String password = ((EditText) findViewById(R.id.txtPassword)).getText().toString();
-                if (validateFields(username, password)) {
-                    requestAPILogin(username, password);
-                }
+        signInButton.setOnClickListener((View view) -> {
+            String username = ((EditText) findViewById(R.id.txtUsername)).getText().toString();
+            String password = ((EditText) findViewById(R.id.txtPassword)).getText().toString();
+            if (validateFields(username, password)) {
+                progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
+                progressDialog.show();
+                requestAPILogin(username, password);
             }
         });
     }
@@ -120,6 +120,7 @@ public class SignInActivity extends AppCompatActivity {
                     requestAPIGetDataUser(username, password);
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -127,6 +128,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }
@@ -140,18 +142,21 @@ public class SignInActivity extends AppCompatActivity {
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
 
-                    Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
-
                     User user = response.body();
 
                     Gson gson = new Gson();
                     String dataUser = gson.toJson(user);
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_DATA_USER, dataUser);
 
+                    progressDialog.dismiss();
+
                     Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     homeIntent.putExtra("user", user);
                     startActivity(homeIntent);
                     finish();
+
+                } else if (response.code() == 403) {
+                    Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED_TOKEN_EXPIRED, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED_TO_RETRIEVE_DATA_SESSION, Toast.LENGTH_SHORT).show();
                 }

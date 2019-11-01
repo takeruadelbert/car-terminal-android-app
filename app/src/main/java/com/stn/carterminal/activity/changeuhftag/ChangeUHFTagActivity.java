@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity.changeuhftag;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import retrofit2.Response;
 public class ChangeUHFTagActivity extends AppCompatActivity {
 
     private static final String TOOLBAR_TITLE = "Ubah UHF Tag";
+    private static final String PROGRESS_DIALOG_MESSAGE = "Updating ...";
 
     private String EPC;
     private RecyclerView recyclerView;
@@ -43,6 +45,7 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
     private ArrayList<Vehicle> vehicles;
     private SearchVehicleAdapter searchVehicleAdapter;
     private VehicleService vehicleService;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
         toolbar.setTitle(TOOLBAR_TITLE);
 
         vehicles = new ArrayList<>();
+        progressDialog = new ProgressDialog(ChangeUHFTagActivity.this);
+        progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
 
         recyclerView = findViewById(R.id.recyclerChangeTag);
         recyclerView.setHasFixedSize(true);
@@ -101,6 +106,7 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
         confirm.setOnClickListener((View view) -> {
             Vehicle vehicle = searchVehicleAdapter.getVehicle();
             if (vehicle != null) {
+                progressDialog.show();
                 requestAPIChangeUHFTag(vehicle.getVehicleId());
             } else {
                 Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_INVALID_VEHICLE, Toast.LENGTH_SHORT).show();
@@ -171,9 +177,11 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
             public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
                 if (response.code() == 200) {
                     Toast.makeText(getApplicationContext(), Constant.API_SUCCESS_CHANGE_UHF_TAG, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                     backToHome();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_UHF_TAG_SAME, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -181,6 +189,7 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
             public void onFailure(Call<Vehicle> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }

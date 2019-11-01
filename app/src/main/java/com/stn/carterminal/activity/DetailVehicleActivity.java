@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private Long providedServiceId;
     private String EPC;
     private VehicleService vehicleService;
+    private ProgressDialog progressDialog;
 
     private final static String TOOLBAR_TITLE = "Detail Kendaraan";
+    private final static String PROGRESS_DIALOG_MESSAGE = "Updating ...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class DetailVehicleActivity extends AppCompatActivity {
         if (vehicle == null || EPC == null || EPC.isEmpty()) {
             throw new Resources.NotFoundException();
         }
+
+        progressDialog = new ProgressDialog(DetailVehicleActivity.this);
+        progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
 
         setData();
         setOnClickListenerBackToSearchVehicleButton();
@@ -80,6 +86,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
         Button confirmDetailVehicle = findViewById(R.id.btnConfirmDetailVehicle);
         confirmDetailVehicle.setOnClickListener((View v) -> {
             if (validate()) {
+                progressDialog.show();
                 apiChangeDataVehiclePosition(vehicle.getVehicleId());
             } else {
                 Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_DETAIL_VEHICLE_CHECKBOX, Toast.LENGTH_SHORT).show();
@@ -114,9 +121,11 @@ public class DetailVehicleActivity extends AppCompatActivity {
             public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
                 if (response.code() == 200) {
                     Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                     backToScanVehicle();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -124,6 +133,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
             public void onFailure(Call<Vehicle> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }

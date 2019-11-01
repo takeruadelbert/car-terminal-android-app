@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -44,8 +45,10 @@ public class SearchVehicleActivity extends AppCompatActivity {
     private String EPC;
     private String menu;
     private String target;
+    private ProgressDialog progressDialog;
 
     private static final String TOOLBAR_TITLE = "Search Kendaraan";
+    private static final String PROGRESS_DIALOG_MESSAGE = "Loading ...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,9 @@ public class SearchVehicleActivity extends AppCompatActivity {
                 throw new Resources.NotFoundException();
             }
         }
+
+        progressDialog = new ProgressDialog(SearchVehicleActivity.this);
+        progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
 
         recyclerView = findViewById(R.id.recyclerViewVehicle);
         search = findViewById(R.id.inputNIK);
@@ -192,6 +198,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
         confirm.setOnClickListener((View view) -> {
             Vehicle vehicle = searchVehicleAdapter.getVehicle();
             if (vehicle != null) {
+                progressDialog.show();
                 changeActivity(vehicle);
             } else {
                 Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
@@ -200,6 +207,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     }
 
     private void changeActivity(Vehicle vehicle) {
+        progressDialog.dismiss();
         if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
             changeActivityToDetailVehicle(vehicle);
         } else {

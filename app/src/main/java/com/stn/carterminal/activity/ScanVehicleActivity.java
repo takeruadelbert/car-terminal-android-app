@@ -1,5 +1,6 @@
 package com.stn.carterminal.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -48,7 +49,10 @@ public class ScanVehicleActivity extends AppCompatActivity {
     private String menu;
     private String target;
 
+    private ProgressDialog progressDialog;
+
     private static final String TOOLBAR_TITLE = "Scan Kendaraan";
+    private static final String PROGRESS_BAR_MESSAGE = "Loading ...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,9 @@ public class ScanVehicleActivity extends AppCompatActivity {
         }
 
         setupUHFReader();
+
+        progressDialog = new ProgressDialog(ScanVehicleActivity.this);
+        progressDialog.setMessage(PROGRESS_BAR_MESSAGE);
     }
 
     private void setupUHFReader() {
@@ -154,10 +161,13 @@ public class ScanVehicleActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                progressDialog.show();
+
                 System.out.println("EPC = " + epc);
                 EPC = epc;
 
                 if (!EPC.isEmpty()) {
+                    progressDialog.dismiss();
                     changeActivity();
                 }
             }
