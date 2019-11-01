@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/grad_bg"
+    android:background="@drawable/login_background"
     tools:context=".activity.HomeActivity">
 
     <include
@@ -64,7 +64,7 @@
                 android:layout_below="@+id/linearLayer1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/home_urus_pelayaran"
                 android:fontFamily="sans-serif-medium"
                 android:minWidth="100dp"
                 android:text="@string/do_service"
@@ -79,7 +79,7 @@
                 android:layout_below="@+id/btnDoService"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/home_cek_kendaraan"
                 android:fontFamily="sans-serif-medium"
                 android:minWidth="100dp"
                 android:text="@string/check_vehicle"
@@ -94,7 +94,7 @@
                 android:layout_below="@+id/btnCheckVehicle"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/home_pindah_manifest"
                 android:fontFamily="sans-serif-medium"
                 android:minWidth="100dp"
                 android:text="@string/change_manifest"
@@ -109,7 +109,7 @@
                 android:layout_below="@+id/btnChangeManifest"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/home_ganti_tag"
                 android:fontFamily="sans-serif-medium"
                 android:minWidth="100dp"
                 android:text="@string/change_tag_vehicle"
@@ -124,7 +124,7 @@
                 android:layout_below="@+id/btnChangeTag"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/home_logout"
                 android:fontFamily="sans-serif-medium"
                 android:minWidth="100dp"
                 android:text="@string/logout"
@@ -135,5 +135,14 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_pelindoiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PELINDO IV CAR TERMINAL"
+        android:textColor="@color/white"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
