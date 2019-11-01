@@ -61,7 +61,7 @@ public class SignInActivity extends AppCompatActivity {
         String username = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME);
         String password = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD);
         if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
-            requestAPIGetDataUser(username, password);
+            requestAPIGetDataUser();
             ((EditText) findViewById(R.id.txtUsername)).setText(username);
             ((EditText) findViewById(R.id.txtPassword)).setText(password);
         }
@@ -116,8 +116,10 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_TOKEN_BEARER, response.headers().get("Authorization"));
-                    requestAPIGetDataUser(username, password);
+                    requestAPIGetDataUser();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
@@ -133,15 +135,12 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private void requestAPIGetDataUser(String username, String password) {
+    private void requestAPIGetDataUser() {
         Call<User> userCall = userService.apiGetDataSession();
         userCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
-                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
-                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
-
                     User user = response.body();
 
                     Gson gson = new Gson();
@@ -156,6 +155,9 @@ public class SignInActivity extends AppCompatActivity {
                     finish();
 
                 } else if (response.code() == 403) {
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, Constant.EMPTY_STRING);
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, Constant.EMPTY_STRING);
+                    SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_TOKEN_BEARER, Constant.EMPTY_STRING);
                     Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED_TOKEN_EXPIRED, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED_TO_RETRIEVE_DATA_SESSION, Toast.LENGTH_SHORT).show();
