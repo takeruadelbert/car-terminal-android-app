@@ -17,7 +17,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp">
 
@@ -29,12 +29,14 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/logo_description"
             android:scaleType="fitCenter"
+            android:layout_marginTop="100dp"
             android:src="@drawable/ic_car_terminal" />
 
         <RelativeLayout
             android:id="@+id/relay1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="600dp"
+            android:layout_marginTop="50dp"
             android:layout_below="@+id/imgView_logo">
 
             <TextView
@@ -60,7 +62,7 @@
             <Button
                 android:id="@+id/btnDoService"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_below="@+id/linearLayer1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
@@ -69,13 +71,13 @@
                 android:minWidth="100dp"
                 android:text="@string/do_service"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnCheckVehicle"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_below="@+id/btnDoService"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -84,13 +86,13 @@
                 android:minWidth="100dp"
                 android:text="@string/check_vehicle"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnChangeManifest"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_below="@+id/btnCheckVehicle"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -99,13 +101,13 @@
                 android:minWidth="100dp"
                 android:text="@string/change_manifest"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnChangeTag"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_below="@+id/btnChangeManifest"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -114,13 +116,13 @@
                 android:minWidth="100dp"
                 android:text="@string/change_tag_vehicle"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnLogout"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_below="@+id/btnChangeTag"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -129,7 +131,7 @@
                 android:minWidth="100dp"
                 android:text="@string/logout"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
         </RelativeLayout>
@@ -140,9 +142,10 @@
         android:id="@+id/text_pelindoiv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PELINDO IV CAR TERMINAL"
-        android:textColor="@color/white"
-        android:layout_marginTop="100dp"
+        android:text="@string/name_company"
+        android:textColor="@color/colorAccent"
+        android:textSize="14dp"
+        android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

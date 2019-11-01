@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/grad_bg"
+    android:background="@drawable/login_background"
     tools:context=".activity.SearchManifestActivity">
 
     <include
@@ -17,15 +17,19 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="80dp">
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="0dp"
+
+        android:background="@drawable/manifest_innerbox">
 
         <RelativeLayout
             android:id="@+id/relay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgView_logo">
+            android:layout_below="@+id/imgView_logo"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp">
 
             <LinearLayout
                 android:id="@+id/linearLayer1"
@@ -87,13 +91,13 @@
                         android:layout_height="40dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@drawable/btn_bg"
+                        android:background="@drawable/login_konfirmasi"
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="40dp"
                         android:paddingRight="40dp"
                         android:text="@string/btnConfirm"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorAccent"
                         android:textSize="16sp" />
 
                 </RelativeLayout>
@@ -103,5 +107,14 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/carTerminalSystem"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

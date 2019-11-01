@@ -28,6 +28,7 @@
     <!-- Home Properties -->
     <string name="home">Home</string>
     <string name="profile_picture">Profile Picture</string>
+    <string name="name_company">PELINDO IV CAR TERMINAL</string>
     <string name="fullName">Full Name</string>
     <string name="do_service">Urus Pelayanan</string>
     <string name="check_vehicle">Cek Kendaraan</string>
@@ -38,10 +39,11 @@
 
     <!-- Search Manifest -->
     <string name="searchManifest">Cari Manifest</string>
-    <string name="providedServiceNumberLabel">Nomor Layanan</string>
-    <string name="btnConfirm">Konfirmasi</string>
+    <string name="providedServiceNumberLabel">CARI MANIFEST</string>
+    <string name="btnConfirm">KONFIRMASI</string>
     <string name="providedServiceNumber">Nomor Layanan : </string>
     <string name="vesselName">Nama Kapal : </string>
+    <string name="carTerminalSystem">CAR TERMINAL SYSTEM</string>
 
     <!-- Detail Manifest -->
     <string name="providedServiceNumberDetailManifestLabel">Nomor Layanan</string>
