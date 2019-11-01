@@ -16,6 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.stn.carterminal.R;
 import com.stn.carterminal.constant.Constant;
+import com.stn.carterminal.constant.sharedPreference.SharedPreferenceDataKey;
+import com.stn.carterminal.helper.SharedPreferencesHelper;
 import com.stn.carterminal.network.response.User;
 
 public class HomeActivity extends AppCompatActivity {
@@ -52,6 +54,11 @@ public class HomeActivity extends AppCompatActivity {
     private void setOnClickListenerLogoutButton() {
         Button logoutButton = findViewById(R.id.btnLogout);
         logoutButton.setOnClickListener((View view) -> {
+            SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, Constant.EMPTY_STRING);
+            SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, Constant.EMPTY_STRING);
+            SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_DATA_USER, Constant.EMPTY_STRING);
+            SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_TOKEN_BEARER, Constant.EMPTY_STRING);
+
             Intent loginIntent = new Intent(getApplicationContext(), SignInActivity.class);
             startActivity(loginIntent);
             finish();
