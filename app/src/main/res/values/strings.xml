@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarTerminal</string>
+    <string name="app_name">Car Terminal</string>
 
     <!-- Dialog Spinner -->
     <string name="buttonLabelSelect">Select</string>
