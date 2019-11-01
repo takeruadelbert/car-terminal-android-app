@@ -61,6 +61,7 @@ public class SignInActivity extends AppCompatActivity {
         String username = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME);
         String password = SharedPreferencesHelper.getData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD);
         if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
+            requestAPIGetDataUser(username, password);
             ((EditText) findViewById(R.id.txtUsername)).setText(username);
             ((EditText) findViewById(R.id.txtPassword)).setText(password);
         }
@@ -141,8 +142,6 @@ public class SignInActivity extends AppCompatActivity {
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_USERNAME, username);
                     SharedPreferencesHelper.storeData(sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_PASSWORD, password);
 
-                    Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
-
                     User user = response.body();
 
                     Gson gson = new Gson();
@@ -155,6 +154,9 @@ public class SignInActivity extends AppCompatActivity {
                     homeIntent.putExtra("user", user);
                     startActivity(homeIntent);
                     finish();
+
+                } else if (response.code() == 403) {
+                    Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED_TOKEN_EXPIRED, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED_TO_RETRIEVE_DATA_SESSION, Toast.LENGTH_SHORT).show();
                 }
