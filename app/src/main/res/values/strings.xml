@@ -50,7 +50,7 @@
     <string name="vesselNameDetailManifestLabel">Nama Kapal</string>
     <string name="vesselOwnerDetailManifestLabel">Pemilik Kapal</string>
     <string name="companyNameDetailManifestLabel">Nama Perusahaan</string>
-    <string name="buttonBackToSearchManifest">Kembali</string>
+    <string name="buttonBackToSearchManifest">KEMBALI</string>
 
     <!-- Scan Vehicle -->
     <string name="labelScanVehicle">Scanning RFID Tag ...</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,8 +21,8 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="100dp"
         android:layout_marginRight="0dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="0dp"
         android:background="@drawable/manifest_innerbox">
 
         <RelativeLayout
@@ -34,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:padding="0dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -41,8 +43,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:paddingTop="10dp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/manifest_nomor_pelayaran">
 
                     <TableLayout
@@ -69,81 +72,105 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/providedServiceNumberDetailManifestLabel"
+                                android:textSize="25dp"
                                 android:textColor="@color/white"/>
 
                         </TableRow>
                     </TableLayout>
                 </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:layout_alignParentRight="true">
 
-                <TableLayout
+                <TextView
+                    android:id="@+id/vesselNameDetailManifest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/vesselNameDetailManifestLabel"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txtVesselNameDetailManifest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/vesselNameDetailManifestLabel"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/imageView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="30dp">
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/manifest_line" />
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/vesselOwnerDetailManifest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/vesselOwnerDetailManifestLabel"
+                    android:textColor="@color/black"/>
 
-                        <TextView
-                            android:id="@+id/vesselNameDetailManifest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/vesselNameDetailManifestLabel"
-                            android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/txtVesselOwnerDetailManifest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/vesselOwnerDetailManifestLabel"
+                    android:textColor="@color/black"/>
 
-                        <TextView
-                            android:id="@+id/txtVesselNameDetailManifest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/vesselNameDetailManifestLabel"
-                            android:textColor="@color/black"/>
-                    </TableRow>
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/manifest_line" />
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/companyNameDetailManifest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/companyNameDetailManifestLabel"
+                    android:textColor="@color/black"/>
 
-                        <TextView
-                            android:id="@+id/vesselOwnerDetailManifest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/vesselOwnerDetailManifestLabel"
-                            android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/txtCompanyNameDetailManifest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/companyNameDetailManifestLabel"
+                    android:textColor="@color/black"/>
 
-                        <TextView
-                            android:id="@+id/txtVesselOwnerDetailManifest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/vesselOwnerDetailManifestLabel"
-                            android:textColor="@color/black"/>
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:id="@+id/companyNameDetailManifest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/companyNameDetailManifestLabel"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/txtCompanyNameDetailManifest"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/companyNameDetailManifestLabel"
-                            android:textColor="@color/black"/>
-                    </TableRow>
-
-                </TableLayout>
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/manifest_line" />
+            </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -153,11 +180,11 @@
                     <Button
                         android:id="@+id/btnBackToSearchManifest"
                         android:layout_width="170dp"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@drawable/manifest_button_kambali"
+                        android:background="@drawable/button_manifest_kembali"
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
@@ -169,11 +196,11 @@
                     <Button
                         android:id="@+id/btnConfirmDetailManifest"
                         android:layout_width="170dp"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@drawable/manifest_button_konfirmasi"
+                        android:background="@drawable/button_manifest_konfirmasi"
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
