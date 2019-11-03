@@ -52,7 +52,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text="@string/providedServiceNumberLabel"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <EditText
@@ -65,7 +65,7 @@
                     android:inputType="text"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <LinearLayout
