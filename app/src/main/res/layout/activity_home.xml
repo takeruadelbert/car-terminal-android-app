@@ -19,18 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp">
-
-        <ImageView
-            android:id="@+id/imgView_logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerHorizontal="true"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/logo_description"
-            android:scaleType="fitCenter"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/ic_car_terminal" />
+        android:layout_marginRight="80dp"
+        android:paddingTop="40dp">
 
         <RelativeLayout
             android:id="@+id/relay1"
@@ -61,8 +51,8 @@
 
             <Button
                 android:id="@+id/btnDoService"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/linearLayer1"
                 android:gravity="right|center_vertical"
                 android:paddingRight="25dp"
@@ -73,12 +63,13 @@
                 android:text="@string/do_service"
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/btnCheckVehicle"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/btnDoService"
                 android:gravity="right|center_vertical"
                 android:paddingRight="25dp"
@@ -89,12 +80,13 @@
                 android:text="@string/check_vehicle"
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/btnChangeManifest"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/btnCheckVehicle"
                 android:gravity="right|center_vertical"
                 android:paddingRight="25dp"
@@ -105,12 +97,13 @@
                 android:text="@string/change_manifest"
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/btnChangeTag"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/btnChangeManifest"
                 android:gravity="right|center_vertical"
                 android:paddingRight="25dp"
@@ -121,12 +114,13 @@
                 android:text="@string/change_tag_vehicle"
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/btnLogout"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/btnChangeTag"
                 android:gravity="right|center_vertical"
                 android:paddingRight="25dp"
@@ -137,7 +131,8 @@
                 android:text="@string/logout"
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 

@@ -9,10 +9,11 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="750dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="120dp"
         >
 
         <RelativeLayout
@@ -24,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/imgView_logo"
-                android:layout_width="250dp"
-                android:layout_height="120dp"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/logo_description"
                 android:layout_marginTop="20dp"
@@ -37,21 +38,20 @@
                 android:id="@+id/tv_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="100dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:text="@string/sign_in"
+                android:text="@string/carTerminalSystem"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="30dp"
-                tools:text="CAR TERMINAL" />
+                android:textColor="@color/gradStop"
+                android:textSize="16dp"/>
 
             <LinearLayout
                 android:id="@+id/linearLayer1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_login"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -59,18 +59,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="@string/username_label"
-                        android:textAllCaps="true"
-                        android:textColor="@color/gradStop"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="50dp"
-                        android:textSize="15sp"
-                        />
 
                     <EditText
                         android:id="@+id/txtUsername"
@@ -84,8 +72,9 @@
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
                         android:textColor="@color/gradStop"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:background="@drawable/login_textfield_username"
+                        android:text="@string/username_label"
                         />
 
                 </LinearLayout>
@@ -95,17 +84,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="@string/password_label"
-                        android:textAllCaps="true"
-                        android:textColor="@color/gradStop"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="50dp"
-                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/txtPassword"
@@ -122,8 +100,9 @@
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
                         android:textColor="@color/gradStop"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:background="@drawable/login_textfield_password"
+                        android:text="@string/password_label"
                         />
 
                 </LinearLayout>
@@ -132,19 +111,19 @@
 
             <Button
                 android:id="@+id/btnSignIn"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
                 android:layout_below="@+id/linearLayer1"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/button_login_konfirmasi"
                 android:fontFamily="sans-serif-medium"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                tools:text="KONFIRMASI" />
+                android:textSize="14sp"
+                android:text="@string/btnConfirm" />
 
         </RelativeLayout>
 
@@ -154,32 +133,30 @@
         android:id="@+id/relay2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"></RelativeLayout>
+        android:layout_centerInParent="true">
 
-    <Button
-        android:id="@+id/setting_button"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/icon_setting"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:text="" />
+        <Button
+            android:id="@+id/setting_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_setting"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/lupa_password"
-        android:textAllCaps="true"
-        android:textColor="@color/gradStop"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:textSize="15sp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/lupa_password"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"/>
+    </RelativeLayout>
+
 
 </RelativeLayout>
