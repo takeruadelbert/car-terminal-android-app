@@ -23,7 +23,7 @@
     <!-- Setting Properties -->
     <string name="setting">Setting</string>
     <string name="ip_address_label">Host/IP Address</string>
-    <string name="save_btn_label">Save</string>
+    <string name="save_btn_label">SIMPAN</string>
 
     <!-- Home Properties -->
     <string name="home">Home</string>
