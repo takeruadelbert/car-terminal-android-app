@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.Toolbar;
 
 import com.stn.carterminal.R;
+import com.stn.carterminal.activity.editvehicle.EditVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.request.ChangeVehiclePosition;
@@ -59,6 +60,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
         setData();
         setOnClickListenerBackToSearchVehicleButton();
         setOnClickListenerConfirmDetailVehicleButton();
+        setOnClickListenerEditDataVehicleButton();
 
         vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
     }
@@ -94,6 +96,18 @@ public class DetailVehicleActivity extends AppCompatActivity {
         });
     }
 
+    private void setOnClickListenerEditDataVehicleButton() {
+        Button editVehicle = findViewById(R.id.btnEdit);
+        editVehicle.setOnClickListener((View view) -> {
+            Intent editVehicleIntent = new Intent(getApplicationContext(), EditVehicleActivity.class);
+            editVehicleIntent.putExtra("vehicle", vehicle);
+            editVehicleIntent.putExtra("providedServiceId", providedServiceId);
+            editVehicleIntent.putExtra("EPC", EPC);
+            startActivity(editVehicleIntent);
+            finish();
+        });
+    }
+
     @Override
     public void onBackPressed() {
         backToScanVehicle();
@@ -115,7 +129,8 @@ public class DetailVehicleActivity extends AppCompatActivity {
     }
 
     private void apiChangeDataVehiclePosition(Long vehicleId) {
-        Call<Vehicle> vehicleCall = vehicleService.apiChangeVehiclePosition(vehicleId, new ChangeVehiclePosition(vehicleId, EPC));
+        ChangeVehiclePosition changeVehiclePosition = new ChangeVehiclePosition(vehicleId, EPC, vehicle.getNIK(), vehicle.getDescription(), vehicle.getVehicleClassId());
+        Call<Vehicle> vehicleCall = vehicleService.apiChangeVehiclePosition(vehicleId, changeVehiclePosition);
         vehicleCall.enqueue(new Callback<Vehicle>() {
             @Override
             public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
