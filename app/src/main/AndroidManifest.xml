@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.addnewvehicle.AddNewVehicleActivity"></activity>
+        <activity android:name=".activity.editvehicle.EditVehicleActivity"></activity>
+        <activity android:name=".activity.addnewvehicle.AddNewVehicleActivity" />
         <activity android:name=".activity.changeuhftag.ChangeUHFTagActivity" />
         <activity android:name=".activity.changemanifest.ChangeManifestActivity" />
         <activity android:name=".activity.checkvehicle.CheckVehicleActivity" />

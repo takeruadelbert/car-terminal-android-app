@@ -71,6 +71,7 @@
     <string name="vehicleNIKValue">NIK Kendaraan</string>
     <string name="vehicleDescriptionValue">Deskripsi Kendaraan</string>
     <string name="vehicleClassValue">Golongan Kendaraan</string>
+    <string name="vehicleEditDataVehicle">Edit</string>
 
     <!-- Check Vehicle -->
     <string name="vehicleEntryDateLabel">Tanggal Masuk</string>
