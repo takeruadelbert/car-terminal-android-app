@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="45dp"
         android:layout_marginRight="0dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
@@ -44,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="0dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -54,12 +54,12 @@
                     android:text="@string/changeUHFTagInputNIK"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/txtChangeTagInputNIK"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/manifest_search"
                     android:fontFamily="sans-serif-light"
@@ -67,7 +67,7 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,39 +84,37 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp">
+                    android:layout_marginBottom="20dp">
 
                     <Button
                         android:id="@+id/btnChangeTagBackToHome"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/button_manifest_kembali"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:layout_marginLeft="20dp"
                         android:text="@string/btnBackToDetailManifest"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                     <Button
                         android:id="@+id/btnChangeTagConfirm"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/button_manifest_konfirmasi"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:layout_marginRight="20dp"
                         android:text="@string/btnConfirmVehicle"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -125,14 +123,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/carTerminalSystem"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/white"/>
 
 </RelativeLayout>

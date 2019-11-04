@@ -17,7 +17,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="45dp"
         android:layout_marginRight="0dp"
         android:paddingLeft="30dp"
         android:paddingRight="0dp"
@@ -32,14 +32,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="0dp"
                 android:padding="0dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
@@ -82,7 +82,7 @@
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="0dp"
                     android:layout_alignParentRight="true">
 
                     <TextView
@@ -90,6 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="9dp"
                         android:text="@string/vesselNameDetailManifestLabel"
                         android:textColor="@color/black"/>
 
@@ -98,8 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16dp"
-                        android:layout_marginTop="5dp"
+                        android:textSize="12dp"
                         android:text="@string/vesselNameDetailManifestLabel"
                         android:textColor="@color/black"/>
 
@@ -118,6 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="9dp"
                         android:text="@string/vesselOwnerDetailManifestLabel"
                         android:textColor="@color/black"/>
 
@@ -126,8 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16dp"
-                        android:layout_marginTop="5dp"
+                        android:textSize="12dp"
                         android:text="@string/vesselOwnerDetailManifestLabel"
                         android:textColor="@color/black"/>
 
@@ -146,6 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="9dp"
                         android:text="@string/companyNameDetailManifestLabel"
                         android:textColor="@color/black"/>
 
@@ -154,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         android:layout_marginTop="5dp"
                         android:text="@string/companyNameDetailManifestLabel"
                         android:textColor="@color/black"/>
@@ -173,7 +174,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -182,20 +185,20 @@
                         android:text="@string/providedServiceNumberLabel"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                     <EditText
                         android:id="@+id/changeManifestSearchServiceNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/manifest_search"
                         android:fontFamily="sans-serif-light"
                         android:inputType="text"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -204,7 +207,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerChangeManifest"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:scrollbars="vertical" />
 
                     </LinearLayout>
@@ -218,37 +221,34 @@
 
                     <Button
                         android:id="@+id/btnChangeManifestBackToHome"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/button_manifest_kembali"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:layout_marginLeft="20dp"
                         android:text="@string/buttonBackToSearchManifest"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                     <Button
                         android:id="@+id/btnConfirmChangeManifest"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/button_manifest_konfirmasi"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:layout_marginRight="30dp"
+                        android:layout_marginRight="50dp"
                         android:layout_marginLeft="30dp"
                         android:text="@string/btnConfirm"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -257,14 +257,4 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/carTerminalSystem"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/white"/>
-
 </RelativeLayout>

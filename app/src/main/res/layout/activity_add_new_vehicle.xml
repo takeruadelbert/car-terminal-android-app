@@ -17,7 +17,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="0dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:background="@drawable/manifest_innerbox">
@@ -51,12 +53,12 @@
                     android:text="@string/addNewVehicleInputNIKLabel"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/txtAddNewVehicleInputNIK"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/manifest_search"
                     android:fontFamily="sans-serif-light"
@@ -64,7 +66,7 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:id="@+id/layout2"
@@ -80,7 +82,7 @@
                         android:text="@string/addNewVehicleClass"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/addNewVehicleClassSpinner"
@@ -104,7 +106,7 @@
                         android:text="@string/addNewVehicleDescriptionLabel"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/txtAddNewVehicleDescription"
@@ -120,7 +122,7 @@
                         android:padding="15dp"
                         android:scrollbars="vertical"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
 
                     <LinearLayout
@@ -138,7 +140,7 @@
                             android:text="@string/warningInput1"
                             android:textAllCaps="true"
                             android:textColor="@color/red"
-                            android:textSize="10sp"
+                            android:textSize="8sp"
                             android:layout_marginTop="5dp"/>
 
                         <TextView
@@ -148,7 +150,7 @@
                             android:text="@string/warningInput2"
                             android:textAllCaps="true"
                             android:textColor="@color/red"
-                            android:textSize="10sp"
+                            android:textSize="8sp"
                             android:layout_marginBottom="5dp"/>
 
 
@@ -163,8 +165,8 @@
 
                     <Button
                         android:id="@+id/btnAddNewVehicleBackToSearchVehicle"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -172,15 +174,16 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
+                        android:layout_marginLeft="20dp"
                         android:text="@string/btnBackToDetailManifest"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                     <Button
                         android:id="@+id/btnAddNewVehicleConfirm"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -188,10 +191,11 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="0dp"
                         android:paddingRight="0dp"
+                        android:layout_marginRight="20dp"
                         android:text="@string/btnConfirmVehicle"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -200,14 +204,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/carTerminalSystem"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/white"/>
 
 </RelativeLayout>

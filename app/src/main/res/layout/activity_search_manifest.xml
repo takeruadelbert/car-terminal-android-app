@@ -18,9 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="45dp"
         android:layout_marginRight="0dp"
-
         android:background="@drawable/manifest_innerbox">
 
         <RelativeLayout
@@ -28,8 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgView_logo"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp">
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp">
 
             <LinearLayout
                 android:id="@+id/linearLayer1"
@@ -53,14 +52,14 @@
                     android:text="@string/providedServiceNumberLabel"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/searchServiceNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/et_bg"
+                    android:background="@drawable/manifest_search"
                     android:fontFamily="sans-serif-light"
                     android:inputType="text"
                     android:paddingLeft="15dp"
@@ -70,12 +69,12 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    android:layout_height="200dp">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewManifest"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="113dp"
                         android:scrollbars="vertical" />
 
                 </LinearLayout>
@@ -87,18 +86,16 @@
 
                     <Button
                         android:id="@+id/btnConfirmSearchManifest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/button_login_konfirmasi"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="40dp"
-                        android:paddingRight="40dp"
                         android:text="@string/btnConfirm"
                         android:textAllCaps="false"
                         android:textColor="@color/colorAccent"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -107,14 +104,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/carTerminalSystem"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/white"/>
 
 </RelativeLayout>
