@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:background="@drawable/manifest_innerbox">
 
         <RelativeLayout
@@ -122,6 +122,38 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/input_nik_warning"
+                        android:paddingLeft="50dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/warningInput1"
+                            android:textAllCaps="true"
+                            android:textColor="@color/red"
+                            android:textSize="10sp"
+                            android:layout_marginTop="5dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/warningInput2"
+                            android:textAllCaps="true"
+                            android:textColor="@color/red"
+                            android:textSize="10sp"
+                            android:layout_marginBottom="5dp"/>
+
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <RelativeLayout
@@ -131,8 +163,8 @@
 
                     <Button
                         android:id="@+id/btnAddNewVehicleBackToSearchVehicle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -147,15 +179,15 @@
 
                     <Button
                         android:id="@+id/btnAddNewVehicleConfirm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/button_manifest_konfirmasi"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:paddingLeft="0dp"
+                        android:paddingRight="0dp"
                         android:text="@string/btnConfirmVehicle"
                         android:textAllCaps="false"
                         android:textColor="@color/white"

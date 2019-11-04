@@ -218,8 +218,8 @@
 
                     <Button
                         android:id="@+id/btnChangeManifestBackToHome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true"
                         android:layout_centerHorizontal="true"
@@ -229,13 +229,13 @@
                         android:paddingRight="20dp"
                         android:text="@string/buttonBackToSearchManifest"
                         android:textAllCaps="false"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
                     <Button
                         android:id="@+id/btnConfirmChangeManifest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_centerHorizontal="true"
@@ -243,10 +243,11 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
+                        android:layout_marginRight="30dp"
                         android:layout_marginLeft="30dp"
                         android:text="@string/btnConfirm"
                         android:textAllCaps="false"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
                 </RelativeLayout>

@@ -13,4 +13,5 @@
     <color name="gradStart">#8E8E8E</color>
     <color name="gradStop">#004D9F</color>
     <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
 </resources>

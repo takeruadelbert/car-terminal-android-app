@@ -19,6 +19,7 @@
     <string name="password_label">Password</string>
     <string name="setting_label">Setting</string>
     <string name="sign_in_btn_label">Sign In</string>
+    <string name="lupa_password">LUPA PASSWORD ?</string>
 
     <!-- Setting Properties -->
     <string name="setting">Setting</string>
@@ -57,7 +58,7 @@
 
     <!-- Search Vehicle -->
     <string name="inputNIKLabel">Input NIK</string>
-    <string name="btnConfirmVehicle">Konfirmasi</string>
+    <string name="btnConfirmVehicle">KONFIRMASI</string>
     <string name="btnBackToDetailManifest">Kembali</string>
     <string name="vehicleNIK">NIK : </string>
     <string name="vehicleDescription">Deskripsi : </string>
@@ -85,4 +86,6 @@
     <string name="addNewVehicleInputNIKLabel">Input NIK Kendaraan Baru :</string>
     <string name="addNewVehicleDescriptionLabel">Detail Kendaraan :</string>
     <string name="addNewVehicleClass">Golongan Kendaraan :</string>
+    <string name="warningInput1">Anda sedang menginput kendaraan</string>
+    <string name="warningInput2">Tambahan yang tidak ada dalam manifest</string>
 </resources>

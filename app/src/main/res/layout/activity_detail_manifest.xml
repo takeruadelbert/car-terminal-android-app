@@ -179,8 +179,8 @@
 
                     <Button
                         android:id="@+id/btnBackToSearchManifest"
-                        android:layout_width="170dp"
-                        android:layout_height="50dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true"
                         android:layout_centerHorizontal="true"
@@ -195,8 +195,8 @@
 
                     <Button
                         android:id="@+id/btnConfirmDetailManifest"
-                        android:layout_width="170dp"
-                        android:layout_height="50dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_centerHorizontal="true"
@@ -204,6 +204,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
+                        android:layout_marginRight="30dp"
                         android:layout_marginLeft="30dp"
                         android:text="@string/btnConfirm"
                         android:textAllCaps="false"

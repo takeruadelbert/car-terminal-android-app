@@ -20,8 +20,8 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="100dp"
         android:layout_marginRight="0dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:paddingTop="20dp"
         android:background="@drawable/manifest_innerbox">
 
@@ -88,8 +88,8 @@
 
                     <Button
                         android:id="@+id/btnChangeTagBackToHome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -104,8 +104,8 @@
 
                     <Button
                         android:id="@+id/btnChangeTagConfirm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"

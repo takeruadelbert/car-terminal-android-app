@@ -39,7 +39,17 @@
                 android:text="@string/vesselName"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                app:srcCompat="@drawable/manifest_line" />
         </LinearLayout>
+
 
     </LinearLayout>
 
