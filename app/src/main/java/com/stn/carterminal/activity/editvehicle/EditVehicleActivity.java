@@ -183,6 +183,10 @@ public class EditVehicleActivity extends AppCompatActivity {
         });
     }
 
+    public void onBackPressed() {
+        backToDetailManifest();
+    }
+
     private void backToDetailManifest() {
         Intent detailManifestIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
         detailManifestIntent.putExtra("EPC", EPC);
