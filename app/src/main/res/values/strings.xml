@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Car Terminal New</string>
+    <string name="app_name">Car Terminal</string>
 
     <!-- Dialog Spinner -->
     <string name="buttonLabelSelect">Select</string>
@@ -74,10 +74,13 @@
     <string name="vehicleEditDataVehicle">Edit</string>
 
     <!-- Check Vehicle -->
-    <string name="vehicleEntryDateLabel">Tanggal Masuk</string>
-    <string name="vehicleEntryDateValue">DD MM YYYY</string>
-    <string name="vehicleProductionDayLabel">Hari Penumpukan</string>
-    <string name="vehicleProductionDayValue">0</string>
+    <string name="checkVehicleEntryDateLabel">Tanggal Masuk</string>
+    <string name="checkVehicleProductionDayLabel">Hari Penumpukan</string>
+    <string name="checkVehicleEntryDateValue">-</string>
+    <string name="checkVehicleProductionDayValue">-</string>
+    <string name="checkVehicleNIKValue">-</string>
+    <string name="checkVehicleDescriptionValue">-</string>
+    <string name="checkVehicleClassValue">-</string>
 
     <!-- Change UHF Tag -->
     <string name="changeUHFTagInputNIK">Input NIK yang Ingin Diganti :</string>
