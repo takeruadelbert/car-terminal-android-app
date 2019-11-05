@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/grad_bg"
+    android:background="@drawable/login_background"
     tools:context=".activity.DetailManifestActivity">
 
     <include
@@ -17,10 +17,10 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="45dp"
         android:layout_marginRight="0dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:background="@drawable/manifest_innerbox">
 
         <RelativeLayout
@@ -46,7 +46,7 @@
                         android:layout_marginBottom="10dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -62,7 +62,11 @@
                             android:text="@string/vehicleClassValue"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatCheckBox android:id="@+id/checkboxVehicleNIK" />
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/checkboxVehicleNIK"
+                            android:textColor="@color/backToolbar"
+                            android:textCursorDrawable="@null"
+                            android:buttonTint="@color/black"/>
                     </TableRow>
 
                     <TableRow
@@ -72,7 +76,7 @@
                         android:layout_marginBottom="10dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -88,7 +92,11 @@
                             android:text="@string/vehicleDescriptionValue"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatCheckBox android:id="@+id/checkboxVehicleDescription" />
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/checkboxVehicleDescription"
+                            android:textColor="@color/backToolbar"
+                            android:textCursorDrawable="@null"
+                            android:buttonTint="@color/black"/>
                     </TableRow>
 
                     <TableRow
@@ -98,7 +106,7 @@
                         android:layout_marginBottom="10dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -114,7 +122,11 @@
                             android:text="@string/vehicleClassValue"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatCheckBox android:id="@+id/checkboxVehicleDetailClass" />
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/checkboxVehicleDetailClass"
+                            android:textColor="@color/backToolbar"
+                            android:textCursorDrawable="@null"
+                            android:buttonTint="@color/black"/>
                     </TableRow>
 
                 </TableLayout>
@@ -126,51 +138,50 @@
 
                     <Button
                         android:id="@+id/btnBackToSearchVehicle"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/button_manifest_kembali"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:layout_marginLeft="20dp"
                         android:text="@string/buttonBackToSearchManifest"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                     <Button
                         android:id="@+id/btnConfirmDetailVehicle"
-                        android:layout_width="140dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/button_manifest_konfirmasi"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/btnConfirm"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <!-- android:layout_alignParentBottom="true" -->
+                    <Button
+                        android:id="@+id/btnEdit"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
                         android:background="@drawable/button_manifest_konfirmasi"
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
-                        android:text="@string/btnConfirm"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-                    <Button
-                        android:id="@+id/btnEdit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:background="@drawable/btn_bg"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:layout_marginBottom="20dp"
                         android:text="@string/vehicleEditDataVehicle"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -179,14 +190,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/carTerminalSystem"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/white"/>
 
 </RelativeLayout>

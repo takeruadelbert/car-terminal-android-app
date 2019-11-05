@@ -24,6 +24,11 @@
         android:paddingRight="30dp"
         android:background="@drawable/manifest_innerbox">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/relay1"
             android:layout_width="wrap_content"
@@ -66,7 +71,9 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:textCursorDrawable="@null"
+                    android:shadowColor="@color/black"/>
 
                 <LinearLayout
                     android:id="@+id/layout2"
@@ -87,8 +94,10 @@
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/addNewVehicleClassSpinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:spinnerMode="dropdown" />
+                        android:layout_height="30dp"
+                        android:spinnerMode="dropdown"
+                        android:background="@drawable/et_bg"
+                        android:textCursorDrawable="@null"/>
 
                 </LinearLayout>
 
@@ -122,7 +131,8 @@
                         android:padding="15dp"
                         android:scrollbars="vertical"
                         android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:textCursorDrawable="@null"/>
 
 
                     <LinearLayout
@@ -161,7 +171,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp">
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="40dp">
 
                     <Button
                         android:id="@+id/btnAddNewVehicleBackToSearchVehicle"
@@ -202,7 +213,7 @@
             </LinearLayout>
 
         </RelativeLayout>
-
+        </ScrollView>
     </RelativeLayout>
 
 </RelativeLayout>

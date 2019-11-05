@@ -23,6 +23,11 @@
         android:paddingRight="0dp"
         android:background="@drawable/manifest_innerbox">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/relay1"
             android:layout_width="wrap_content"
@@ -200,7 +205,7 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="130dp">
 
@@ -210,14 +215,14 @@
                             android:layout_height="match_parent"
                             android:scrollbars="vertical" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp">
+                    android:layout_marginBottom="80dp">
 
                     <Button
                         android:id="@+id/btnChangeManifestBackToHome"
@@ -253,8 +258,8 @@
                 </RelativeLayout>
 
             </LinearLayout>
-
         </RelativeLayout>
-
+        </ScrollView>
     </RelativeLayout>
+
 </RelativeLayout>

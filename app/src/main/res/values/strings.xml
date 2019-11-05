@@ -59,7 +59,7 @@
     <!-- Search Vehicle -->
     <string name="inputNIKLabel">Input NIK</string>
     <string name="btnConfirmVehicle">KONFIRMASI</string>
-    <string name="btnBackToDetailManifest">Kembali</string>
+    <string name="btnBackToDetailManifest">KEMBALI</string>
     <string name="vehicleNIK">NIK : </string>
     <string name="vehicleDescription">Deskripsi : </string>
     <string name="vehicleProvidedServiceNumber">Nomor Layanan : </string>
@@ -75,9 +75,9 @@
 
     <!-- Check Vehicle -->
     <string name="vehicleEntryDateLabel">Tanggal Masuk</string>
-    <string name="vehicleEntryDateValue">31 Oktober 2019</string>
+    <string name="vehicleEntryDateValue">DD MM YYYY</string>
     <string name="vehicleProductionDayLabel">Hari Penumpukan</string>
-    <string name="vehicleProductionDayValue">15</string>
+    <string name="vehicleProductionDayValue">0</string>
 
     <!-- Change UHF Tag -->
     <string name="changeUHFTagInputNIK">Input NIK yang Ingin Diganti :</string>
