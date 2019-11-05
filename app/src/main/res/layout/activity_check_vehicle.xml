@@ -56,7 +56,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="@string/vehicleNIKValue"
+                            android:text="@string/checkVehicleNIKValue"
                             android:textColor="@color/white" />
 
                     </TableRow>
@@ -81,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="@string/vehicleDescriptionValue"
+                            android:text="@string/checkVehicleDescriptionValue"
                             android:textColor="@color/white" />
 
                     </TableRow>
@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="@string/vehicleClassValue"
+                            android:text="@string/checkVehicleClassValue"
                             android:textColor="@color/white" />
 
                     </TableRow>
@@ -122,7 +122,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="@string/vehicleEntryDateLabel"
+                            android:text="@string/checkVehicleEntryDateLabel"
                             android:textColor="@color/white" />
 
                         <TextView
@@ -131,7 +131,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="@string/vehicleEntryDateValue"
+                            android:text="@string/checkVehicleEntryDateValue"
                             android:textColor="@color/white" />
 
                     </TableRow>
@@ -147,7 +147,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="@string/vehicleProductionDayLabel"
+                            android:text="@string/checkVehicleProductionDayLabel"
                             android:textColor="@color/white" />
 
                         <TextView
@@ -156,7 +156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="@string/vehicleProductionDayValue"
+                            android:text="@string/checkVehicleProductionDayValue"
                             android:textColor="@color/white" />
 
                     </TableRow>
