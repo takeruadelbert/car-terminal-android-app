@@ -245,8 +245,12 @@ public class ChangeManifestActivity extends AppCompatActivity {
                     vehicleId = vehicle.getVehicleId();
                     originProvidedServiceId = vehicle.getProvidedServiceId();
                     requestAPIByProvidedServiceId(originProvidedServiceId);
+                } else if (response.code() == 404) {
+                    Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_EPC_NOT_FOUND, Toast.LENGTH_SHORT).show();
+                    backToHome();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                    backToHome();
                 }
             }
 
@@ -254,6 +258,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
             public void onFailure(Call<Vehicle> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                backToHome();
             }
         });
     }
