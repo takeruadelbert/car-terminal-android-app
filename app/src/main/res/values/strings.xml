@@ -19,15 +19,17 @@
     <string name="password_label">Password</string>
     <string name="setting_label">Setting</string>
     <string name="sign_in_btn_label">Sign In</string>
+    <string name="lupa_password">LUPA PASSWORD ?</string>
 
     <!-- Setting Properties -->
     <string name="setting">Setting</string>
     <string name="ip_address_label">Host/IP Address</string>
-    <string name="save_btn_label">Save</string>
+    <string name="save_btn_label">SIMPAN</string>
 
     <!-- Home Properties -->
     <string name="home">Home</string>
     <string name="profile_picture">Profile Picture</string>
+    <string name="name_company">PELINDO IV CAR TERMINAL</string>
     <string name="fullName">Full Name</string>
     <string name="do_service">Urus Pelayanan</string>
     <string name="check_vehicle">Cek Kendaraan</string>
@@ -38,25 +40,26 @@
 
     <!-- Search Manifest -->
     <string name="searchManifest">Cari Manifest</string>
-    <string name="providedServiceNumberLabel">Nomor Layanan</string>
-    <string name="btnConfirm">Konfirmasi</string>
+    <string name="providedServiceNumberLabel">CARI MANIFEST</string>
+    <string name="btnConfirm">KONFIRMASI</string>
     <string name="providedServiceNumber">Nomor Layanan : </string>
     <string name="vesselName">Nama Kapal : </string>
+    <string name="carTerminalSystem">CAR TERMINAL SYSTEM</string>
 
     <!-- Detail Manifest -->
     <string name="providedServiceNumberDetailManifestLabel">Nomor Layanan</string>
     <string name="vesselNameDetailManifestLabel">Nama Kapal</string>
     <string name="vesselOwnerDetailManifestLabel">Pemilik Kapal</string>
     <string name="companyNameDetailManifestLabel">Nama Perusahaan</string>
-    <string name="buttonBackToSearchManifest">Kembali</string>
+    <string name="buttonBackToSearchManifest">KEMBALI</string>
 
     <!-- Scan Vehicle -->
     <string name="labelScanVehicle">Scanning RFID Tag ...</string>
 
     <!-- Search Vehicle -->
     <string name="inputNIKLabel">Input NIK</string>
-    <string name="btnConfirmVehicle">Konfirmasi</string>
-    <string name="btnBackToDetailManifest">Kembali</string>
+    <string name="btnConfirmVehicle">KONFIRMASI</string>
+    <string name="btnBackToDetailManifest">KEMBALI</string>
     <string name="vehicleNIK">NIK : </string>
     <string name="vehicleDescription">Deskripsi : </string>
     <string name="vehicleProvidedServiceNumber">Nomor Layanan : </string>
@@ -87,4 +90,6 @@
     <string name="addNewVehicleInputNIKLabel">Input NIK Kendaraan Baru :</string>
     <string name="addNewVehicleDescriptionLabel">Detail Kendaraan :</string>
     <string name="addNewVehicleClass">Golongan Kendaraan :</string>
+    <string name="warningInput1">Anda sedang menginput kendaraan</string>
+    <string name="warningInput2">Tambahan yang tidak ada dalam manifest</string>
 </resources>

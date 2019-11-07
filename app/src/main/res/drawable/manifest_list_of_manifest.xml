@@ -1,0 +1,55 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="345dp"
+    android:height="151dp"
+    android:viewportWidth="345"
+    android:viewportHeight="151">
+    <group android:name="group_22">
+        <path
+            android:name="path"
+            android:pathData="M 332.6 150.876 C 335.692 150.876 338.596 149.726 340.779 147.639 C 342.949 145.563 344.145 142.806 344.145 139.876 L 344.145 19.303 C 344.145 16.373 342.949 13.616 340.779 11.54 C 338.596 9.452 335.692 8.303 332.6 8.303 L 35.562 8.303 L 35.267 7.844 L 31.158 1.458 C 30.971 1.167 30.664 0.999 30.317 0.999 C 29.971 0.999 29.664 1.167 29.476 1.458 L 25.368 7.844 L 25.073 8.303 L 12.545 8.303 C 9.453 8.303 6.548 9.452 4.366 11.54 C 2.195 13.616 1 16.373 1 19.303 L 1 139.876 C 1 142.806 2.195 145.563 4.366 147.639 C 6.548 149.726 9.453 150.876 12.545 150.876 L 332.6 150.876 M 332.6 151.876 L 12.545 151.876 C 5.617 151.876 0 146.504 0 139.876 L 0 19.303 C 0 12.675 5.617 7.303 12.545 7.303 L 24.527 7.303 L 28.635 0.917 C 29.029 0.305 29.673 -0.001 30.317 -0.001 C 30.962 -0.001 31.606 0.305 31.999 0.917 L 36.108 7.303 L 332.6 7.303 C 339.528 7.303 345.145 12.675 345.145 19.303 L 345.145 139.876 C 345.145 146.504 339.528 151.876 332.6 151.876 Z"
+            android:fillColor="#68b1ef"
+            android:strokeWidth="1"/>
+        <group android:name="group_21">
+            <group android:name="group_11">
+                <group android:name="group_1">
+                    <group android:name="group"/>
+                </group>
+                <group android:name="group_10">
+                    <group android:name="group_3">
+                        <group android:name="group_2"/>
+                    </group>
+                    <group android:name="group_5">
+                        <group android:name="group_4"/>
+                    </group>
+                    <group android:name="group_7">
+                        <group android:name="group_6"/>
+                    </group>
+                    <group android:name="group_9">
+                        <group android:name="group_8"/>
+                    </group>
+                </group>
+            </group>
+            <group android:name="group_20">
+                <group android:name="group_13">
+                    <group android:name="group_12"/>
+                </group>
+                <group android:name="group_15">
+                    <group android:name="group_14"/>
+                </group>
+                <group android:name="group_17">
+                    <group android:name="group_16"/>
+                </group>
+                <group android:name="group_19">
+                    <group android:name="group_18"/>
+                </group>
+            </group>
+            <path
+                android:name="path_1"
+                android:pathData="M 20 89.418 L 286.984 89.418"
+                android:strokeColor="#dddddd"
+                android:strokeWidth="1"/>
+        </group>
+    </group>
+</vector>

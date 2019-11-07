@@ -1,0 +1,23 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="360dp"
+    android:height="113dp"
+    android:viewportWidth="360"
+    android:viewportHeight="113">
+    <group android:name="group_5">
+        <path
+            android:name="path"
+            android:pathData="M 18 0 L 360 0 L 360 113 L 18 113 C 13.228 113 8.646 111.102 5.272 107.728 C 1.898 104.354 0 99.772 0 95 L 0 18 C 0 13.228 1.898 8.646 5.272 5.272 C 8.646 1.898 13.228 0 18 0 Z"
+            android:fillColor="#eb8919"
+            android:strokeWidth="1"/>
+        <group android:name="group_4">
+            <group android:name="group_1">
+                <group android:name="group"/>
+            </group>
+            <group android:name="group_3">
+                <group android:name="group_2"/>
+            </group>
+        </group>
+    </group>
+</vector>

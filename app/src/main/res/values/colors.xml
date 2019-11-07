@@ -8,8 +8,12 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorToolbar">#8071DA</color>
 
+    <color name="backToolbar">#307acf</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="gradStart">#8E8E8E</color>
     <color name="gradStop">#004D9F</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+
 </resources>

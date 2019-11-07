@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/grad_bg"
+    android:background="@drawable/login_background"
     tools:context=".activity.DetailManifestActivity">
 
     <include
@@ -17,9 +17,13 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="0dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:background="@drawable/manifest_innerbox">
 
         <RelativeLayout
             android:id="@+id/relay1"
@@ -40,124 +44,134 @@
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/vehicleNIKLabel"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                         <TextView
                             android:id="@+id/txtVehicleDetailNIK"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/checkVehicleNIKValue"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/vehicleDescriptionLabel"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                         <TextView
                             android:id="@+id/txtVehicleDetailDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/checkVehicleDescriptionValue"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/vehicleClassLabel"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                         <TextView
                             android:id="@+id/txtVehicleDetailClass"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/checkVehicleClassValue"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/checkVehicleEntryDateLabel"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                         <TextView
                             android:id="@+id/txtVehicleDetailEntryDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/checkVehicleEntryDateValue"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/checkVehicleProductionDayLabel"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                         <TextView
                             android:id="@+id/txtVehicleDetailProductionDay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:text="@string/checkVehicleProductionDayValue"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
 
                     </TableRow>
 
@@ -170,18 +184,16 @@
 
                     <Button
                         android:id="@+id/btnVehicleDetailBackToHome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@drawable/btn_bg"
+                        android:background="@drawable/button_manifest_kembali"
                         android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
                         android:text="@string/buttonBackToSearchManifest"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -190,5 +202,14 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/carTerminalSystem"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>
