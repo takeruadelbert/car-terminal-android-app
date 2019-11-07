@@ -25,9 +25,16 @@ import com.stn.carterminal.activity.checkvehicle.CheckVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.magicrf.uhfreader.ScreenStateReceiver;
 import com.stn.carterminal.magicrf.uhfreader.UhfReaderDevice;
+import com.stn.carterminal.network.ServiceGenerator;
+import com.stn.carterminal.network.response.UhfTag;
 import com.stn.carterminal.network.response.User;
+import com.stn.carterminal.network.service.VehicleService;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ScanVehicleActivity extends AppCompatActivity {
 
@@ -168,7 +175,11 @@ public class ScanVehicleActivity extends AppCompatActivity {
 
                 if (!EPC.isEmpty()) {
                     progressDialog.dismiss();
-                    changeActivity();
+                    if (menu.equals("detailManifest")) {
+                        checkUhfTag(EPC);
+                    } else {
+                        changeActivity();
+                    }
                 }
             }
         });
@@ -205,6 +216,34 @@ public class ScanVehicleActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    public void checkUhfTag(String uhfTag) {
+        VehicleService vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
+        Call<UhfTag> uhfTagCall = vehicleService.apiCheckUhfTag(uhfTag);
+        uhfTagCall.enqueue(new Callback<UhfTag>() {
+            @Override
+            public void onResponse(Call<UhfTag> call, Response<UhfTag> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus().equals("inactive")) {
+                        changeActivity();
+                    } else {
+                        Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
+                        backToHome();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
+                    backToHome();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UhfTag> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
+                backToHome();
+            }
+        });
     }
 
     @Override

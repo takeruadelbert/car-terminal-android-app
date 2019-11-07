@@ -4,6 +4,7 @@ import com.stn.carterminal.network.endpoint.Endpoint;
 import com.stn.carterminal.network.request.ChangeUhfTag;
 import com.stn.carterminal.network.request.ChangeVehiclePosition;
 import com.stn.carterminal.network.request.NewVehicle;
+import com.stn.carterminal.network.response.UhfTag;
 import com.stn.carterminal.network.response.Vehicle;
 
 import java.util.ArrayList;
@@ -40,4 +41,7 @@ public interface VehicleService {
 
     @OPTIONS(Endpoint.API_GET_VEHICLE_CLASS)
     Call<Map<Long, String>> apiGetVehicleClass();
+
+    @GET(Endpoint.API_CHECK_UHF_TAG_VEHICLE)
+    Call<UhfTag> apiCheckUhfTag(@Path("uhfTag") String uhfTag);
 }

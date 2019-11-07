@@ -14,4 +14,5 @@ public class Endpoint {
     public static final String API_CHANGE_DATA_MANIFEST = "vehicles/mobile/change_data_manifest/{vehicleId}/to/{providedServiceId}";
     public static final String API_CHANGE_UHF_TAG = "vehicles/mobile/change_uhf_tag/{vehicleId}";
     public static final String API_ADD_NEW_VEHICLE = "vehicles/mobile";
+    public static final String API_CHECK_UHF_TAG_VEHICLE = "vehicles/mobile/check_uhf_tag/{uhfTag}";
 }

@@ -13,6 +13,7 @@ public class Constant {
     public static final String ERROR_MESSAGE_DETAIL_VEHICLE_CHECKBOX = "Whole Checkboxes must be checked.";
     public static final String ERROR_MESSAGE_EPC_NOT_FOUND = "UHF Tag Not Found.";
     public static final String ERROR_MESSAGE_INVALID_VEHICLE_CLASS = "Invalid Data Vehicle Class.";
+    public static final String ERROR_MESSAGE_UHF_TAG_ALREADY_USED = "UHF Tag already used.";
 
     public static final String WARNING_MESSAGE_VEHICLE_ID_NUMBER = "Vehicle ID Number must be filled.";
     public static final String WARNING_MESSAGE_VEHICLE_DESCRIPTION = "Vehicle Description must be filled.";
