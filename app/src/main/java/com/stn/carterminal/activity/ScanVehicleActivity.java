@@ -199,6 +199,8 @@ public class ScanVehicleActivity extends AppCompatActivity {
                     startActivity(changeManifest);
                     finish();
                 } else if (target.equals("changeUhfTag")) {
+                    checkUhfTag(EPC);
+
                     Intent changeUhfTag = new Intent(getApplicationContext(), ChangeUHFTagActivity.class);
                     changeUhfTag.putExtra("EPC", EPC);
                     startActivity(changeUhfTag);
