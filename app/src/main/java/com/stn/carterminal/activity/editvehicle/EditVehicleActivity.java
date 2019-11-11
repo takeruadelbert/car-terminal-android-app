@@ -17,6 +17,7 @@ import com.stn.carterminal.R;
 import com.stn.carterminal.activity.DetailVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
+import com.stn.carterminal.network.response.ProvidedService;
 import com.stn.carterminal.network.response.Vehicle;
 import com.stn.carterminal.network.response.VehicleClass;
 import com.stn.carterminal.network.service.VehicleService;
@@ -42,6 +43,7 @@ public class EditVehicleActivity extends AppCompatActivity {
     private EditText editTextDescription;
     private String EPC;
     private Long providedServiceId;
+    private ProvidedService providedService;
 
     private static final String TOOLBAR_TITLE = "Edit Detail Kendaraan";
 
@@ -56,6 +58,7 @@ public class EditVehicleActivity extends AppCompatActivity {
         vehicle = (Vehicle) getIntent().getSerializableExtra("vehicle");
         EPC = getIntent().getStringExtra("EPC");
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
+        providedService = (ProvidedService) getIntent().getSerializableExtra("providedService");
         if (vehicle == null || EPC == null || EPC.isEmpty() || providedServiceId == 0L) {
             throw new Resources.NotFoundException();
         }
@@ -171,6 +174,7 @@ public class EditVehicleActivity extends AppCompatActivity {
             detailVehicleIntent.putExtra("vehicle", vehicle);
             detailVehicleIntent.putExtra("EPC", EPC);
             detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
+            detailVehicleIntent.putExtra("providedService", providedService);
             startActivity(detailVehicleIntent);
             finish();
         });
@@ -191,6 +195,7 @@ public class EditVehicleActivity extends AppCompatActivity {
         Intent detailManifestIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
         detailManifestIntent.putExtra("EPC", EPC);
         detailManifestIntent.putExtra("providedServiceId", providedServiceId);
+        detailManifestIntent.putExtra("providedService", providedService);
         detailManifestIntent.putExtra("vehicle", vehicle);
         startActivity(detailManifestIntent);
         finish();

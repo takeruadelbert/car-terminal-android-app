@@ -26,6 +26,7 @@ import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.magicrf.uhfreader.ScreenStateReceiver;
 import com.stn.carterminal.magicrf.uhfreader.UhfReaderDevice;
 import com.stn.carterminal.network.ServiceGenerator;
+import com.stn.carterminal.network.response.ProvidedService;
 import com.stn.carterminal.network.response.UhfTag;
 import com.stn.carterminal.network.response.User;
 import com.stn.carterminal.network.service.VehicleService;
@@ -53,6 +54,7 @@ public class ScanVehicleActivity extends AppCompatActivity {
     private static final Integer DELAY_TIME_SCAN = 1000;
     private String EPC;
     private Long providedServiceId;
+    private ProvidedService providedService;
     private String menu;
     private String target;
 
@@ -72,6 +74,8 @@ public class ScanVehicleActivity extends AppCompatActivity {
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
         menu = getIntent().getStringExtra("menu");
         target = getIntent().getStringExtra("target");
+        providedService = (ProvidedService) getIntent().getSerializableExtra("providedService");
+
         if (menu.equals("detailManifest") && providedServiceId == 0L) {
             Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
             throw new Resources.NotFoundException();
@@ -176,7 +180,11 @@ public class ScanVehicleActivity extends AppCompatActivity {
                 if (!EPC.isEmpty()) {
                     progressDialog.dismiss();
                     if (menu.equals("detailManifest")) {
-                        checkUhfTag(EPC);
+                        checkUhfTag(EPC, "searchVehicle");
+                    }
+
+                    if(menu.equals("home") && target.equals("changeUhfTag")){
+                        checkUhfTag(EPC, "changeUhfTag");
                     } else {
                         changeActivity();
                     }
@@ -199,8 +207,6 @@ public class ScanVehicleActivity extends AppCompatActivity {
                     startActivity(changeManifest);
                     finish();
                 } else if (target.equals("changeUhfTag")) {
-                    checkUhfTag(EPC);
-
                     Intent changeUhfTag = new Intent(getApplicationContext(), ChangeUHFTagActivity.class);
                     changeUhfTag.putExtra("EPC", EPC);
                     startActivity(changeUhfTag);
@@ -210,6 +216,7 @@ public class ScanVehicleActivity extends AppCompatActivity {
             case "detailManifest":
                 Intent searchVehicle = new Intent(getApplicationContext(), SearchVehicleActivity.class);
                 searchVehicle.putExtra("providedServiceId", providedServiceId);
+                searchVehicle.putExtra("providedService", providedService);
                 searchVehicle.putExtra("menu", "scanVehicle");
                 searchVehicle.putExtra("EPC", EPC);
                 startActivity(searchVehicle);
@@ -220,7 +227,7 @@ public class ScanVehicleActivity extends AppCompatActivity {
         }
     }
 
-    public void checkUhfTag(String uhfTag) {
+    public void checkUhfTag(String uhfTag, String target) {
         VehicleService vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
         Call<UhfTag> uhfTagCall = vehicleService.apiCheckUhfTag(uhfTag);
         uhfTagCall.enqueue(new Callback<UhfTag>() {
@@ -231,11 +238,11 @@ public class ScanVehicleActivity extends AppCompatActivity {
                         changeActivity();
                     } else {
                         Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
-                        backToHome();
+                        backActionForInvalidResponse(target);
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
-                    backToHome();
+                    backActionForInvalidResponse(target);
                 }
             }
 
@@ -243,9 +250,17 @@ public class ScanVehicleActivity extends AppCompatActivity {
             public void onFailure(Call<UhfTag> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
-                backToHome();
+                backActionForInvalidResponse(target);
             }
         });
+    }
+
+    private void backActionForInvalidResponse(String target) {
+        if(target.equals("changeUhfTag")) {
+            backToHome();
+        } else {
+            backToDetailManifest();
+        }
     }
 
     @Override
@@ -262,6 +277,13 @@ public class ScanVehicleActivity extends AppCompatActivity {
 
         homeIntent.putExtra("user", user);
         startActivity(homeIntent);
+        finish();
+    }
+
+    private void backToDetailManifest() {
+        Intent detailManifestIntent = new Intent(getApplicationContext(), DetailManifestActivity.class);
+        detailManifestIntent.putExtra("providedService", providedService);
+        startActivity(detailManifestIntent);
         finish();
     }
 

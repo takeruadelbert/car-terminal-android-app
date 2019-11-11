@@ -18,6 +18,7 @@ import com.stn.carterminal.activity.editvehicle.EditVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.request.ChangeVehiclePosition;
+import com.stn.carterminal.network.response.ProvidedService;
 import com.stn.carterminal.network.response.Vehicle;
 import com.stn.carterminal.network.service.VehicleService;
 
@@ -32,6 +33,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private TextView txtVehicleDescription;
     private TextView txtVehicleClass;
     private Long providedServiceId;
+    private ProvidedService providedService;
     private String EPC;
     private VehicleService vehicleService;
     private ProgressDialog progressDialog;
@@ -49,6 +51,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
 
         vehicle = (Vehicle) getIntent().getSerializableExtra("vehicle");
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
+        providedService = (ProvidedService) getIntent().getSerializableExtra("providedService");
         EPC = getIntent().getStringExtra("EPC");
         if (vehicle == null || EPC == null || EPC.isEmpty()) {
             throw new Resources.NotFoundException();
@@ -102,6 +105,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
             Intent editVehicleIntent = new Intent(getApplicationContext(), EditVehicleActivity.class);
             editVehicleIntent.putExtra("vehicle", vehicle);
             editVehicleIntent.putExtra("providedServiceId", providedServiceId);
+            editVehicleIntent.putExtra("providedService", providedService);
             editVehicleIntent.putExtra("EPC", EPC);
             startActivity(editVehicleIntent);
             finish();
@@ -116,6 +120,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private void backToScanVehicle() {
         Intent scanVehicleIntent = new Intent(getApplicationContext(), ScanVehicleActivity.class);
         scanVehicleIntent.putExtra("providedServiceId", providedServiceId);
+        scanVehicleIntent.putExtra("providedService", providedService);
         scanVehicleIntent.putExtra("menu", "detailManifest");
         startActivity(scanVehicleIntent);
         finish();
