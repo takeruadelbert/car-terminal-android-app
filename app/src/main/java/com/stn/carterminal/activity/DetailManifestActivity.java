@@ -77,6 +77,7 @@ public class DetailManifestActivity extends AppCompatActivity {
 
             Intent scanVehicle = new Intent(getApplicationContext(), ScanVehicleActivity.class);
             scanVehicle.putExtra("providedServiceId", providedServiceId);
+            scanVehicle.putExtra("providedService", providedService);
             scanVehicle.putExtra("menu", "detailManifest");
             progressDialog.dismiss();
             startActivity(scanVehicle);

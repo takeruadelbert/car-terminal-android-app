@@ -24,6 +24,7 @@ import com.stn.carterminal.activity.checkvehicle.CheckVehicleActivity;
 import com.stn.carterminal.adapter.SearchVehicleAdapter;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
+import com.stn.carterminal.network.response.ProvidedService;
 import com.stn.carterminal.network.response.Vehicle;
 import com.stn.carterminal.network.service.VehicleService;
 
@@ -42,6 +43,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     private SearchVehicleAdapter searchVehicleAdapter;
     private VehicleService vehicleService;
     private Long providedServiceId;
+    private ProvidedService providedService;
     private String EPC;
     private String menu;
     private String target;
@@ -59,6 +61,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
 
         menu = getIntent().getStringExtra("menu");
         target = getIntent().getStringExtra("target");
+        providedService = (ProvidedService) getIntent().getSerializableExtra("providedService");
         if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
             providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
             EPC = getIntent().getStringExtra("EPC");
@@ -214,6 +217,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
             if (target.equals("checkVehicle")) {
                 Intent checkVehicleIntent = new Intent(getApplicationContext(), CheckVehicleActivity.class);
                 checkVehicleIntent.putExtra("vehicle", vehicle);
+                checkVehicleIntent.putExtra("providedService", providedService);
                 startActivity(checkVehicleIntent);
                 finish();
             } else if (target.equals("changeManifest")) {
@@ -230,6 +234,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
         Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
         detailVehicleIntent.putExtra("vehicle", vehicle);
         detailVehicleIntent.putExtra("providedServiceId", providedServiceId);
+        detailVehicleIntent.putExtra("providedService", providedService);
         detailVehicleIntent.putExtra("EPC", EPC);
         startActivity(detailVehicleIntent);
         finish();
