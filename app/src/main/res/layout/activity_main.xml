@@ -131,34 +131,65 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relay2"
+    <Button
+        android:id="@+id/setting_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_setting"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:text="" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/lupa_password"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="15dp"/>
+
+    <RelativeLayout
+        android:id="@+id/relay2"
+        android:layout_width="1000dp"
+        android:layout_height="1000dp"
+        android:background="@color/white"
         android:layout_centerInParent="true">
-
-        <Button
-            android:id="@+id/setting_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/icon_setting"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:text="" />
-
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/logo_description"
+            android:layout_marginTop="170dp"
+            android:layout_marginLeft="55dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logopelindo4" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="@string/lupa_password"
+            android:text="@string/carterminal"
             android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="10dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="370dp"
+            android:textSize="16dp"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
+            android:paddingBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/pelindoiv"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="400dp"
+            android:textSize="16dp"
+            android:layout_centerHorizontal="true"
             android:paddingBottom="15dp"/>
     </RelativeLayout>
-
 
 </RelativeLayout>
