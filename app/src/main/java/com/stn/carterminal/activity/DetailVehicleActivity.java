@@ -134,7 +134,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     }
 
     private void apiChangeDataVehiclePosition(Long vehicleId) {
-        ChangeVehiclePosition changeVehiclePosition = new ChangeVehiclePosition(vehicleId, EPC, vehicle.getNIK(), vehicle.getDescription(), vehicle.getVehicleClassId());
+        ChangeVehiclePosition changeVehiclePosition = new ChangeVehiclePosition(vehicleId, EPC, vehicle.getNIK(), vehicle.getDescription(), vehicle.getVehicleClassId(), vehicle.isDataVehicleChanged());
         Call<Vehicle> vehicleCall = vehicleService.apiChangeVehiclePosition(vehicleId, changeVehiclePosition);
         vehicleCall.enqueue(new Callback<Vehicle>() {
             @Override

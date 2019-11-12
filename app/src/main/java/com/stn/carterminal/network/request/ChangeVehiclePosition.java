@@ -10,12 +10,14 @@ public class ChangeVehiclePosition {
     private String vehicleIdNumber;
     private String description;
     private Long vehicleClassId;
+    private boolean isDataVehicleChanged;
 
-    public ChangeVehiclePosition(Long id, String uhfTag, String vehicleIdNumber, String description, Long vehicleClassId) {
+    public ChangeVehiclePosition(Long id, String uhfTag, String vehicleIdNumber, String description, Long vehicleClassId, boolean isChanged) {
         this.id = id;
         this.uhfTag = uhfTag;
         this.vehicleIdNumber = vehicleIdNumber;
         this.description = description;
         this.vehicleClassId = vehicleClassId;
+        this.isDataVehicleChanged = isChanged;
     }
 }
