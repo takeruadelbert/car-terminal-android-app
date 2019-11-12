@@ -39,7 +39,7 @@ public interface VehicleService {
     @POST(Endpoint.API_ADD_NEW_VEHICLE)
     Call<Vehicle> apiAddNewVehicle(@Body NewVehicle newVehicle);
 
-    @OPTIONS(Endpoint.API_GET_VEHICLE_CLASS)
+    @GET(Endpoint.API_GET_VEHICLE_CLASS)
     Call<Map<Long, String>> apiGetVehicleClass();
 
     @GET(Endpoint.API_CHECK_UHF_TAG_VEHICLE)
