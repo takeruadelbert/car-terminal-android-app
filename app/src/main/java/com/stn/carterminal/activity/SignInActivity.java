@@ -36,13 +36,14 @@ public class SignInActivity extends AppCompatActivity {
     private static final String INVALID_PASSWORD_MESSAGE = "Invalid Field 'Password'.";
     private static final String PROGRESS_DIALOG_MESSAGE = "Signing In ...";
 
-    RelativeLayout relativeLayout1, relativeLayout2;
+    RelativeLayout relativeLayout1, relativeLayout2, relativeLayout3;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
             relativeLayout1.setVisibility(View.VISIBLE);
-            relativeLayout2.setVisibility(View.INVISIBLE);
+            relativeLayout2.setVisibility(View.VISIBLE);
+            relativeLayout3.setVisibility(View.INVISIBLE);
         }
     };
     private UserService userService;
@@ -74,6 +75,7 @@ public class SignInActivity extends AppCompatActivity {
     private void setupSplashScreen() {
         relativeLayout1 = findViewById(R.id.relay1);
         relativeLayout2 = findViewById(R.id.relay2);
+        relativeLayout3 = findViewById(R.id.relay3);
         handler.postDelayed(runnable, SPLASH_SCREEN_DELAY_TIME);
     }
 
