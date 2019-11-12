@@ -42,7 +42,7 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         public void run() {
             relativeLayout1.setVisibility(View.VISIBLE);
-            relativeLayout2.setVisibility(View.VISIBLE);
+            relativeLayout2.setVisibility(View.INVISIBLE);
         }
     };
     private UserService userService;

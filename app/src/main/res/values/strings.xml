@@ -20,6 +20,8 @@
     <string name="setting_label">Setting</string>
     <string name="sign_in_btn_label">Sign In</string>
     <string name="lupa_password">LUPA PASSWORD ?</string>
+    <string name="pelindoiv">PELINDO IV</string>
+    <string name="carterminal">CAR TERMINAL SYSTEM</string>
 
     <!-- Setting Properties -->
     <string name="setting">Setting</string>
