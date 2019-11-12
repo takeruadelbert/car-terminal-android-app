@@ -96,19 +96,14 @@ public class HomeActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        builder.setPositiveButton("Select", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                changeActivity(spinner, target);
-            }
-        });
+        builder.setPositiveButton("Select", ((DialogInterface dialog, int which) -> {
+            changeActivity(spinner, target);
+        }));
 
-        builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("Dismiss", ((DialogInterface dialog, int which) -> {
+            dialog.dismiss();
+        }));
+
         builder.setView(mView);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();

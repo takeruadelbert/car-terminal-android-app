@@ -1,6 +1,8 @@
 package com.stn.carterminal.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -49,11 +51,14 @@ public class SignInActivity extends AppCompatActivity {
     private UserService userService;
     public static SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        builder = new AlertDialog.Builder(SignInActivity.this, R.style.MyDialogTheme);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userService = ServiceGenerator.createBaseService(this, UserService.class);
@@ -172,5 +177,16 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void forgotPasswordClick(View view) {
+        builder.setMessage(R.string.forgotPasswordMessage)
+                .setPositiveButton("OK", ((DialogInterface dialog, int which) -> {
+                    dialog.dismiss();
+                }));
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setTitle(R.string.forgotPasswordTitle);
+        alertDialog.show();
     }
 }
