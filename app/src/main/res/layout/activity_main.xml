@@ -12,25 +12,24 @@
         android:layout_height="750dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="120dp"
-        >
+        android:layout_marginRight="20dp">
 
         <RelativeLayout
             android:id="@+id/relay1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:background="@drawable/login_background_innerbox_new">
+            android:background="@drawable/login_background_innerbox_new"
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/imgView_logo"
                 android:layout_width="150dp"
                 android:layout_height="80dp"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="20dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/logo_description"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="55dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/logopelindo4" />
 
@@ -44,7 +43,7 @@
                 android:text="@string/carTerminalSystem"
                 android:textAllCaps="true"
                 android:textColor="@color/gradStop"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
 
             <LinearLayout
                 android:id="@+id/linearLayer1"
@@ -64,19 +63,18 @@
                         android:id="@+id/txtUsername"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginLeft="50dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginRight="50dp"
+                        android:background="@drawable/login_textfield_username"
                         android:fontFamily="sans-serif-light"
+                        android:hint="@string/username_label"
                         android:inputType="text"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="50dp"
                         android:textColor="@color/gradStop"
-                        android:textSize="13sp"
-                        android:background="@drawable/login_textfield_username"
-                        android:hint="@string/username_label"
                         android:textCursorDrawable="@null"
-                        />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -91,21 +89,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="50dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginRight="50dp"
+                        android:background="@drawable/login_textfield_password"
                         android:fontFamily="sans-serif-light"
                         android:foregroundGravity="center_horizontal"
                         android:gravity="center_vertical"
+                        android:hint="@string/password_label"
                         android:inputType="textPassword"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="50dp"
                         android:textColor="@color/gradStop"
-                        android:textSize="13sp"
-                        android:background="@drawable/login_textfield_password"
-                        android:hint="@string/password_label"
                         android:textCursorDrawable="@null"
-                        />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -122,51 +119,62 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
+                android:text="@string/btnConfirm"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="14sp"
-                android:text="@string/btnConfirm" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/setting_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/icon_setting"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:text="" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/lupa_password"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="15dp"/>
-
     <RelativeLayout
         android:id="@+id/relay2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:layout_centerInParent="true">
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/setting_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/icon_setting"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-light"
+            android:onClick="forgotPasswordClick"
+            android:paddingBottom="15dp"
+            android:text="@string/forgot_password"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relay3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@color/white">
+
         <ImageView
             android:layout_width="300dp"
             android:layout_height="150dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/logo_description"
-            android:layout_marginLeft="55dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="55dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/logo_description"
             android:src="@drawable/logopelindo4" />
     </RelativeLayout>
 

@@ -1,6 +1,8 @@
 package com.stn.carterminal.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,23 +38,27 @@ public class SignInActivity extends AppCompatActivity {
     private static final String INVALID_PASSWORD_MESSAGE = "Invalid Field 'Password'.";
     private static final String PROGRESS_DIALOG_MESSAGE = "Signing In ...";
 
-    RelativeLayout relativeLayout1, relativeLayout2;
+    RelativeLayout relativeLayout1, relativeLayout2, relativeLayout3;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
             relativeLayout1.setVisibility(View.VISIBLE);
-            relativeLayout2.setVisibility(View.INVISIBLE);
+            relativeLayout2.setVisibility(View.VISIBLE);
+            relativeLayout3.setVisibility(View.INVISIBLE);
         }
     };
     private UserService userService;
     public static SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        builder = new AlertDialog.Builder(SignInActivity.this, R.style.MyDialogTheme);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userService = ServiceGenerator.createBaseService(this, UserService.class);
@@ -74,6 +80,7 @@ public class SignInActivity extends AppCompatActivity {
     private void setupSplashScreen() {
         relativeLayout1 = findViewById(R.id.relay1);
         relativeLayout2 = findViewById(R.id.relay2);
+        relativeLayout3 = findViewById(R.id.relay3);
         handler.postDelayed(runnable, SPLASH_SCREEN_DELAY_TIME);
     }
 
@@ -170,5 +177,16 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), Constant.API_LOGIN_FAILED, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void forgotPasswordClick(View view) {
+        builder.setMessage(R.string.forgotPasswordMessage)
+                .setPositiveButton("OK", ((DialogInterface dialog, int which) -> {
+                    dialog.dismiss();
+                }));
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setTitle(R.string.forgotPasswordTitle);
+        alertDialog.show();
     }
 }

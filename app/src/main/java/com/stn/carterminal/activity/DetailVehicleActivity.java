@@ -83,7 +83,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     private void setOnClickListenerBackToSearchVehicleButton() {
         Button backToSearchVehicle = findViewById(R.id.btnBackToSearchVehicle);
         backToSearchVehicle.setOnClickListener((View v) -> {
-            backToScanVehicle();
+            backToDetailManifest();
         });
     }
 
@@ -114,14 +114,12 @@ public class DetailVehicleActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        backToScanVehicle();
+        backToDetailManifest();
     }
 
-    private void backToScanVehicle() {
-        Intent scanVehicleIntent = new Intent(getApplicationContext(), ScanVehicleActivity.class);
-        scanVehicleIntent.putExtra("providedServiceId", providedServiceId);
+    private void backToDetailManifest() {
+        Intent scanVehicleIntent = new Intent(getApplicationContext(), DetailManifestActivity.class);
         scanVehicleIntent.putExtra("providedService", providedService);
-        scanVehicleIntent.putExtra("menu", "detailManifest");
         startActivity(scanVehicleIntent);
         finish();
     }
@@ -134,7 +132,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
     }
 
     private void apiChangeDataVehiclePosition(Long vehicleId) {
-        ChangeVehiclePosition changeVehiclePosition = new ChangeVehiclePosition(vehicleId, EPC, vehicle.getNIK(), vehicle.getDescription(), vehicle.getVehicleClassId());
+        ChangeVehiclePosition changeVehiclePosition = new ChangeVehiclePosition(vehicleId, EPC, vehicle.getNIK(), vehicle.getDescription(), vehicle.getVehicleClassId(), vehicle.isDataVehicleChanged());
         Call<Vehicle> vehicleCall = vehicleService.apiChangeVehiclePosition(vehicleId, changeVehiclePosition);
         vehicleCall.enqueue(new Callback<Vehicle>() {
             @Override
@@ -142,7 +140,7 @@ public class DetailVehicleActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     Toast.makeText(getApplicationContext(), Constant.API_SUCCESS, Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
-                    backToScanVehicle();
+                    backToDetailManifest();
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();

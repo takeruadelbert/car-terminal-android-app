@@ -169,6 +169,7 @@ public class EditVehicleActivity extends AppCompatActivity {
             vehicle.setDescription(editedDescription);
             vehicle.setVehicleClass(editedVehicleClass);
             vehicle.setVehicleClassId(getVehicleClassIdByName(editedVehicleClass));
+            vehicle.setDataVehicleChanged(true);
 
             Intent detailVehicleIntent = new Intent(getApplicationContext(), DetailVehicleActivity.class);
             detailVehicleIntent.putExtra("vehicle", vehicle);
