@@ -47,7 +47,7 @@ public interface VehicleService {
     Call<UhfTag> apiCheckUhfTag(@Path("uhfTag") String uhfTag);
 
     @GET(Endpoint.API_GET_ALL_WHOLE_VEHICLE_ITS_TAG_IS_USED)
-    Call<ArrayList<Vehicle>> apiGetAllVehicleItsTagIsUed(@Query("keyword") String keyword);
+    Call<ArrayList<Vehicle>> apiGetAllVehicleItsTagIsUsed(@Query("keyword") String keyword);
 
     @GET(Endpoint.API_CHECK_PROVIDED_SERVICE_CONFIRMATION_STATUS)
     Call<Status> apiCheckProvidedConfirmationStatusByUhfTag(@Path("uhfTag") String uhfTag);

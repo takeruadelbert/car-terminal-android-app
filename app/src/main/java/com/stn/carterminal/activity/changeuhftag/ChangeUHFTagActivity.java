@@ -150,7 +150,7 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
     }
 
     private ArrayList<Vehicle> requestAPISearchVehicle(String NIK) {
-        Call<ArrayList<Vehicle>> vehicleCall = vehicleService.apiGetAllVehicleItsTagIsUed(NIK);
+        Call<ArrayList<Vehicle>> vehicleCall = vehicleService.apiGetAllVehicleItsTagIsUsed(NIK);
         vehicleCall.enqueue(new Callback<ArrayList<Vehicle>>() {
             @Override
             public void onResponse(Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {

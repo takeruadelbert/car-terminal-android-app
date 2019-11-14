@@ -176,7 +176,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     }
 
     private ArrayList<Vehicle> requestAPISearchVehicleByNIK(String NIK) {
-        Call<ArrayList<Vehicle>> vehicleCall = vehicleService.apiGetVehicleByNIK(NIK);
+        Call<ArrayList<Vehicle>> vehicleCall = target.equals("changeManifest") ? vehicleService.apiSearchProvidedServiceConfirmationStatusNotApproved(NIK) : vehicleService.apiGetVehicleByNIK(NIK);
         vehicleCall.enqueue(new Callback<ArrayList<Vehicle>>() {
             @Override
             public void onResponse(Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
