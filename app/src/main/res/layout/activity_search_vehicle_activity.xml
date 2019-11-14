@@ -23,6 +23,11 @@
         android:paddingRight="20dp"
         android:background="@drawable/manifest_innerbox">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/relay1"
             android:layout_width="wrap_content"
@@ -120,6 +125,8 @@
             </LinearLayout>
 
         </RelativeLayout>
+
+        </ScrollView>
 
     </RelativeLayout>
 
