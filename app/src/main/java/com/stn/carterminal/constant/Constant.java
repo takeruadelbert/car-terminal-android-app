@@ -33,4 +33,5 @@ public class Constant {
     public static final String API_ERROR_VEHICLE_NOT_FOUND = "Invalid Vehicle ID.";
     public static final String API_ERROR_CHANGE_DATA_MANIFEST = "Error : Fail to change manifest.";
     public static final String API_ERROR_UHF_TAG_SAME = "UHF Tag is currently same.";
+    public static final String API_ERROR_PROVIDED_SERVICE_STATUS_ALREADY_APPROVED = "Provided Service Status Already Approved.";
 }

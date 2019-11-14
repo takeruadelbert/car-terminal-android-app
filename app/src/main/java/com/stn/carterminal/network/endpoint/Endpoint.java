@@ -16,4 +16,6 @@ public class Endpoint {
     public static final String API_ADD_NEW_VEHICLE = "vehicles/mobile";
     public static final String API_CHECK_UHF_TAG_VEHICLE = "vehicles/mobile/check_uhf_tag/{uhfTag}";
     public static final String API_GET_ALL_WHOLE_VEHICLE_ITS_TAG_IS_USED = "vehicles/mobile/search_used_tag_vehicle";
+    public static final String API_CHECK_PROVIDED_SERVICE_CONFIRMATION_STATUS = "vehicles/mobile/check_provided_confirmation_status/{uhfTag}";
+    public static final String API_SEARCH_PROVIDED_SERVICE_CONFIRMATION_STATUS_NOT_APPROVED = "vehicles/mobile/search_provided_service_confirmation_status_not_approved";
 }

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.stn.carterminal.R;
 import com.stn.carterminal.activity.HomeActivity;
 import com.stn.carterminal.activity.SignInActivity;
@@ -25,11 +26,13 @@ import com.stn.carterminal.adapter.SearchManifestAdapter;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.response.ProvidedService;
+import com.stn.carterminal.network.response.Status;
 import com.stn.carterminal.network.response.User;
 import com.stn.carterminal.network.response.Vehicle;
 import com.stn.carterminal.network.service.ProvidedServiceService;
 import com.stn.carterminal.network.service.VehicleService;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -52,6 +55,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
     private Long targetProvidedServiceId;
     private VehicleService vehicleService;
     private ProgressDialog progressDialog;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
         toolbar.setTitle(TOOLBAR_TITLE);
 
         manifests = new ArrayList<>();
+        gson = new Gson();
 
         progressDialog = new ProgressDialog(ChangeManifestActivity.this);
         progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
@@ -73,7 +78,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
             String EPC = getIntent().getStringExtra("EPC");
             vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
             if (EPC != null && !EPC.isEmpty()) {
-                requestAPIByTag(EPC);
+                checkProvidedServiceConfirmationStatusByTag(EPC);
             }
         }
 
@@ -256,6 +261,35 @@ public class ChangeManifestActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Vehicle> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
+                backToHome();
+            }
+        });
+    }
+
+    private void checkProvidedServiceConfirmationStatusByTag(String EPC) {
+        Call<Status> vehicleCall = vehicleService.apiCheckProvidedConfirmationStatusByUhfTag(EPC);
+        vehicleCall.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if (response.code() == 200) {
+                    requestAPIByTag(EPC);
+                } else {
+                    Type type = new TypeToken<Status>() {}.getType();
+                    Status status = gson.fromJson(response.errorBody().charStream(), type);
+                    if (status.getStatus().equals("active")) {
+                        Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
+                        backToHome();
+                    } else {
+                        Toast.makeText(getApplicationContext(), Constant.API_ERROR_PROVIDED_SERVICE_STATUS_ALREADY_APPROVED, Toast.LENGTH_SHORT).show();
+                        backToHome();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                 backToHome();

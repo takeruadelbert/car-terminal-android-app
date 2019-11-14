@@ -4,6 +4,7 @@ import com.stn.carterminal.network.endpoint.Endpoint;
 import com.stn.carterminal.network.request.ChangeUhfTag;
 import com.stn.carterminal.network.request.ChangeVehiclePosition;
 import com.stn.carterminal.network.request.NewVehicle;
+import com.stn.carterminal.network.response.Status;
 import com.stn.carterminal.network.response.UhfTag;
 import com.stn.carterminal.network.response.Vehicle;
 
@@ -47,4 +48,10 @@ public interface VehicleService {
 
     @GET(Endpoint.API_GET_ALL_WHOLE_VEHICLE_ITS_TAG_IS_USED)
     Call<ArrayList<Vehicle>> apiGetAllVehicleItsTagIsUed(@Query("keyword") String keyword);
+
+    @GET(Endpoint.API_CHECK_PROVIDED_SERVICE_CONFIRMATION_STATUS)
+    Call<Status> apiCheckProvidedConfirmationStatusByUhfTag(@Path("uhfTag") String uhfTag);
+
+    @GET(Endpoint.API_SEARCH_PROVIDED_SERVICE_CONFIRMATION_STATUS_NOT_APPROVED)
+    Call<ArrayList<Vehicle>> apiSearchProvidedServiceConfirmationStatusNotApproved(@Query("keyword") String keyword);
 }
