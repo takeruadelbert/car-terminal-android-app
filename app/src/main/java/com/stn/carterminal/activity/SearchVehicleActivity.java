@@ -223,7 +223,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
             } else if (target.equals("changeManifest")) {
                 Intent changeManifestIntent = new Intent(getApplicationContext(), ChangeManifestActivity.class);
                 changeManifestIntent.putExtra("originProvidedServiceId", vehicle.getProvidedServiceId());
-                changeManifestIntent.putExtra("vehicleId", vehicle.getVehicleId());
+                changeManifestIntent.putExtra("vehicle", vehicle);
                 startActivity(changeManifestIntent);
                 finish();
             }
