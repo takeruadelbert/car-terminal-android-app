@@ -46,7 +46,7 @@
                         android:layout_marginBottom="10dp">
 
                         <TextView
-                            android:layout_width="60dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -55,12 +55,14 @@
 
                         <TextView
                             android:id="@+id/txtVehicleDetailNIK"
-                            android:layout_width="wrap_content"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
                             android:text="@string/vehicleClassValue"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:ellipsize="none"
+                            android:singleLine="false"/>
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/checkboxVehicleNIK"
@@ -76,7 +78,7 @@
                         android:layout_marginBottom="10dp">
 
                         <TextView
-                            android:layout_width="60dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -85,12 +87,14 @@
 
                         <TextView
                             android:id="@+id/txtVehicleDetailDescription"
-                            android:layout_width="wrap_content"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
                             android:text="@string/vehicleDescriptionValue"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:ellipsize="none"
+                            android:singleLine="false"/>
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/checkboxVehicleDescription"
@@ -106,7 +110,7 @@
                         android:layout_marginBottom="10dp">
 
                         <TextView
-                            android:layout_width="60dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -115,12 +119,14 @@
 
                         <TextView
                             android:id="@+id/txtVehicleDetailClass"
-                            android:layout_width="wrap_content"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
                             android:text="@string/vehicleClassValue"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:ellipsize="none"
+                            android:singleLine="false"/>
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/checkboxVehicleDetailClass"
