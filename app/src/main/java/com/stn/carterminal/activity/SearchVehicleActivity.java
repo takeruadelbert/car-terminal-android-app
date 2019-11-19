@@ -104,6 +104,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
                         Intent newVehicle = new Intent(getApplicationContext(), AddNewVehicleActivity.class);
                         newVehicle.putExtra("EPC", EPC);
                         newVehicle.putExtra("providedServiceId", providedServiceId);
+                        newVehicle.putExtra("providedService", providedService);
                         startActivity(newVehicle);
                         finish();
                         break;
