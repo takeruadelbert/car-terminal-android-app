@@ -10,14 +10,20 @@ public class ChangeVehiclePosition {
     private String vehicleIdNumber;
     private String description;
     private Long vehicleClassId;
+    private String vehicleManifestStatus;
     private boolean isDataVehicleChanged;
 
-    public ChangeVehiclePosition(Long id, String uhfTag, String vehicleIdNumber, String description, Long vehicleClassId, boolean isChanged) {
+    public ChangeVehiclePosition(Long id, String uhfTag, String vehicleIdNumber, String description, Long vehicleClassId, String vehicleManifestStatus) {
         this.id = id;
         this.uhfTag = uhfTag;
         this.vehicleIdNumber = vehicleIdNumber;
         this.description = description;
         this.vehicleClassId = vehicleClassId;
-        this.isDataVehicleChanged = isChanged;
+        this.vehicleManifestStatus = vehicleManifestStatus;
+        this.isDataVehicleChanged = setDataVehicleChanged();
+    }
+
+    private boolean setDataVehicleChanged() {
+        return vehicleManifestStatus.equals("NOT_IN");
     }
 }
