@@ -96,4 +96,10 @@
     <string name="addNewVehicleClass">Golongan Kendaraan :</string>
     <string name="warningInput1">Anda sedang menginput kendaraan</string>
     <string name="warningInput2">Tambahan yang tidak ada dalam manifest</string>
+
+    <!-- Detail Change Manifest -->
+    <string name="detailChangeManifestPreviousManifestNumberLabel">Nomor Manifest Sekarang</string>
+    <string name="detailChangeManifestCurrentManifestNumberLabel">Nomor Manifest Pengganti</string>
+    <string name="detailChangeManifestPreviousManifestNumberValue">-</string>
+    <string name="detailChangeManifestCurrentManifestNumberValue">-</string>
 </resources>

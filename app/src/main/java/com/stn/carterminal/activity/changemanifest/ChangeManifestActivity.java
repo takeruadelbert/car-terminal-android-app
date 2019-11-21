@@ -42,7 +42,7 @@ import retrofit2.Response;
 public class ChangeManifestActivity extends AppCompatActivity {
 
     private static final String TOOLBAR_TITLE = "Pindah Manifest";
-    private static final String PROGRESS_DIALOG_MESSAGE = "Updating ...";
+    private static final String PROGRESS_DIALOG_MESSAGE = "Confirming ...";
 
     private ProvidedService providedService;
     private ArrayList<ProvidedService> manifests;
@@ -50,9 +50,10 @@ public class ChangeManifestActivity extends AppCompatActivity {
     private ProvidedServiceService providedServiceService;
     private EditText search;
 
-    private Long vehicleId;
+    private Vehicle vehicle;
     private Long originProvidedServiceId;
     private Long targetProvidedServiceId;
+    private String currentManifestNumber;
     private VehicleService vehicleService;
     private ProgressDialog progressDialog;
     private Gson gson;
@@ -84,8 +85,8 @@ public class ChangeManifestActivity extends AppCompatActivity {
 
         if (getIntent().getExtras().containsKey("originProvidedServiceId")) {
             originProvidedServiceId = getIntent().getLongExtra("originProvidedServiceId", 0L);
-            vehicleId = getIntent().getLongExtra("vehicleId", 0L);
-            if (originProvidedServiceId == 0L || vehicleId == 0L) {
+            vehicle = (Vehicle) getIntent().getSerializableExtra("vehicle");
+            if (originProvidedServiceId == 0L || vehicle == null) {
                 throw new Resources.NotFoundException();
             }
             requestAPIByProvidedServiceId(originProvidedServiceId);
@@ -123,9 +124,18 @@ public class ChangeManifestActivity extends AppCompatActivity {
             ProvidedService providedService = searchManifestAdapter.getProvidedService();
             if (providedService != null) {
                 targetProvidedServiceId = providedService.getProvidedServiceId();
-                if (targetProvidedServiceId != null && vehicleId != null) {
+                currentManifestNumber = providedService.getProvidedServiceNumber();
+                if (targetProvidedServiceId != null && vehicle != null) {
                     progressDialog.show();
-                    changeManifest(vehicleId, targetProvidedServiceId);
+
+                    Intent detailChangeManifest = new Intent(getApplicationContext(), DetailChangeManifestActivity.class);
+                    detailChangeManifest.putExtra("vehicle", vehicle);
+                    detailChangeManifest.putExtra("originProvidedServiceId", originProvidedServiceId);
+                    detailChangeManifest.putExtra("targetProvidedServiceId", targetProvidedServiceId);
+                    detailChangeManifest.putExtra("previousManifest", vehicle.getProvidedServiceNumber());
+                    detailChangeManifest.putExtra("currentManifest", currentManifestNumber);
+                    startActivity(detailChangeManifest);
+                    finish();
                 } else {
                     if (targetProvidedServiceId == null) {
                         Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
@@ -246,8 +256,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
                 if (response.code() == 200) {
-                    Vehicle vehicle = response.body();
-                    vehicleId = vehicle.getVehicleId();
+                    vehicle = response.body();
                     originProvidedServiceId = vehicle.getProvidedServiceId();
                     requestAPIByProvidedServiceId(originProvidedServiceId);
                 } else if (response.code() == 404) {
@@ -276,10 +285,11 @@ public class ChangeManifestActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     requestAPIByTag(EPC);
                 } else {
-                    Type type = new TypeToken<Status>() {}.getType();
+                    Type type = new TypeToken<Status>() {
+                    }.getType();
                     Status status = gson.fromJson(response.errorBody().charStream(), type);
-                    if (status.getStatus().equals("active")) {
-                        Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_UHF_TAG_ALREADY_USED, Toast.LENGTH_SHORT).show();
+                    if (status.getStatus().equals("inactive UHF Tag")) {
+                        Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_INACTIVE_UHF_TAG, Toast.LENGTH_SHORT).show();
                         backToHome();
                     } else {
                         Toast.makeText(getApplicationContext(), Constant.API_ERROR_PROVIDED_SERVICE_STATUS_ALREADY_APPROVED, Toast.LENGTH_SHORT).show();
@@ -293,30 +303,6 @@ public class ChangeManifestActivity extends AppCompatActivity {
                 t.printStackTrace();
                 Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                 backToHome();
-            }
-        });
-    }
-
-    private void changeManifest(Long vehicleId, Long providedServiceId) {
-        Call<ProvidedService> providedServiceCall = providedServiceService.apiChangeDataManifest(vehicleId, providedServiceId);
-        providedServiceCall.enqueue(new Callback<ProvidedService>() {
-            @Override
-            public void onResponse(Call<ProvidedService> call, Response<ProvidedService> response) {
-                if (response.code() == 200) {
-                    Toast.makeText(getApplicationContext(), Constant.API_SUCCESS_CHANGE_DATA_MANIFEST, Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    backToHome();
-                } else {
-                    Toast.makeText(getApplicationContext(), Constant.API_ERROR_CHANGE_DATA_MANIFEST, Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProvidedService> call, Throwable t) {
-                t.printStackTrace();
-                Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
             }
         });
     }

@@ -104,6 +104,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
                         Intent newVehicle = new Intent(getApplicationContext(), AddNewVehicleActivity.class);
                         newVehicle.putExtra("EPC", EPC);
                         newVehicle.putExtra("providedServiceId", providedServiceId);
+                        newVehicle.putExtra("providedService", providedService);
                         startActivity(newVehicle);
                         finish();
                         break;
@@ -223,7 +224,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
             } else if (target.equals("changeManifest")) {
                 Intent changeManifestIntent = new Intent(getApplicationContext(), ChangeManifestActivity.class);
                 changeManifestIntent.putExtra("originProvidedServiceId", vehicle.getProvidedServiceId());
-                changeManifestIntent.putExtra("vehicleId", vehicle.getVehicleId());
+                changeManifestIntent.putExtra("vehicle", vehicle);
                 startActivity(changeManifestIntent);
                 finish();
             }

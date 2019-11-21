@@ -19,6 +19,7 @@ import com.stn.carterminal.activity.SearchVehicleActivity;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.request.NewVehicle;
+import com.stn.carterminal.network.response.ProvidedService;
 import com.stn.carterminal.network.response.Vehicle;
 import com.stn.carterminal.network.response.VehicleClass;
 import com.stn.carterminal.network.service.VehicleService;
@@ -43,6 +44,7 @@ public class AddNewVehicleActivity extends AppCompatActivity {
     private String EPC;
     private Long providedServiceId;
     private Long vehicleClassId;
+    private ProvidedService providedService;
 
     private ProgressDialog progressDialog;
 
@@ -53,7 +55,8 @@ public class AddNewVehicleActivity extends AppCompatActivity {
 
         EPC = getIntent().getStringExtra("EPC");
         providedServiceId = getIntent().getLongExtra("providedServiceId", 0L);
-        if (EPC == null || EPC.isEmpty() || providedServiceId == 0L) {
+        providedService = (ProvidedService) getIntent().getSerializableExtra("providedService");
+        if (EPC == null || EPC.isEmpty() || providedServiceId == 0L || providedService == null) {
             throw new Resources.NotFoundException();
         }
 
@@ -122,6 +125,7 @@ public class AddNewVehicleActivity extends AppCompatActivity {
         searchVehicle.putExtra("EPC", EPC);
         searchVehicle.putExtra("menu", "newVehicle");
         searchVehicle.putExtra("providedServiceId", providedServiceId);
+        searchVehicle.putExtra("providedService", providedService);
         startActivity(searchVehicle);
         finish();
     }

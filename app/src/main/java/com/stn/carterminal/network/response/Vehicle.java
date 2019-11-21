@@ -37,5 +37,8 @@ public class Vehicle implements Serializable {
     @SerializedName("vehicleClassId")
     private Long vehicleClassId;
 
+    @SerializedName("vehicleManifestStatus")
+    private String vehicleManifestStatus;
+
     private boolean isDataVehicleChanged = false;
 }
