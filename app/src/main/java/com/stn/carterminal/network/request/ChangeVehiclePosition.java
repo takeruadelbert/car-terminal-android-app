@@ -24,6 +24,6 @@ public class ChangeVehiclePosition {
     }
 
     private boolean setDataVehicleChanged() {
-        return vehicleManifestStatus.equals("NOT_IN");
+        return vehicleManifestStatus.equals("MATCH");
     }
 }
