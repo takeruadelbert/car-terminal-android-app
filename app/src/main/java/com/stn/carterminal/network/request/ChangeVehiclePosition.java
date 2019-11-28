@@ -13,17 +13,21 @@ public class ChangeVehiclePosition {
     private String vehicleManifestStatus;
     private boolean isDataVehicleChanged;
 
-    public ChangeVehiclePosition(Long id, String uhfTag, String vehicleIdNumber, String description, Long vehicleClassId, String vehicleManifestStatus) {
+    public ChangeVehiclePosition(Long id, String uhfTag, String vehicleIdNumber, String description, Long vehicleClassId, String vehicleManifestStatus, boolean isDataVehicleChanged) {
         this.id = id;
         this.uhfTag = uhfTag;
         this.vehicleIdNumber = vehicleIdNumber;
         this.description = description;
         this.vehicleClassId = vehicleClassId;
         this.vehicleManifestStatus = vehicleManifestStatus;
-        this.isDataVehicleChanged = setDataVehicleChanged();
+        this.isDataVehicleChanged = setDataVehicleChanged(isDataVehicleChanged);
     }
 
-    private boolean setDataVehicleChanged() {
-        return vehicleManifestStatus.equals("MATCH");
+    private boolean setDataVehicleChanged(boolean isDataVehicleChanged) {
+        if (vehicleManifestStatus.equals("ADD")) {
+            return false;
+        } else {
+            return isDataVehicleChanged;
+        }
     }
 }
