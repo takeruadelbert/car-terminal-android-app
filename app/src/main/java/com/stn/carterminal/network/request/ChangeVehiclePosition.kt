@@ -7,11 +7,10 @@ class ChangeVehiclePosition(var id: Long, var uhfTag: String, var vehicleIdNumbe
         isDataVehicleChanged = setDataVehicleChanged(isDataVehicleChanged)
     }
 
-    fun setDataVehicleChanged(isDataVehicleChanged: Boolean): Boolean {
-        if (vehicleManifestStatus == "ADD") {
-            return false
-        } else {
-            return isDataVehicleChanged
+    private fun setDataVehicleChanged(isDataVehicleChanged: Boolean): Boolean {
+        when (vehicleManifestStatus) {
+            "ADD" -> return false
+            else -> return isDataVehicleChanged
         }
     }
 }
