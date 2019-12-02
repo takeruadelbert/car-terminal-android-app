@@ -75,7 +75,13 @@ public class CheckVehicleActivity extends AppCompatActivity {
         vehicleEntryDate.setText(date);
 
         TextView vehicleProductionDay = findViewById(R.id.txtVehicleDetailProductionDay);
-        String numDaysBuildUp = vehicle.getNumDaysBuildUp() != null ? vehicle.getNumDaysBuildUp().toString() : "-";
+        String numDaysBuildUp;
+        try {
+            numDaysBuildUp = vehicle.getNumDaysBuildUp().toString();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            numDaysBuildUp = "-";
+        }
         vehicleProductionDay.setText(numDaysBuildUp);
     }
 

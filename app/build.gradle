@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 29
@@ -63,4 +65,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation files('libs/uhf_lib.jar')
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
