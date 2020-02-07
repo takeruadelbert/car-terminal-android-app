@@ -2,7 +2,7 @@ package com.stn.carterminal.network.endpoint
 
 object Endpoint {
     const val API_SIGN_IN = "login"
-    const val API_GET_SESSION = "users/heartbeat"
+    const val API_GET_SESSION = "users/profile"
     const val API_GET_PROVIDED_SERVICE = "provided_services/search"
     const val API_GET_PROVIDED_SERVICE_BY_ID = "provided_services/mobile/{providedServiceId}"
     const val API_GET_VEHICLE = "vehicles/mobile/search/{providedServiceId}"
