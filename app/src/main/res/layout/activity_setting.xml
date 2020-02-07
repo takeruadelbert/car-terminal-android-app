@@ -95,6 +95,22 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
+            <Button
+                android:id="@+id/testConnection"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/saveBtnSetting"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_login_konfirmasi"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="@string/testConnection"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
         </RelativeLayout>
 
     </RelativeLayout>

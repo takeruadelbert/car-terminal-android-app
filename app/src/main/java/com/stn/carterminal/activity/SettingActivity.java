@@ -14,15 +14,27 @@ import com.stn.carterminal.R;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.constant.sharedPreference.SharedPreferenceDataKey;
 import com.stn.carterminal.helper.SharedPreferencesHelper;
+import com.stn.carterminal.network.ServiceGenerator;
+import com.stn.carterminal.network.request.Login;
+import com.stn.carterminal.network.service.UserService;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SettingActivity extends AppCompatActivity {
 
     private static final String MESSAGE_HOST_NOT_BLANK = "Field 'Host' must not be empty.";
     private static final String MESSAGE_INVALID_HOST = "Host/IP Address must be ended with '/'";
-    private static final String MESSAGE_PROGRESS_DIALOG = "Saving ...";
+    private static final String MESSAGE_PROGRESS_DIALOG = "Loading ...";
+    private static final String MESSAGE_TEST_CONNECTION_FAILED = "Fail to Connect.";
+    private static final String MESSAGE_TEST_CONNECTION_SUCCESS = "Connection Established.";
 
     private String host;
     private ProgressDialog progressDialog;
+
+    private static final Integer TEST_CONNECTION_TIMEOUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +43,7 @@ public class SettingActivity extends AppCompatActivity {
 
         setHost();
         setOnClickSubmitButton();
+        setOnClickTestConnectionButton();
 
         progressDialog = new ProgressDialog(SettingActivity.this);
     }
@@ -58,6 +71,18 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
+    private void setOnClickTestConnectionButton() {
+        Button testConnection = findViewById(R.id.testConnection);
+        testConnection.setOnClickListener((View view) -> {
+            progressDialog.setMessage(MESSAGE_PROGRESS_DIALOG);
+            progressDialog.show();
+            String inputHost = ((EditText) findViewById(R.id.host)).getText().toString();
+            if (validate(inputHost)) {
+                testConnection(inputHost);
+            }
+        });
+    }
+
     private boolean validate(String inputHost) {
         if (inputHost.isEmpty()) {
             Toast.makeText(getApplicationContext(), MESSAGE_HOST_NOT_BLANK, Toast.LENGTH_SHORT).show();
@@ -71,5 +96,33 @@ public class SettingActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void testConnection(String host) {
+        String dataHost = SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST);
+        if (!dataHost.equals(host)) {
+            SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST, host);
+        }
+        UserService userService = ServiceGenerator.createBaseService(this, UserService.class);
+        Call<ResponseBody> call = userService.apiSignIn(new Login(Constant.EMPTY_STRING, Constant.EMPTY_STRING));
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 401) {
+                    Toast.makeText(getApplicationContext(), MESSAGE_TEST_CONNECTION_SUCCESS, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                } else {
+                    Toast.makeText(getApplicationContext(), MESSAGE_TEST_CONNECTION_FAILED, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getApplicationContext(), MESSAGE_TEST_CONNECTION_FAILED, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
     }
 }

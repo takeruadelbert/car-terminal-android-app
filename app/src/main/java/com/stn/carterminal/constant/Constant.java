@@ -3,7 +3,7 @@ package com.stn.carterminal.constant;
 public class Constant {
     public static final String EMPTY_STRING = "";
     public static final String WHITESPACE = " ";
-
+    public static final String HTTP_PROTOCOL = "http://";
     public static final String DIALOG_SPINNER_TITLE = "Method";
 
     public static final String SUCCESS_SAVE_DATA_MESSAGE = "Data has successfully been saved.";

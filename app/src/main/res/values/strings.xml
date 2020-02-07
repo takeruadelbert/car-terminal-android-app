@@ -29,6 +29,7 @@
     <string name="setting">Setting</string>
     <string name="ip_address_label">Host/IP Address</string>
     <string name="save_btn_label">SIMPAN</string>
+    <string name="testConnection">CONNECT</string>
 
     <!-- Home Properties -->
     <string name="home">Home</string>
