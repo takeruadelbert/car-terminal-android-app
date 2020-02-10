@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.stn.carterminal.R;
 import com.stn.carterminal.activity.addnewvehicle.AddNewVehicleActivity;
 import com.stn.carterminal.activity.changemanifest.ChangeManifestActivity;
@@ -25,6 +26,7 @@ import com.stn.carterminal.adapter.SearchVehicleAdapter;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.network.ServiceGenerator;
 import com.stn.carterminal.network.response.ProvidedService;
+import com.stn.carterminal.network.response.User;
 import com.stn.carterminal.network.response.Vehicle;
 import com.stn.carterminal.network.service.VehicleService;
 
@@ -259,8 +261,20 @@ public class SearchVehicleActivity extends AppCompatActivity {
     }
 
     private void backToSearchManifest() {
-        Intent backToSearchManifest = new Intent(getApplicationContext(), SearchManifestActivity.class);
-        startActivity(backToSearchManifest);
-        finish();
+        if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
+            Intent backToSearchManifest = new Intent(getApplicationContext(), SearchManifestActivity.class);
+            startActivity(backToSearchManifest);
+            finish();
+        } else {
+            Intent home = new Intent(getApplicationContext(), HomeActivity.class);
+
+            Gson gson = new Gson();
+            String dataUser = SignInActivity.sharedPreferences.getString("user", "");
+            User user = gson.fromJson(dataUser, User.class);
+
+            home.putExtra("user", user);
+            startActivity(home);
+            finish();
+        }
     }
 }
