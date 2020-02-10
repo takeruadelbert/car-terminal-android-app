@@ -46,6 +46,7 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
     private SearchVehicleAdapter searchVehicleAdapter;
     private VehicleService vehicleService;
     private ProgressDialog progressDialog;
+    private TextWatcher textWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,33 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(ChangeUHFTagActivity.this);
         progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
 
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String input = s.toString();
+                if (!input.isEmpty()) {
+                    vehicles = requestAPISearchVehicle(input);
+                } else {
+                    vehicles = new ArrayList<>();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
         recyclerView = findViewById(R.id.recyclerChangeTag);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         search = findViewById(R.id.txtChangeTagInputNIK);
-        searchVehicleAdapter = new SearchVehicleAdapter(this, vehicles, search);
+        searchVehicleAdapter = new SearchVehicleAdapter(this, vehicles, search, textWatcher);
         recyclerView.setAdapter(searchVehicleAdapter);
 
         vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
@@ -115,28 +138,7 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
     }
 
     private void setSearchFunctionalityRecyclerView() {
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String input = s.toString();
-                if (!input.isEmpty()) {
-                    vehicles = requestAPISearchVehicle(input);
-                } else {
-                    vehicles = new ArrayList<>();
-                }
-                searchVehicleAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
+        search.addTextChangedListener(textWatcher);
     }
 
     private void filter(String text) {
@@ -156,6 +158,7 @@ public class ChangeUHFTagActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
                 if (response.code() == 200) {
                     vehicles = response.body();
+                    filter(NIK);
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.ERROR_MESSAGE_SEARCH_PROVIDED_SERVICE, Toast.LENGTH_SHORT).show();
                 }

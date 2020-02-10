@@ -1,6 +1,7 @@
 package com.stn.carterminal.adapter;
 
 import android.content.Context;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stn.carterminal.R;
-import com.stn.carterminal.network.response.Vehicle;
-import com.stn.carterminal.viewholder.SearchVehicleViewHolder;
 import com.stn.carterminal.constant.Constant;
 import com.stn.carterminal.listener.ItemClickListener;
+import com.stn.carterminal.network.response.Vehicle;
+import com.stn.carterminal.viewholder.SearchVehicleViewHolder;
 
 import java.util.ArrayList;
 
@@ -23,11 +24,13 @@ public class SearchVehicleAdapter extends RecyclerView.Adapter<SearchVehicleView
     private ItemClickListener itemClickListener;
     private EditText search;
     private Vehicle vehicle;
+    private TextWatcher textWatcher;
 
-    public SearchVehicleAdapter(Context context, ArrayList<Vehicle> vehicles, EditText search) {
+    public SearchVehicleAdapter(Context context, ArrayList<Vehicle> vehicles, EditText search, TextWatcher textWatcher) {
         this.context = context;
         this.vehicles = vehicles;
         this.search = search;
+        this.textWatcher = textWatcher;
     }
 
     @NonNull
@@ -54,10 +57,12 @@ public class SearchVehicleAdapter extends RecyclerView.Adapter<SearchVehicleView
             @Override
             public void onClick(View v) {
                 vehicle = vehicles.get(position);
-
+                search.removeTextChangedListener(textWatcher);
                 search.setText(vehicleNIK);
                 vehicles = new ArrayList<>();
                 notifyDataSetChanged();
+
+                search.addTextChangedListener(textWatcher);
             }
         });
     }

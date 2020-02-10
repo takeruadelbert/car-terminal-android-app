@@ -37,7 +37,7 @@ public class SearchManifestActivity extends AppCompatActivity {
     private ArrayList<ProvidedService> manifests;
     private SearchManifestAdapter searchManifestAdapter;
     private ProvidedServiceService providedServiceService;
-
+    private TextWatcher textWatcher;
     private static final String TOOLBAR_TITLE = "Search Manifest";
 
     @Override
@@ -53,20 +53,7 @@ public class SearchManifestActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarSearchManifest);
         toolbar.setTitle(TOOLBAR_TITLE);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        searchManifestAdapter = new SearchManifestAdapter(this, manifests, search);
-        recyclerView.setAdapter(searchManifestAdapter);
-
-        setSearchFunctionalityRecyclerView();
-
-        providedServiceService = ServiceGenerator.createBaseService(this, ProvidedServiceService.class);
-        setOnClickListenerConfirmationButton();
-    }
-
-    private void setSearchFunctionalityRecyclerView() {
-        search.addTextChangedListener(new TextWatcher() {
+        textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -85,9 +72,24 @@ public class SearchManifestActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
+
             }
-        });
+        };
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        searchManifestAdapter = new SearchManifestAdapter(this, manifests, search, textWatcher);
+        recyclerView.setAdapter(searchManifestAdapter);
+
+        setSearchFunctionalityRecyclerView();
+
+        providedServiceService = ServiceGenerator.createBaseService(this, ProvidedServiceService.class);
+        setOnClickListenerConfirmationButton();
+    }
+
+    private void setSearchFunctionalityRecyclerView() {
+        search.addTextChangedListener(textWatcher);
     }
 
     private void filter(String text) {
@@ -108,6 +110,7 @@ public class SearchManifestActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<ProvidedService>> call, Response<ArrayList<ProvidedService>> response) {
                 if (response.code() == 200) {
                     manifests = response.body();
+                    filter(providedServiceNumber);
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                 }

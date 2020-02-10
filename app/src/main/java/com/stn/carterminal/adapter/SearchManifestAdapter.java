@@ -1,6 +1,7 @@
 package com.stn.carterminal.adapter;
 
 import android.content.Context;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,13 @@ public class SearchManifestAdapter extends RecyclerView.Adapter<SearchManifestVi
     private ItemClickListener itemClickListener;
     private EditText search;
     private ProvidedService providedService;
+    private TextWatcher textWatcher;
 
-    public SearchManifestAdapter(Context context, ArrayList<ProvidedService> manifests, EditText search) {
+    public SearchManifestAdapter(Context context, ArrayList<ProvidedService> manifests, EditText search, TextWatcher textWatcher) {
         this.context = context;
         this.manifests = manifests;
         this.search = search;
+        this.textWatcher = textWatcher;
     }
 
     @NonNull
@@ -52,10 +55,11 @@ public class SearchManifestAdapter extends RecyclerView.Adapter<SearchManifestVi
             @Override
             public void onClick(View v) {
                 providedService = manifests.get(position);
-
+                search.removeTextChangedListener(textWatcher);
                 search.setText(providedServiceNumber);
                 manifests = new ArrayList<>();
                 notifyDataSetChanged();
+                search.addTextChangedListener(textWatcher);
             }
         });
     }

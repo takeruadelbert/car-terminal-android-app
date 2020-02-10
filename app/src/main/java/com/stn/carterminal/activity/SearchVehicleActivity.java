@@ -48,6 +48,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     private String menu;
     private String target;
     private ProgressDialog progressDialog;
+    private TextWatcher textWatcher;
 
     private static final String TOOLBAR_TITLE = "Search Kendaraan";
     private static final String PROGRESS_DIALOG_MESSAGE = "Loading ...";
@@ -74,6 +75,33 @@ public class SearchVehicleActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(SearchVehicleActivity.this);
         progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
 
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String input = s.toString();
+                if (!input.isEmpty()) {
+                    if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
+                        vehicles = requestAPISearchVehicleByProvidedServiceIdAndNIK(input);
+                    } else {
+                        vehicles = requestAPISearchVehicleByNIK(input);
+                    }
+                } else {
+                    vehicles = new ArrayList<>();
+                }
+                searchVehicleAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
         recyclerView = findViewById(R.id.recyclerViewVehicle);
         search = findViewById(R.id.inputNIK);
 
@@ -82,7 +110,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        searchVehicleAdapter = new SearchVehicleAdapter(this, vehicles, search);
+        searchVehicleAdapter = new SearchVehicleAdapter(this, vehicles, search, textWatcher);
         recyclerView.setAdapter(searchVehicleAdapter);
 
         vehicleService = ServiceGenerator.createBaseService(this, VehicleService.class);
@@ -117,32 +145,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
     }
 
     private void setSearchFunctionalityRecyclerView() {
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String input = s.toString();
-                if (!input.isEmpty()) {
-                    if (menu.equals("scanVehicle") || menu.equals("newVehicle")) {
-                        vehicles = requestAPISearchVehicleByProvidedServiceIdAndNIK(input);
-                    } else {
-                        vehicles = requestAPISearchVehicleByNIK(input);
-                    }
-                } else {
-                    vehicles = new ArrayList<>();
-                }
-                searchVehicleAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
+        search.addTextChangedListener(textWatcher);
     }
 
     private void filter(String text) {
@@ -162,6 +165,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
                 if (response.code() == 200) {
                     vehicles = response.body();
+                    filter(NIK);
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                 }
@@ -183,6 +187,7 @@ public class SearchVehicleActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Vehicle>> call, Response<ArrayList<Vehicle>> response) {
                 if (response.code() == 200) {
                     vehicles = response.body();
+                    filter(NIK);
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                 }

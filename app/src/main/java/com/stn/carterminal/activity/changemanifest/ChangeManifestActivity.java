@@ -49,7 +49,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
     private SearchManifestAdapter searchManifestAdapter;
     private ProvidedServiceService providedServiceService;
     private EditText search;
-
+    private TextWatcher textWatcher;
     private Vehicle vehicle;
     private Long originProvidedServiceId;
     private Long targetProvidedServiceId;
@@ -71,6 +71,29 @@ public class ChangeManifestActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(ChangeManifestActivity.this);
         progressDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
+
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String input = s.toString();
+                if (!input.isEmpty()) {
+                    manifests = requestAPISearchProvidedServiceWithExcludedId(input);
+                } else {
+                    manifests = new ArrayList<>();
+                }
+                searchManifestAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
 
         RecyclerView recyclerView = findViewById(R.id.recyclerChangeManifest);
         search = findViewById(R.id.changeManifestSearchServiceNumber);
@@ -95,7 +118,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        searchManifestAdapter = new SearchManifestAdapter(this, manifests, search);
+        searchManifestAdapter = new SearchManifestAdapter(this, manifests, search, textWatcher);
         recyclerView.setAdapter(searchManifestAdapter);
 
         setSearchFunctionalityRecyclerView();
@@ -174,28 +197,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
     }
 
     private void setSearchFunctionalityRecyclerView() {
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String input = s.toString();
-                if (!input.isEmpty()) {
-                    manifests = requestAPISearchProvidedServiceWithExcludedId(input);
-                } else {
-                    manifests = new ArrayList<>();
-                }
-                searchManifestAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
+        search.addTextChangedListener(textWatcher);
     }
 
     private void filter(String text) {
@@ -216,6 +218,7 @@ public class ChangeManifestActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<ProvidedService>> call, Response<ArrayList<ProvidedService>> response) {
                 if (response.code() == 200) {
                     manifests = response.body();
+                    filter(providedServiceNumber);
                 } else {
                     Toast.makeText(getApplicationContext(), Constant.API_ERROR_INVALID_RESPONSE, Toast.LENGTH_SHORT).show();
                 }
