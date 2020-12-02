@@ -27,6 +27,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private static final String MESSAGE_HOST_NOT_BLANK = "Field 'Host' must not be empty.";
     private static final String MESSAGE_INVALID_HOST = "Host/IP Address must be ended with '/'";
+    private static final String MESSAGE_INVALID_PROTOCOL_HOST = "Invalid Host/IP Address Protocol";
     private static final String MESSAGE_PROGRESS_DIALOG = "Loading ...";
     private static final String MESSAGE_TEST_CONNECTION_FAILED = "Fail to Connect.";
     private static final String MESSAGE_TEST_CONNECTION_SUCCESS = "Connection Established.";
@@ -86,6 +87,13 @@ public class SettingActivity extends AppCompatActivity {
     private boolean validate(String inputHost) {
         if (inputHost.isEmpty()) {
             Toast.makeText(getApplicationContext(), MESSAGE_HOST_NOT_BLANK, Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+            return false;
+        }
+        boolean test1 = inputHost.startsWith(Constant.HTTP_PROTOCOL);
+        boolean test2 = inputHost.startsWith(Constant.HTTP_PROTOCOL_SECURE);
+        if (!(inputHost.startsWith(Constant.HTTP_PROTOCOL) || inputHost.startsWith(Constant.HTTP_PROTOCOL_SECURE))) {
+            Toast.makeText(getApplicationContext(), MESSAGE_INVALID_PROTOCOL_HOST, Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
             return false;
         }

@@ -16,7 +16,7 @@ public class SharedPreferencesHelper {
 
     public static String getData(SharedPreferences sharedPreferences, String key) {
         if (key.equals(SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST)) {
-            return sharedPreferences.getString(key, DEFAULT_VALUE_HOST);
+            return sharedPreferences.getString(key, String.format("%s%s", Constant.HTTP_PROTOCOL, DEFAULT_VALUE_HOST));
         }
         return sharedPreferences.getString(key, Constant.EMPTY_STRING);
     }

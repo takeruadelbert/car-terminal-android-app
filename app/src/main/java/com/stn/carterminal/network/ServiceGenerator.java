@@ -20,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
     private static final Integer TIMEOUT = 5; // in second(s)
-    private static final String DEFAULT_HTTP_PROTOCOL = "http://";
 
     private static OkHttpClient.Builder builder() {
         OkHttpClient.Builder okhttpBuilder = new OkHttpClient().newBuilder();
@@ -57,8 +56,7 @@ public class ServiceGenerator {
         });
 
         OkHttpClient client = builder.build();
-        String dataBaseURL = SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST);
-        String baseURL = dataBaseURL.isEmpty() ? DEFAULT_HTTP_PROTOCOL : dataBaseURL;
+        String baseURL = SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
                 .client(client)
