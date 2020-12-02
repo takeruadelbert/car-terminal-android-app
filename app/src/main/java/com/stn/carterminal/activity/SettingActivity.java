@@ -99,7 +99,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void testConnection(String host) {
-        String dataHost = SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST);
+        String dataHost = String.format("%s%s", SharedPreferencesHelper.getData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST), "login");
         if (!dataHost.equals(host)) {
             SharedPreferencesHelper.storeData(SignInActivity.sharedPreferences, SharedPreferenceDataKey.KEY_SHARED_PREFERENCES_HOST, host);
         }
